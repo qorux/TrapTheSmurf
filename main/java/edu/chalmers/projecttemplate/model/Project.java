@@ -1,6 +1,8 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 public class Project {
+
+  public Board board = new Board();
   public static final String PROJECT_WINDOW_TEXT = "ProjectTemplate";
   public static final String PROJECT_BUTTON_TEXT = "Press me!";
 

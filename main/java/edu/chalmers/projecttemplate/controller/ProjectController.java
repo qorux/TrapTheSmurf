@@ -1,15 +1,18 @@
 package main.java.edu.chalmers.projecttemplate.controller;
 
-import main.java.edu.chalmers.projecttemplate.model.Project;
+import main.java.edu.chalmers.projecttemplate.model.*;
 
 import main.java.edu.chalmers.projecttemplate.view.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 
 public class ProjectController {
   private final Project project;
   private final myFirstForm projectView;
+
   public static final int KO = 1;
 
   public static ProjectController create(Project project, myFirstForm projectView) {
@@ -18,6 +21,12 @@ public class ProjectController {
 
   private ProjectController(Project project, myFirstForm projectView) {
     projectView.getjButton1().addActionListener(new ProjectButtonPressed());
+
+    boardPressedListener BoardPressedListener = new boardPressedListener();
+
+    for (int counter = 0; counter < projectView.getButtonBoard().size(); counter++) {
+      projectView.getButtonBoard().get(counter).addActionListener(BoardPressedListener);
+    }
 
     this.project = project;
     this.projectView = projectView;
@@ -28,6 +37,18 @@ public class ProjectController {
     public void actionPerformed(ActionEvent e) {
       project.incrementPresses();
       projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
+    }
+  }
+
+  private class boardPressedListener implements ActionListener {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      Object pressedTile = e.getSource();
+      int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
+      project.board.getBoardSpaces().get(pressedTileIndex).switchState();
+      System.out.print("Switched states of button nr. ");
+      System.out.println(pressedTileIndex);
+
     }
   }
 }
