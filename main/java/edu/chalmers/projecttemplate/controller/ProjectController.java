@@ -20,16 +20,20 @@ public class ProjectController {
   }
 
   private ProjectController(Project project, myFirstForm projectView) {
-    projectView.getjButton1().addActionListener(new ProjectButtonPressed());
+    projectView.getjButton1().addActionListener(new ProjectButtonPressed());  //onödigt
 
+    boardPressedListenerAssigner();
+
+    this.project = project;
+    this.projectView = projectView;
+  }
+
+  private void boardPressedListenerAssigner(){
     boardPressedListener BoardPressedListener = new boardPressedListener();
 
     for (int counter = 0; counter < projectView.getButtonBoard().size(); counter++) {
       projectView.getButtonBoard().get(counter).addActionListener(BoardPressedListener);
     }
-
-    this.project = project;
-    this.projectView = projectView;
   }
 
   private class ProjectButtonPressed implements ActionListener {
