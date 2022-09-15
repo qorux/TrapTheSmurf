@@ -6,6 +6,5 @@ public class Hexagon {
 
     public void switchState(){
         System.out.println("Hexagon switched state");
-        System.out.println("Hej emil");
     }
 }
