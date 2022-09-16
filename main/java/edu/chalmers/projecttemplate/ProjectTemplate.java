@@ -2,6 +2,7 @@ package main.java.edu.chalmers.projecttemplate;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.Project;
+import main.java.edu.chalmers.projecttemplate.model.Smurf;
 import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
 
 import javax.swing.SwingUtilities;
