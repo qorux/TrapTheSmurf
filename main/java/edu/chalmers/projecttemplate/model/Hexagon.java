@@ -7,20 +7,36 @@ public class Hexagon {
     public void switchState(){
         System.out.println("Hexagon switched state");
     }
-/*
+
     HexagonState blockedTile;
     HexagonState occupiedTile;
-    HexagonState freeTile;
+    HexagonState clickableTile;
 
     HexagonState hexagonState;
 
     public Hexagon(){
         blockedTile = new BlockedTile(this);
         occupiedTile = new OccupiedTile(this);
-        freeTile = new FreeTile(this);
+        clickableTile = new ClickableTile(this);
 
-        hexagonState = freeTile;
+        hexagonState = clickableTile;
 
-    }*/
+    }
+
+    void setHexagonState(HexagonState newHexagonState){
+        hexagonState = newHexagonState;
+    }
+
+    public void blockTile() {
+        hexagonState.blockTile();
+    }
+
+    public void occupyTile() {
+        hexagonState.occupyTile();
+    }
+
+    public void freeTile() {
+        hexagonState.freeTile();
+    }
 
 }
