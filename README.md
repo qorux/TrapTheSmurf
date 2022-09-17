@@ -1,4 +1,4 @@
 # TrapTheSmurf
-trapi it!
+trap it!
 
-Project for course TDA367 at Chalmers univerity of technology
+Project for course TDA367 at Chalmers university of technology
