@@ -31,7 +31,6 @@ public class ProjectController {
 
   public void boardPressedListenerAssigner(){
     for (int counter = 0; counter < this.projectView.getButtonBoard().size(); counter++) {
-      //this.projectView.getButtonBoard().get(counter).addActionListener(BoardPressedListener);
       this.projectView.getButtonBoard().get(counter).addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
