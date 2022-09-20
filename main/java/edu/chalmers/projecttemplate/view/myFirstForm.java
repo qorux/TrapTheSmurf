@@ -6,6 +6,7 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import javax.swing.*;
 import main.java.edu.chalmers.projecttemplate.model.Project;
+import main.java.edu.chalmers.projecttemplate.model.hexButton;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class myFirstForm extends javax.swing.JFrame {
         jButton1.setText(Project.PROJECT_BUTTON_TEXT);
         jPanel1.setLayout(new FlowLayout());
 
-        for(int i =0;i<=5;i++){
+        for(int i =0;i<=10;i++){
             buttonBoard.add(generateButton());
             System.out.println("hej");
         }
@@ -122,8 +123,8 @@ public class myFirstForm extends javax.swing.JFrame {
     }
 
     public JButton generateButton(){
-        JButton generatedButton = new JButton();
-        generatedButton.setBackground(Color.blue);
+        hexButton generatedButton = new hexButton();
+        generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);
 
