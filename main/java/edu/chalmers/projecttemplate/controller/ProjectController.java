@@ -30,30 +30,30 @@ public class ProjectController {
   }
 
   public void boardPressedListenerAssigner(){
-    boardPressedListener BoardPressedListener = new boardPressedListener();
-
     for (int counter = 0; counter < this.projectView.getButtonBoard().size(); counter++) {
-      this.projectView.getButtonBoard().get(counter).addActionListener(BoardPressedListener);
+      this.projectView.getButtonBoard().get(counter).addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+          listenedObject_actionPerformed(evt);
+        }
+      });
     }
   }
+
+  private void listenedObject_actionPerformed(ActionEvent evt) {
+    Object pressedTile = evt.getSource();
+    int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
+    project.board.getBoardSpaces().get(pressedTileIndex).switchState();
+    System.out.print("Switched states of button nr. ");
+    System.out.println(pressedTileIndex);
+  }
+
 
   private class ProjectButtonPressed implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
       project.incrementPresses();
       projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
-    }
-  }
-
-  private class boardPressedListener implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-      Object pressedTile = e.getSource();
-      int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
-      project.board.getBoardSpaces().get(pressedTileIndex).switchState();
-      System.out.print("Switched states of button nr. ");
-      System.out.println(pressedTileIndex);
-
     }
   }
 }
