@@ -43,9 +43,7 @@ public class ProjectController {
   private void listenedObject_actionPerformed(ActionEvent evt) {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
-    project.board.getBoardSpaces().get(pressedTileIndex).switchState();
-    System.out.print("Switched states of button nr. ");
-    System.out.println(pressedTileIndex);
+    project.getTile(pressedTileIndex).clickTile();
   }
 
 

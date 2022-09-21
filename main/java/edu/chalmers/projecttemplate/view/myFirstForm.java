@@ -6,7 +6,6 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import javax.swing.*;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.model.hexButton;
 
 import java.awt.*;
 import java.util.ArrayList;

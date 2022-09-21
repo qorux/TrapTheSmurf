@@ -1,42 +1,33 @@
 package main.java.edu.chalmers.projecttemplate.model;
+import main.java.edu.chalmers.projecttemplate.view.*;
 
-public class Hexagon {
+public class Hexagon{
+    private HexagonStateContext hexagonStateContext;
+    private Integer index;
 
-    private Boolean State = true;
+    private myFirstForm projectView;
 
-    public void switchState(){
-        System.out.println("Hexagon switched state");
+    public Hexagon(Integer boardIndex, myFirstForm ProjectView) {
+        this.index= boardIndex;
+        this.projectView = ProjectView;
+        this.hexagonStateContext = new HexagonStateContext(index, projectView);
     }
 
-    HexagonState blockedTile;
-    HexagonState occupiedTile;
-    HexagonState clickableTile;
 
-    HexagonState hexagonState;
-
-    public Hexagon(){
-        blockedTile = new BlockedTile(this);
-        occupiedTile = new OccupiedTile(this);
-        clickableTile = new ClickableTile(this);
-
-        hexagonState = clickableTile;
-
-    }
 
     void setHexagonState(HexagonState newHexagonState){
-        hexagonState = newHexagonState;
+        hexagonStateContext.setCurrentState(newHexagonState);
     }
 
-    public void blockTile() {
-        hexagonState.blockTile();
+    public void clickTile() {
+        hexagonStateContext.click();
     }
 
     public void occupyTile() {
-        hexagonState.occupyTile();
+        hexagonStateContext.occupy();
     }
 
-    public void freeTile() {
-        hexagonState.freeTile();
-    }
+
+
 
 }

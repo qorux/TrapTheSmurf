@@ -1,16 +1,26 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+
+import javax.swing.*;
+import main.java.edu.chalmers.projecttemplate.view.*;
+
+import java.awt.*;
+
 public class ClickableTile implements HexagonState {
 
-    Hexagon hexagon;
-
-    public ClickableTile(Hexagon newHexagon){
-        hexagon = newHexagon;
+    myFirstForm projectView;
+    Integer Index;
+    JButton tile;
+    public ClickableTile(Integer index, myFirstForm ProjectView) {
+        this.projectView = ProjectView;
+        this.Index = index;
+        this.tile = ProjectView.getButtonBoard().get(Index);
     }
 
     @Override
-    public void blockTile() {
-
+    public void clickTile() {
+        System.out.println("Clickable tile turns gray");
+        tile.setBackground(Color.DARK_GRAY);
     }
 
     @Override
@@ -18,8 +28,4 @@ public class ClickableTile implements HexagonState {
 
     }
 
-    @Override
-    public void freeTile() {
-
-    }
 }

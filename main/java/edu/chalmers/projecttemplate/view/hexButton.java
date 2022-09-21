@@ -1,4 +1,4 @@
-package main.java.edu.chalmers.projecttemplate.model;
+package main.java.edu.chalmers.projecttemplate.view;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +29,10 @@ public class hexButton extends JButton {
         hex.addPoint(0, ratio);
 
         return hex;
+    }
+
+    private void makeBlocked(){
+        System.out.println("Blocked hexagon button");
     }
 
     @Override

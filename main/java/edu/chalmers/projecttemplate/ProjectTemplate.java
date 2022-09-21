@@ -18,8 +18,8 @@ public final class ProjectTemplate {
 
 			@Override
 			public void run() {
-				final Project project = new Project();
 				final myFirstForm ProjectView = new myFirstForm();
+				final Project project = new Project(ProjectView);
 
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);

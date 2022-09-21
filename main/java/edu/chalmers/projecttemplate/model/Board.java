@@ -1,14 +1,18 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 import java.util.ArrayList;
+import main.java.edu.chalmers.projecttemplate.view.*;
 
 public class Board {
     private ArrayList <Hexagon> boardSpaces ;
 
-    public Board(){
+    myFirstForm projectView;
+
+    public Board(myFirstForm ProjectView){
         boardSpaces = new ArrayList<Hexagon>();
+        this.projectView = ProjectView;
         for(int i=0;i<=5;i++){
-            boardSpaces.add(new Hexagon());
+            boardSpaces.add(new Hexagon(i, projectView));
         }
     }
 
