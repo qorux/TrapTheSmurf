@@ -21,6 +21,7 @@ public class ClickableTile implements HexagonState {
     public void clickTile() {
         System.out.println("Clickable tile turns gray");
         tile.setBackground(Color.DARK_GRAY);
+        tile.setEnabled(false);
     }
 
     @Override
