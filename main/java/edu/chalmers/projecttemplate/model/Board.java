@@ -11,7 +11,7 @@ public class Board {
     public Board(myFirstForm ProjectView){
         boardSpaces = new ArrayList<Hexagon>();
         this.projectView = ProjectView;
-        for(int i=0;i<=5;i++){
+        for(int i=0;i<=10;i++){
             boardSpaces.add(new Hexagon(i, projectView));
         }
     }
