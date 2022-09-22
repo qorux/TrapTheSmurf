@@ -16,7 +16,7 @@ public class Hexagon{
         return hexagonStateContext;
     }
 
-    void setHexagonState(HexagonState newHexagonState){
+    public void setHexagonState(HexagonState newHexagonState){
         hexagonStateContext.setCurrentState(newHexagonState);
     }
 
@@ -29,6 +29,9 @@ public class Hexagon{
     }
 
 
+    public Integer getIndex() {
+        return index;
+    }
 
 
 }

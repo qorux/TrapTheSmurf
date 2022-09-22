@@ -13,7 +13,7 @@ public class BlockedTile implements HexagonState {
 
     @Override
     public void clickTile() {
-        System.out.println("Blocked tile ignores input");
+
     }
 
     @Override

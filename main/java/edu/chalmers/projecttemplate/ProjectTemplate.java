@@ -2,7 +2,6 @@ package main.java.edu.chalmers.projecttemplate;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.model.Smurf;
 import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
 
 import javax.swing.SwingUtilities;
@@ -19,7 +18,7 @@ public final class ProjectTemplate {
 			@Override
 			public void run() {
 				final myFirstForm ProjectView = new myFirstForm();
-				final Project project = new Project(ProjectView);
+				final Project project = new Project();
 
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);

@@ -1,13 +1,16 @@
 package main.java.edu.chalmers.projecttemplate.model;
-import main.java.edu.chalmers.projecttemplate.view.*;
 
 public class Project {
   public static final String PROJECT_WINDOW_TEXT = "ProjectTemplate";
   public static final String PROJECT_BUTTON_TEXT = "Press me!";
   private int presses;
   public Board board;//borde va private
-  public Project(myFirstForm ProjectView){
+
+  private Smurf smurf;
+  public Project(){
     this.board = new Board();
+    this.smurf=new Smurf(board.getBoardSpaces().get(1));
+
   }
 
 

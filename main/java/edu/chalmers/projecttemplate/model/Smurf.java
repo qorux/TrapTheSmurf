@@ -1,5 +1,7 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,14 @@ public class Smurf {
     //Något sätt att indikera vilken knapp/hexagon man står på! :)
     private int xPos = 6;
     private int yPos = 6;
+
+    private Hexagon hexagon;
+
+    public Smurf(Hexagon Hexagon){
+        this.hexagon = Hexagon;
+        hexagon.setHexagonState(new OccupiedTile());
+        hexagon.occupyTile();
+    }
 
     public void setxPos(int xPos) {
         this.xPos = xPos;
