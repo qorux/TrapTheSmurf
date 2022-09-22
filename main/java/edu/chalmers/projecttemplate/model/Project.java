@@ -7,7 +7,7 @@ public class Project {
   private int presses;
   public Board board;//borde va private
   public Project(myFirstForm ProjectView){
-    this.board = new Board(ProjectView);
+    this.board = new Board();
   }
 
 

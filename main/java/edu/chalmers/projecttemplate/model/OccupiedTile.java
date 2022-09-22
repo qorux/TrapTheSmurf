@@ -8,13 +8,7 @@ import java.awt.*;
 
 public class OccupiedTile implements HexagonState {
 
-    myFirstForm projectView;
-    Integer Index;
-    JButton tile;
-    public OccupiedTile(Integer index, myFirstForm ProjectView) {
-        this.projectView = ProjectView;
-        this.Index = index;
-        this.tile = ProjectView.getButtonBoard().get(Index);
+    public OccupiedTile() {
     }
 
     @Override

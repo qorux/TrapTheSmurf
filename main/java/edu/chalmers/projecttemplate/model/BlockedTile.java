@@ -8,13 +8,7 @@ import java.awt.*;
 
 public class BlockedTile implements HexagonState {
 
-    myFirstForm projectView;
-    Integer Index;
-    JButton tile;
-    public BlockedTile(Integer index, myFirstForm ProjectView) {
-        this.projectView = ProjectView;
-        this.Index = index;
-        this.tile = ProjectView.getButtonBoard().get(Index);
+    public BlockedTile() {
     }
 
     @Override

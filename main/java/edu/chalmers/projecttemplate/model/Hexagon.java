@@ -7,13 +7,14 @@ public class Hexagon{
 
     private myFirstForm projectView;
 
-    public Hexagon(Integer boardIndex, myFirstForm ProjectView) {
+    public Hexagon(Integer boardIndex) {
         this.index= boardIndex;
-        this.projectView = ProjectView;
-        this.hexagonStateContext = new HexagonStateContext(index, projectView);
+        this.hexagonStateContext = new HexagonStateContext(index);
     }
 
-
+    public HexagonStateContext getHexagonStateContext() {
+        return hexagonStateContext;
+    }
 
     void setHexagonState(HexagonState newHexagonState){
         hexagonStateContext.setCurrentState(newHexagonState);
