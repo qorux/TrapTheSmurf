@@ -10,12 +10,17 @@ public class ClickableTile implements HexagonState {
 
     Integer Index;
 
-    public ClickableTile() {
+    public ClickableTile(Integer index) {
+        this.Index = index;
     }
 
     @Override
     public void clickTile() {
         System.out.println("Clickable tile turns gray");
+    }
+
+    public Integer getIndex() {
+        return Index;
     }
 
     @Override

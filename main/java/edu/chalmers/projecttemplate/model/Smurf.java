@@ -23,7 +23,7 @@ public class Smurf {
 
     public Smurf(Hexagon Hexagon){
         this.hexagon = Hexagon;
-        hexagon.setHexagonState(new OccupiedTile());
+        hexagon.setHexagonState(new OccupiedTile(Hexagon.getIndex()));
         hexagon.occupyTile();
     }
 
@@ -35,8 +35,9 @@ public class Smurf {
         this.yPos = yPos;
     }
 
-    public void moveSmurf(){
-
+    public void moveSmurf(Hexagon hexagon){
+        hexagon.setHexagonState(new OccupiedTile(hexagon.getIndex()));
+        hexagon.occupyTile();
     }
 
     public ArrayList<Integer> calculateRoute(){

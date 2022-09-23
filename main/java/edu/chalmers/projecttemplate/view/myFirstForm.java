@@ -21,16 +21,16 @@ public class myFirstForm extends javax.swing.JFrame {
      * Creates new form myFirstForm
      */
 
-    public ArrayList<JButton> buttonBoard = new ArrayList<JButton>();
-    public myFirstForm() {
+    private Project project;
+    public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
+    public myFirstForm(Project Project) {
 
         initComponents();
-        jLabel1.setText(Project.PROJECT_WINDOW_TEXT);
-        jButton1.setText(Project.PROJECT_BUTTON_TEXT);
+        this.project=Project;
         jPanel1.setLayout(new FlowLayout());
 
         for(int i =0;i<=10;i++){
-            buttonBoard.add(generateButton());
+            buttonBoard.add(generateButton(i));
             System.out.println("hej");
         }
     }
@@ -109,6 +109,7 @@ public class myFirstForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+    public OHexagonButtonState observer = new OHexagonButtonState(buttonBoard);
     public JButton getjButton1() {
         return jButton1;
     }
@@ -117,12 +118,16 @@ public class myFirstForm extends javax.swing.JFrame {
         return jLabel1;
     }
 
-    public ArrayList<JButton> getButtonBoard() {
+    public ArrayList<hexButton> getButtonBoard() {
         return buttonBoard;
     }
 
-    public JButton generateButton(){
-        hexButton generatedButton = new hexButton();
+    public OHexagonButtonState getObserver() {
+        return observer;
+    }
+
+    public hexButton generateButton(Integer index){
+        hexButton generatedButton = new hexButton(project.getTile(index));
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);

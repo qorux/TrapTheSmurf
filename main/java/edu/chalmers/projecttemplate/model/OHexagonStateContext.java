@@ -1,17 +1,18 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
-import main.java.edu.chalmers.projecttemplate.view.*;
-
-public class HexagonStateContext {
+import java.util.Observable;
+public class OHexagonStateContext extends Observable{
     private HexagonState currentState;
-
     private Integer index;
 
-    public HexagonStateContext(Integer Index) {
+    public OHexagonStateContext(Integer Index) {
         this.index = Index;
-        currentState = new ClickableTile();
+        currentState = new ClickableTile(index);
     }
 
+    public Integer getIndex() {
+        return index;
+    }
 
     public HexagonState getCurrentState() {
         return currentState;
@@ -19,15 +20,17 @@ public class HexagonStateContext {
 
     public void setCurrentState(HexagonState currentState) {
         this.currentState = currentState;
+        setChanged();
+        notifyObservers(currentState);
     }
 
     public void click(){
         currentState.clickTile();
-        setCurrentState(new BlockedTile());
+        setCurrentState(new BlockedTile(index));
     }
 
     public void occupy(){
         currentState.occupyTile();
-        setCurrentState(new OccupiedTile());
+        setCurrentState(new OccupiedTile(index));
     }
 }

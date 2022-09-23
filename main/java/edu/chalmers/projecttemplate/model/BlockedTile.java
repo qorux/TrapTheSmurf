@@ -8,7 +8,14 @@ import java.awt.*;
 
 public class BlockedTile implements HexagonState {
 
-    public BlockedTile() {
+    Integer index;
+    public BlockedTile(Integer Index) {
+        this.index=Index;
+    }
+
+    @Override
+    public Integer getIndex() {
+        return index;
     }
 
     @Override

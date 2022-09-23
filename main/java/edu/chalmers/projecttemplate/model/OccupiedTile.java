@@ -8,7 +8,14 @@ import java.awt.*;
 
 public class OccupiedTile implements HexagonState {
 
-    public OccupiedTile() {
+    Integer index;
+    public OccupiedTile(Integer Index) {
+        this.index = Index;
+    }
+
+    @Override
+    public Integer getIndex() {
+        return index;
     }
 
     @Override

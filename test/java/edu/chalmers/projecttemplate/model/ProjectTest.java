@@ -11,8 +11,8 @@ public class ProjectTest {
 
 	@Test
 	public void testIncrementResult() {
-		final var projectView = new myFirstForm();
 		final var project = new Project();
+		final var projectView = new myFirstForm(project);
 		//fixa packages
 
 		for (var i = 0; i < ProjectTest.NUM_INCREMENTATIONS; i++) {

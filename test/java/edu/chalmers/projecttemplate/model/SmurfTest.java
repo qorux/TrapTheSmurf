@@ -15,8 +15,8 @@ public class SmurfTest {
 
     @Test
     public void testRouteCalculation() {
-        myFirstForm projectView = new myFirstForm();
         Project project = new Project();
+        myFirstForm projectView = new myFirstForm(project);
         Smurf smurf = new Smurf(project.getTile(1));
 
         final List<Integer> expectedResult = Arrays.asList(5,5,5,5);
@@ -28,8 +28,8 @@ public class SmurfTest {
 
     @Test
     public void testRouteCalculation2() {
-        myFirstForm projectView = new myFirstForm();
         Project project = new Project();
+        myFirstForm projectView = new myFirstForm(project);
         Smurf smurf = new Smurf(project.getTile(1));
 
         smurf.setyPos(6);

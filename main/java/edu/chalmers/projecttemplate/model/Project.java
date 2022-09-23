@@ -14,6 +14,10 @@ public class Project {
   }
 
 
+  public Smurf getSmurf() {
+    return smurf;
+  }
+
   public int getPresses() {
     int bla;
     bla = 42;
