@@ -48,7 +48,7 @@ public class ProjectController {
 
     //aids
     if (ClickableTile.class.equals(project.getTile(pressedTileIndex).getHexagonStateContext().getCurrentState().getClass())) {
-      projectView.getButtonBoard().get(pressedTileIndex).setBackground(Color.cyan);
+      projectView.getButtonBoard().get(pressedTileIndex).setBackground(Color.red);
       projectView.getButtonBoard().get(pressedTileIndex).setEnabled(true);
     }
     else if (OccupiedTile.class.equals(project.getTile(pressedTileIndex).getHexagonStateContext().getCurrentState().getClass())) {
@@ -61,7 +61,7 @@ public class ProjectController {
     }
 
 
-    //bygg ut denna till ett state pattern potenciellt ifall det behövs mer, resonera om varför/varför inte vi gör det
+    //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 
   }
 

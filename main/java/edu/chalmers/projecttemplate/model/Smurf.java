@@ -16,7 +16,7 @@ public class Smurf {
     final List<String> directions = Arrays.asList("N","E","W","S");
     //Kanske bör ändras, med avseende på hur hexagonerna är implementerade
     //Något sätt att indikera vilken knapp/hexagon man står på! :)
-    private int xPos = 6;
+    private int xPos = 10;
     private int yPos = 6;
 
     private Hexagon hexagon;
@@ -38,6 +38,7 @@ public class Smurf {
     public void moveSmurf(Hexagon hexagon){
         hexagon.setHexagonState(new OccupiedTile(hexagon.getIndex()));
         hexagon.occupyTile();
+
     }
 
     public ArrayList<Integer> calculateRoute(){
