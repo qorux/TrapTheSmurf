@@ -9,11 +9,14 @@ import java.util.List;
 
 public class Smurf {
 
+    //Kanske bör vara i Board/Application(projectTemplate)
     private boolean hasWon = false;
 
+    //(NE,E,SE,SW,W,NW), alla möjliga directions smurfen kan ha?
     final List<String> directions = Arrays.asList("N","E","W","S");
-
-    private int xPos = 6;
+    //Kanske bör ändras, med avseende på hur hexagonerna är implementerade
+    //Något sätt att indikera vilken knapp/hexagon man står på! :)
+    private int xPos = 10;
     private int yPos = 6;
 
     private Hexagon hexagon;
@@ -35,6 +38,7 @@ public class Smurf {
     public void moveSmurf(Hexagon hexagon){
         hexagon.setHexagonState(new OccupiedTile(hexagon.getIndex()));
         hexagon.occupyTile();
+
     }
 
     public ArrayList<Integer> calculateRoute(){

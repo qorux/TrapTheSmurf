@@ -32,6 +32,8 @@ public class myFirstForm extends javax.swing.JFrame {
         for(int i =0;i<=10;i++){
             buttonBoard.add(generateButton(i));
             System.out.println("hej");
+
+
         }
     }
 
@@ -132,6 +134,9 @@ public class myFirstForm extends javax.swing.JFrame {
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);
 
+
         return generatedButton;
     }
+
+
 }
