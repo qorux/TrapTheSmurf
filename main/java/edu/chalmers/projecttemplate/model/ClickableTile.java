@@ -8,20 +8,19 @@ import java.awt.*;
 
 public class ClickableTile implements HexagonState {
 
-    myFirstForm projectView;
     Integer Index;
-    JButton tile;
-    public ClickableTile(Integer index, myFirstForm ProjectView) {
-        this.projectView = ProjectView;
+
+    public ClickableTile(Integer index) {
         this.Index = index;
-        this.tile = ProjectView.getButtonBoard().get(Index);
     }
 
     @Override
     public void clickTile() {
         System.out.println("Clickable tile turns gray");
-        tile.setBackground(Color.DARK_GRAY);
-        tile.setEnabled(false);
+    }
+
+    public Integer getIndex() {
+        return Index;
     }
 
     @Override

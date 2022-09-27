@@ -2,32 +2,37 @@ package main.java.edu.chalmers.projecttemplate.model;
 import main.java.edu.chalmers.projecttemplate.view.*;
 
 public class Hexagon{
-    private HexagonStateContext hexagonStateContext;
+    private OHexagonStateContext observable;
     private Integer index;
 
     private myFirstForm projectView;
 
-    public Hexagon(Integer boardIndex, myFirstForm ProjectView) {
+    public Hexagon(Integer boardIndex) {
         this.index= boardIndex;
-        this.projectView = ProjectView;
-        this.hexagonStateContext = new HexagonStateContext(index, projectView);
+        this.observable = new OHexagonStateContext(index);
+
     }
 
+    public OHexagonStateContext getHexagonStateContext() {
+        return observable;
+    }
 
-
-    void setHexagonState(HexagonState newHexagonState){
-        hexagonStateContext.setCurrentState(newHexagonState);
+    public void setHexagonState(HexagonState newHexagonState){
+        observable.setCurrentState(newHexagonState);
     }
 
     public void clickTile() {
-        hexagonStateContext.click();
+        observable.click();
     }
 
     public void occupyTile() {
-        hexagonStateContext.occupy();
+        observable.occupy();
     }
 
 
+    public Integer getIndex() {
+        return index;
+    }
 
 
 }

@@ -1,15 +1,19 @@
 package main.java.edu.chalmers.projecttemplate.view;
 
+import main.java.edu.chalmers.projecttemplate.model.Hexagon;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class hexButton extends JButton {
     Polygon hexagonalShape;
+    Hexagon hexagon;
 
-    public hexButton() {
+    public hexButton(Hexagon Hexagon) {
         this.setOpaque(false);
         hexagonalShape = getHexPolygon();
+        this.hexagon = Hexagon;
     }
 
     /**
