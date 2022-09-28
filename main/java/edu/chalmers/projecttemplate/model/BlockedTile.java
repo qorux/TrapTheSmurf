@@ -1,15 +1,25 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+
+import javax.swing.*;
+import main.java.edu.chalmers.projecttemplate.view.*;
+
+import java.awt.*;
+
 public class BlockedTile implements HexagonState {
 
-    Hexagon hexagon;
-
-    public BlockedTile(Hexagon newHexagon){
-        hexagon = newHexagon;
+    Integer index;
+    public BlockedTile(Integer Index) {
+        this.index=Index;
     }
 
     @Override
-    public void blockTile() {
+    public Integer getIndex() {
+        return index;
+    }
+
+    @Override
+    public void clickTile() {
 
     }
 
@@ -18,8 +28,4 @@ public class BlockedTile implements HexagonState {
 
     }
 
-    @Override
-    public void freeTile() {
-
-    }
 }

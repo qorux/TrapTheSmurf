@@ -1,5 +1,7 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,14 @@ public class Smurf {
     private int xPos = 6;
     private int yPos = 6;
 
+    private Hexagon hexagon;
+
+    public Smurf(Hexagon Hexagon){
+        this.hexagon = Hexagon;
+        hexagon.setHexagonState(new OccupiedTile(Hexagon.getIndex()));
+        hexagon.occupyTile();
+    }
+
     public void setxPos(int xPos) {
         this.xPos = xPos;
     }
@@ -25,8 +35,9 @@ public class Smurf {
         this.yPos = yPos;
     }
 
-    public void moveSmurf(){
-
+    public void moveSmurf(Hexagon hexagon){
+        hexagon.setHexagonState(new OccupiedTile(hexagon.getIndex()));
+        hexagon.occupyTile();
     }
 
     public ArrayList<Integer> calculateRoute(){
