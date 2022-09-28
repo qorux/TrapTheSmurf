@@ -33,4 +33,9 @@ public class OHexagonStateContext extends Observable{
         currentState.occupyTile();
         setCurrentState(new OccupiedTile(index));
     }
+
+    public void block(){
+        currentState.blockTile();
+        setCurrentState(new BlockedTile(index));
+    }
 }

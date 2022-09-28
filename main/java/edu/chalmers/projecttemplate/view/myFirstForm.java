@@ -38,7 +38,6 @@ public class myFirstForm extends javax.swing.JFrame {
         for(int i =0;i<=maxHeight * maxLength;i++){
             buttonBoard.add(generateButton(i));
 
-            System.out.println("hej");
         }
     }
 

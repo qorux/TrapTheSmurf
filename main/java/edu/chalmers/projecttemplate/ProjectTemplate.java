@@ -23,11 +23,11 @@ public final class ProjectTemplate {
 				final Project project = new Project();
 				final myFirstForm ProjectView = new myFirstForm(project);
 
-				for(int i=0; i<=10;i++){
+				for(int i=0; i<=120;i++){
 					project.board.getBoardSpaces().get(i).getHexagonStateContext().addObserver(ProjectView.observer);
 				}
-
-				project.getSmurf().moveSmurf(project.board.getBoardSpaces().get(5)); //hur gör vi här
+				project.board.randomizeBlockedTiles();
+				project.getSmurf().moveSmurf(project.board.getBoardSpaces().get(58)); //hur gör vi här
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);
 

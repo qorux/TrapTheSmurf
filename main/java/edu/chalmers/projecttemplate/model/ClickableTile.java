@@ -27,5 +27,7 @@ public class ClickableTile implements HexagonState {
     public void occupyTile() {
 
     }
+    @Override
+    public void blockTile() {}
 
 }
