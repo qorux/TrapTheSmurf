@@ -8,7 +8,7 @@ public class Board {
 
     public Board(){
         boardSpaces = new ArrayList<Hexagon>();
-        for(int i=0;i<=10;i++){
+        for(int i=0;i<=121;i++){
             boardSpaces.add(new Hexagon(i));
         }
     }
