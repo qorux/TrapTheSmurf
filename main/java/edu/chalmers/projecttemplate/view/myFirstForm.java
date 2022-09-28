@@ -141,7 +141,7 @@ public class myFirstForm extends javax.swing.JFrame {
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);
-        if (index == 10 || index == 32){
+        if (index == 10 || index == 31 || index == 52 || index == 73 || index == 94){
             jPanelMini = new JPanel();
             jPanelMini.setSize(20,40);
             jPanel1.add(jPanelMini);
