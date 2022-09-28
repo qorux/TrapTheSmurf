@@ -1,9 +1,6 @@
 package main.java.edu.chalmers.projecttemplate.view;
 
-import main.java.edu.chalmers.projecttemplate.model.ClickableTile;
-import main.java.edu.chalmers.projecttemplate.model.HexagonState;
-import main.java.edu.chalmers.projecttemplate.model.OHexagonStateContext;
-import main.java.edu.chalmers.projecttemplate.model.OccupiedTile;
+import main.java.edu.chalmers.projecttemplate.model.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -25,6 +22,10 @@ public class OHexagonButtonState implements Observer {
             buttonBoard.get(currentState.getIndex()).setBackground(Color.RED);
             buttonBoard.get(currentState.getIndex()).setEnabled(false);
             System.out.println("röd!");
+        }
+        if (BlockedTile.class.equals(currentState.getClass())){
+            buttonBoard.get(currentState.getIndex()).setBackground(Color.DARK_GRAY);
+            buttonBoard.get(currentState.getIndex()).setEnabled(false);
         }
     }
 

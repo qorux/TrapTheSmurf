@@ -29,6 +29,10 @@ public class Hexagon{
         observable.occupy();
     }
 
+    public void blockTile() {
+        observable.block();
+    }
+
 
     public Integer getIndex() {
         return index;

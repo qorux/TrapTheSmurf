@@ -19,6 +19,9 @@ public class OccupiedTile implements HexagonState {
     }
 
     @Override
+    public void blockTile() {}
+
+    @Override
     public void clickTile() {
         System.out.println("smurf is on this tile");
     }

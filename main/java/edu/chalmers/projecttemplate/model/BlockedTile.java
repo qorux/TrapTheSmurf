@@ -22,6 +22,8 @@ public class BlockedTile implements HexagonState {
     public void clickTile() {
 
     }
+    @Override
+    public void blockTile() {}
 
     @Override
     public void occupyTile() {
