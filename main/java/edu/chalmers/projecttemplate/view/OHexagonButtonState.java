@@ -23,6 +23,7 @@ public class OHexagonButtonState implements Observer {
         System.out.println(currentState.getClass());
         if (OccupiedTile.class.equals(currentState.getClass())){
             buttonBoard.get(currentState.getIndex()).setBackground(Color.RED);
+            buttonBoard.get(currentState.getIndex()).setEnabled(false);
             System.out.println("röd!");
         }
     }
