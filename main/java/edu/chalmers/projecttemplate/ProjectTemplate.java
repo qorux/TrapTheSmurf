@@ -27,7 +27,7 @@ public final class ProjectTemplate {
 				for(int i=0; i<=120;i++){
 					project.board.getBoardSpaces().get(i).getHexagonStateContext().addObserver(ProjectView.observer);
 				}
-				project.getSmurf().placeSmurf();
+				project.getSmurf().startPlaceSmurf();
 				project.board.randomizeBlockedTiles();
 
 				//project.getSmurf().moveSmurf(project.board.getBoardSpaces().get(58)); //hur gör vi här

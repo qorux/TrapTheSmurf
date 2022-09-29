@@ -1,5 +1,6 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Smurf {
     //Är tanken att vi ska göra om spelplanen till en matrix, för just nu så har ju varje plats en nummer 0-120(?), istället
     //för x=5, y=6?
     private int xPos = 6;
-    private int yPos = 10;
+    private int yPos = 6;
 
     private Hexagon hexagon;
 
@@ -44,7 +45,7 @@ public class Smurf {
 
 //Detta är väl säkert mot law of demeter, men tycker det ser bättre ut än i ProjectTemplate
     //fult, i know, kommer väl behövas skrivas om?
-    public void placeSmurf(){
+    public void startPlaceSmurf(){
         int smurfLocation = 58;
         hexagon.setHexagonState(new OccupiedTile(smurfLocation));
     }
@@ -94,7 +95,7 @@ public class Smurf {
         }
         return false;
     }
-    public void jump(){
+    public void jumpAroundSmurf(ActionEvent event){
 
     }
 
