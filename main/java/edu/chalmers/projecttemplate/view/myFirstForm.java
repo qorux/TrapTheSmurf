@@ -28,10 +28,6 @@ public class myFirstForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMini2;
     private javax.swing.JPanel jPanelMini3;
     private javax.swing.JPanel jPanelMini4;
-    private javax.swing.JPanel jPanelMini5;
-    private javax.swing.JPanel jPanelMini6;
-
-
 
     public myFirstForm(Project Project) {
 
@@ -43,7 +39,7 @@ public class myFirstForm extends javax.swing.JFrame {
         jPanel1.setLayout(new FlowLayout(5,0,0 ));
 
 
-        for(int i =0;i<=maxHeight * maxWidth;i++){
+        for(int i =0;i<=120;i++){
             buttonBoard.add(generateButton(i));
 
 //            System.out.println("hej");
@@ -154,19 +150,20 @@ public class myFirstForm extends javax.swing.JFrame {
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);
-        if (index == 10 || index == 32 || index == 54 || index == 76 || index == 98) {
+        if (index == 10 || index == 32 || index == 54 || index == 76 || index == 98){
             jPanelMini = new JPanel();
-            jPanelMini.setSize(20, 40);
+            jPanelMini.setSize(20,40);
             jPanel1.add(jPanelMini);
             jPanelMini2 = new JPanel();
-            jPanelMini2.setSize(20, 40);
+            jPanelMini2.setSize(20,40);
             jPanel1.add(jPanelMini2);
             jPanelMini3 = new JPanel();
-            jPanelMini3.setSize(20, 40);
+            jPanelMini3.setSize(20,40);
             jPanel1.add(jPanelMini3);
             jPanelMini4 = new JPanel();
-            jPanelMini4.setSize(20, 40);
+            jPanelMini4.setSize(20,40);
             jPanel1.add(jPanelMini4);
+//            System.out.print("Lägger in mellanrum på index: " + index + " ");
         }
         return generatedButton;
     }
