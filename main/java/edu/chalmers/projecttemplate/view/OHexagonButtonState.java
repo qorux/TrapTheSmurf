@@ -16,16 +16,17 @@ public class OHexagonButtonState implements Observer {
     @Override
     public void update(Observable o, Object CurrentState) {
         HexagonState currentState = (HexagonState) CurrentState;
-        System.out.print("Observer saw changed state. State: ");
-        System.out.println(currentState.getClass());
         if (OccupiedTile.class.equals(currentState.getClass())){
             buttonBoard.get(currentState.getIndex()).setBackground(Color.RED);
             buttonBoard.get(currentState.getIndex()).setEnabled(false);
-            System.out.println("röd!");
         }
         if (BlockedTile.class.equals(currentState.getClass())){
             buttonBoard.get(currentState.getIndex()).setBackground(Color.DARK_GRAY);
             buttonBoard.get(currentState.getIndex()).setEnabled(false);
+        }
+        if (ClickableTile.class.equals(currentState.getClass())){
+            buttonBoard.get(currentState.getIndex()).setBackground(Color.CYAN);
+            buttonBoard.get(currentState.getIndex()).setEnabled(true);
         }
     }
 

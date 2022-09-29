@@ -46,8 +46,8 @@ public class ProjectController {
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
     project.getTile(pressedTileIndex).clickTile();
 
-    //aids
-    if (ClickableTile.class.equals(project.getTile(pressedTileIndex).getHexagonStateContext().getCurrentState().getClass())) {
+    //
+ /*   if (ClickableTile.class.equals(project.getTile(pressedTileIndex).getHexagonStateContext().getCurrentState().getClass())) {
       projectView.getButtonBoard().get(pressedTileIndex).setBackground(Color.red);
       projectView.getButtonBoard().get(pressedTileIndex).setEnabled(true);
     }
@@ -59,7 +59,9 @@ public class ProjectController {
       projectView.getButtonBoard().get(pressedTileIndex).setBackground(Color.darkGray);
       projectView.getButtonBoard().get(pressedTileIndex).setEnabled(false);
     }
+*/
 
+    //^ Funkar utan allt det där ändå ?? haha
 
     //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 

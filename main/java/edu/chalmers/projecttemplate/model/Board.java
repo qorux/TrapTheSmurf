@@ -23,12 +23,11 @@ public class Board {
     }
 
     public void randomizeBlockedTiles(){
-        int numberOfBlockedTiles = ThreadLocalRandom.current().nextInt(11, 16);
+        Random random = new Random();
+        int numberOfBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
         System.out.println("Number of blocked tiles this round: "+numberOfBlockedTiles);
-        int i = 1;
-        while (i <= numberOfBlockedTiles) {
+        for(int i=1;i<=numberOfBlockedTiles;i++) { //for each??
             blockTile();
-            i++;
         }
     }
 
@@ -36,8 +35,11 @@ public class Board {
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(boardSpaces.size());
         System.out.println("Tile "+index+" is blocked");
-        boardSpaces.get(index).setHexagonState(new BlockedTile(index));
-
+        if (index == 58) {
+           blockTile(); } //makes the smurfs start tile unblockable
+        else {
+            boardSpaces.get(index).setHexagonState(new BlockedTile(index));
+        }
     }
 
 

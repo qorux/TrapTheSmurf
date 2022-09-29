@@ -1,11 +1,11 @@
 package main.java.edu.chalmers.projecttemplate.model;
-import main.java.edu.chalmers.projecttemplate.view.*;
+import main.java.edu.chalmers.projecttemplate.view.*; //fixa
 
 public class Hexagon{
     private OHexagonStateContext observable;
     private Integer index;
 
-    private myFirstForm projectView;
+  //  private myFirstForm projectView;
 
     public Hexagon(Integer boardIndex) {
         this.index= boardIndex;
