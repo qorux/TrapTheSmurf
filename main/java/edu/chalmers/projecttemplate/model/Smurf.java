@@ -1,11 +1,9 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
-import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Observable;
 
 public class Smurf {
 
@@ -16,12 +14,15 @@ public class Smurf {
     final List<String> directions = Arrays.asList("N","E","W","S");
     //Kanske bör ändras, med avseende på hur hexagonerna är implementerade
     //Något sätt att indikera vilken knapp/hexagon man står på! :)
-    private int xPos = 10;
-    private int yPos = 6;
+
+    //Är tanken att vi ska göra om spelplanen till en matrix, för just nu så har ju varje plats en nummer 0-120(?), istället
+    //för x=5, y=6?
+    private int xPos = 6;
+    private int yPos = 10;
 
     private Hexagon hexagon;
 
-    public Smurf(Hexagon Hexagon){
+   public Smurf(Hexagon Hexagon){
         this.hexagon = Hexagon;
         hexagon.setHexagonState(new OccupiedTile(Hexagon.getIndex()));
         hexagon.occupyTile();
@@ -35,10 +36,17 @@ public class Smurf {
         this.yPos = yPos;
     }
 
-    public void moveSmurf(Hexagon hexagon){
-        hexagon.setHexagonState(new OccupiedTile(hexagon.getIndex()));
-        hexagon.occupyTile();
+    public void moveSmurf(){
 
+
+    }
+
+
+//Detta är väl säkert mot law of demeter, men tycker det ser bättre ut än i ProjectTemplate
+    //fult, i know, kommer väl behövas skrivas om?
+    public void placeSmurf(){
+        int smurfLocation = 58;
+        hexagon.setHexagonState(new OccupiedTile(smurfLocation));
     }
 
     public ArrayList<Integer> calculateRoute(){

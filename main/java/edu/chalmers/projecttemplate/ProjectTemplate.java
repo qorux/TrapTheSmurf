@@ -1,6 +1,7 @@
 package main.java.edu.chalmers.projecttemplate;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
+import main.java.edu.chalmers.projecttemplate.model.Hexagon;
 import main.java.edu.chalmers.projecttemplate.model.OHexagonStateContext;
 import main.java.edu.chalmers.projecttemplate.model.Project;
 import main.java.edu.chalmers.projecttemplate.model.Smurf;
@@ -26,8 +27,10 @@ public final class ProjectTemplate {
 				for(int i=0; i<=120;i++){
 					project.board.getBoardSpaces().get(i).getHexagonStateContext().addObserver(ProjectView.observer);
 				}
+				project.getSmurf().placeSmurf();
 				project.board.randomizeBlockedTiles();
-				project.getSmurf().moveSmurf(project.board.getBoardSpaces().get(58)); //hur gör vi här
+
+				//project.getSmurf().moveSmurf(project.board.getBoardSpaces().get(58)); //hur gör vi här
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);
 

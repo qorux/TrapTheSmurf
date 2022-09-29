@@ -32,6 +32,7 @@ public class Board {
         }
     }
 
+    //Blockerar just nu smurfen ;(
     public void blockTile() {
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(boardSpaces.size());

@@ -74,4 +74,5 @@ public class ProjectController {
       projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
     }
   }
+
 }
