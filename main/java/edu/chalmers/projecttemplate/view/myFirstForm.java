@@ -24,6 +24,9 @@ public class myFirstForm extends javax.swing.JFrame {
     private Project project;
     public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
 
+    private OHexagonButtonState observer;
+
+
     public myFirstForm(Project Project) {
 
         int maxHeight = 11;
@@ -39,6 +42,7 @@ public class myFirstForm extends javax.swing.JFrame {
 
 //            System.out.println("hej");
         }
+        observer = new OHexagonButtonState(buttonBoard, project.getBoard());
     }
 
     /**
@@ -57,11 +61,6 @@ public class myFirstForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setBackground(new java.awt.Color(102, 255, 255));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("jLabel1");
 
@@ -109,10 +108,6 @@ public class myFirstForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -121,9 +116,12 @@ public class myFirstForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+
+    public OHexagonButtonState getObserver() {
+        return observer;
+    }
     // End of variables declaration//GEN-END:variables
 
-    public OHexagonButtonState observer = new OHexagonButtonState(buttonBoard);
     public JButton getjButton1() {
         return jButton1;
     }
@@ -136,9 +134,6 @@ public class myFirstForm extends javax.swing.JFrame {
         return buttonBoard;
     }
 
-    public OHexagonButtonState getObserver() {
-        return observer;
-    }
 
     public hexButton generateButton(Integer index){
         hexButton generatedButton = new hexButton(project.getTile(index));

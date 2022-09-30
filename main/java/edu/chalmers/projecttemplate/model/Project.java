@@ -10,9 +10,12 @@ public class Project {
   public Project(){
     this.board = new Board();
     this.smurf=new Smurf(board.getBoardSpaces().get(1));
-
   }
 
+
+  public Board getBoard() {
+    return board;
+  }
 
   public Smurf getSmurf() {
     return smurf;

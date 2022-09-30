@@ -1,32 +1,41 @@
 package main.java.edu.chalmers.projecttemplate.view;
 
-import main.java.edu.chalmers.projecttemplate.model.ClickableTile;
-import main.java.edu.chalmers.projecttemplate.model.HexagonState;
-import main.java.edu.chalmers.projecttemplate.model.OHexagonStateContext;
-import main.java.edu.chalmers.projecttemplate.model.OccupiedTile;
+import main.java.edu.chalmers.projecttemplate.model.*;
 
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-public class OHexagonButtonState implements Observer {
+import java.util.Arrays;
+
+public class OHexagonButtonState implements PropertyChangeListener {
 
     private ArrayList<hexButton> buttonBoard;
-    public OHexagonButtonState(ArrayList<hexButton> ButtonBoard) {
+    private Board hexagonBoard;
+    public OHexagonButtonState(ArrayList<hexButton> ButtonBoard, Board HexagonBoard) {
         this.buttonBoard = ButtonBoard;
+        this.hexagonBoard = HexagonBoard;
     }
 
-    @Override
-    public void update(Observable o, Object CurrentState) {
-        HexagonState currentState = (HexagonState) CurrentState;
-        System.out.print("Observer saw changed state. State: ");
-        System.out.println(currentState.getClass());
-        if (OccupiedTile.class.equals(currentState.getClass())){
-            buttonBoard.get(currentState.getIndex()).setBackground(Color.RED);
-            buttonBoard.get(currentState.getIndex()).setEnabled(false);
-            System.out.println("röd!");
+
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        Hexagon hexagon = ((Hexagon)evt.getOldValue());
+        int pressedTileIndex = hexagon.getIndex();
+        System.out.println( pressedTileIndex);
+
+        if (ClickableTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
+            buttonBoard.get(pressedTileIndex).setBackground(Color.darkGray);
+            buttonBoard.get(pressedTileIndex).setEnabled(false);
+        }
+        else if (OccupiedTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
+            buttonBoard.get(pressedTileIndex).setBackground(Color.red);
+            buttonBoard.get(pressedTileIndex).setEnabled(false);
+        }
+        else if (BlockedTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
+            buttonBoard.get(pressedTileIndex).setBackground(Color.darkGray);
+            buttonBoard.get(pressedTileIndex).setEnabled(false);
         }
     }
-
     // standard getter and setter
 }
