@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Observable;
 
 public class Smurf {
 
@@ -25,7 +24,7 @@ public class Smurf {
 
    public Smurf(Hexagon Hexagon){
         this.hexagon = Hexagon;
-        hexagon.setHexagonState(new OccupiedTile(Hexagon.getIndex()));
+        hexagon.getHexagonStateContext().setHexagonState( new OccupiedTile());
         hexagon.occupyTile();
     }
 
@@ -45,9 +44,10 @@ public class Smurf {
 
 //Detta är väl säkert mot law of demeter, men tycker det ser bättre ut än i ProjectTemplate
     //fult, i know, kommer väl behövas skrivas om?
+    //japp, onödig då vi gör detta i konstruktorn
     public void startPlaceSmurf(){
         int smurfLocation = 58;
-        hexagon.setHexagonState(new OccupiedTile(smurfLocation));
+        hexagon.getHexagonStateContext().setHexagonState(new OccupiedTile());
     }
 
     public ArrayList<Integer> calculateRoute(){

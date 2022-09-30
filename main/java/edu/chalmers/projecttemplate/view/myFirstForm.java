@@ -24,6 +24,8 @@ public class myFirstForm extends javax.swing.JFrame {
     private Project project;
     public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
 
+    private OHexagonButtonState observer;
+
     private javax.swing.JPanel jPanelMini;
     public myFirstForm(Project Project) {
 
@@ -34,11 +36,10 @@ public class myFirstForm extends javax.swing.JFrame {
         this.project=Project;
         jPanel1.setLayout(new FlowLayout(5,0,0 ));
 
-
         for(int i =0;i<=maxHeight * maxLength;i++){
             buttonBoard.add(generateButton(i));
-
         }
+        observer = new OHexagonButtonState(buttonBoard, project.getBoard());
     }
 
     /**
@@ -116,9 +117,12 @@ public class myFirstForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+
+    public OHexagonButtonState getObserver() {
+        return observer;
+    }
     // End of variables declaration//GEN-END:variables
 
-    public OHexagonButtonState observer = new OHexagonButtonState(buttonBoard);
     public JButton getjButton1() {
         return jButton1;
     }
@@ -131,9 +135,6 @@ public class myFirstForm extends javax.swing.JFrame {
         return buttonBoard;
     }
 
-    public OHexagonButtonState getObserver() {
-        return observer;
-    }
 
     public hexButton generateButton(Integer index){
         hexButton generatedButton = new hexButton(project.getTile(index));

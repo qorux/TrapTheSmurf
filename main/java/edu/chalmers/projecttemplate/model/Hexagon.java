@@ -1,36 +1,40 @@
 package main.java.edu.chalmers.projecttemplate.model;
-import main.java.edu.chalmers.projecttemplate.view.*; //fixa
+
+import java.beans.PropertyChangeSupport;
 
 public class Hexagon{
-    private OHexagonStateContext observable;
+    private HexagonStateContext wrapper;
     private Integer index;
 
-  //  private myFirstForm projectView;
+    private PropertyChangeSupport support;
 
-    public Hexagon(Integer boardIndex) {
+
+    public PropertyChangeSupport getSupport() {
+        return support;
+    }
+
+    public Hexagon(Integer boardIndex, PropertyChangeSupport Support) {
+        this.support = Support;
         this.index= boardIndex;
-        this.observable = new OHexagonStateContext(index);
+        this.wrapper = new HexagonStateContext(this,support);
 
     }
 
-    public OHexagonStateContext getHexagonStateContext() {
-        return observable;
+    public HexagonStateContext getHexagonStateContext() {
+        return wrapper;
     }
 
-    public void setHexagonState(HexagonState newHexagonState){
-        observable.setCurrentState(newHexagonState);
-    }
 
     public void clickTile() {
-        observable.click();
+        wrapper.click();
     }
 
     public void occupyTile() {
-        observable.occupy();
+        wrapper.occupy();
     }
 
     public void blockTile() {
-        observable.block();
+        wrapper.block();
     }
 
 

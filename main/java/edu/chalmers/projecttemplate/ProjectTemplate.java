@@ -1,11 +1,7 @@
 package main.java.edu.chalmers.projecttemplate;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
-import main.java.edu.chalmers.projecttemplate.model.Hexagon;
-import main.java.edu.chalmers.projecttemplate.model.OHexagonStateContext;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.model.Smurf;
-import main.java.edu.chalmers.projecttemplate.view.OHexagonButtonState;
 import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
 
 import javax.swing.SwingUtilities;
@@ -24,9 +20,7 @@ public final class ProjectTemplate {
 				final Project project = new Project();
 				final myFirstForm ProjectView = new myFirstForm(project);
 
-				for(int i=0; i<=120;i++){
-					project.board.getBoardSpaces().get(i).getHexagonStateContext().addObserver(ProjectView.observer);
-				}
+				project.board.addPropertyChangeListener(ProjectView.getObserver());
 				project.getSmurf().startPlaceSmurf();
 				project.board.randomizeBlockedTiles();
 

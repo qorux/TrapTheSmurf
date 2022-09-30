@@ -1,21 +1,31 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import main.java.edu.chalmers.projecttemplate.view.*;
 
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Board {
     private ArrayList <Hexagon> boardSpaces ;
 
+    private PropertyChangeSupport support;
+
     public Board(){
+        support = new PropertyChangeSupport(this);
         boardSpaces = new ArrayList<Hexagon>();
         for(int i=0;i<=121;i++){
-            boardSpaces.add(new Hexagon(i));
+            boardSpaces.add(new Hexagon(i, support));
         }
 
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
     }
 
     public ArrayList<Hexagon> getBoardSpaces() {
@@ -39,12 +49,8 @@ public class Board {
         if (index == 58) {
            blockTile(); } //makes the smurfs start tile unblockable
         else {
-            boardSpaces.get(index).setHexagonState(new BlockedTile(index));
+            boardSpaces.get(index).getHexagonStateContext().setHexagonState(new BlockedTile());
         }
     }
-
-
-
-
 }
 
