@@ -24,11 +24,6 @@ public class myFirstForm extends javax.swing.JFrame {
     private Project project;
     public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
 
-    private javax.swing.JPanel jPanelMini;
-    private javax.swing.JPanel jPanelMini2;
-    private javax.swing.JPanel jPanelMini3;
-    private javax.swing.JPanel jPanelMini4;
-
     public myFirstForm(Project Project) {
 
         int maxHeight = 11;
@@ -70,14 +65,14 @@ public class myFirstForm extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(460, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(460, 500));
+        jPanel1.setMaximumSize(new java.awt.Dimension(548, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(548, 500));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +86,7 @@ public class myFirstForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(753, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,20 +145,13 @@ public class myFirstForm extends javax.swing.JFrame {
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);
+        jPanel1.add(Box.createRigidArea(new Dimension(8,0)));
         if (index == 10 || index == 32 || index == 54 || index == 76 || index == 98){
-            jPanelMini = new JPanel();
-            jPanelMini.setSize(20,40);
-            jPanel1.add(jPanelMini);
-            jPanelMini2 = new JPanel();
-            jPanelMini2.setSize(20,40);
-            jPanel1.add(jPanelMini2);
-            jPanelMini3 = new JPanel();
-            jPanelMini3.setSize(20,40);
-            jPanel1.add(jPanelMini3);
-            jPanelMini4 = new JPanel();
-            jPanelMini4.setSize(20,40);
-            jPanel1.add(jPanelMini4);
-//            System.out.print("Lägger in mellanrum på index: " + index + " ");
+            for (int i = 0; i < 4 ; i++) {
+                JPanel jPanelMini = new JPanel();
+                jPanelMini.setSize(20,40);
+                jPanel1.add(jPanelMini);
+            }
         }
         return generatedButton;
     }
