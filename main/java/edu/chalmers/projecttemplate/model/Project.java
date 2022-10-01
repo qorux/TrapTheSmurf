@@ -9,7 +9,7 @@ public class Project {
   private Smurf smurf;
   public Project(){
     this.board = new Board();
-    this.smurf=new Smurf(board.getBoardSpaces().get(1));
+    this.smurf=new Smurf(board.getBoardSpaces().get(60));
   }
 
 

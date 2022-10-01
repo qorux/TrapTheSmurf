@@ -8,7 +8,6 @@ public class Hexagon{
 
     private PropertyChangeSupport support;
 
-
     public PropertyChangeSupport getSupport() {
         return support;
     }

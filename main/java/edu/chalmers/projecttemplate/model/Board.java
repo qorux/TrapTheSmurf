@@ -36,18 +36,18 @@ public class Board {
         Random random = new Random();
         int numberOfBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
         System.out.println("Number of blocked tiles this round: "+numberOfBlockedTiles);
-        for(int i=1;i<=numberOfBlockedTiles;i++) { //for each??
+        for(int i=1;i<=numberOfBlockedTiles;i++) {
             blockTile();
         }
     }
 
-    //Blockerar just nu smurfen ;(
     public void blockTile() {
         Random randomGenerator = new Random();
-        int index = randomGenerator.nextInt(boardSpaces.size());
+        int index = randomGenerator.nextInt(boardSpaces.size()-1);
         System.out.println("Tile "+index+" is blocked");
-        if (index == 58) {
-           blockTile(); } //makes the smurfs start tile unblockable
+        if (index == 60) {
+            ;
+        }
         else {
             boardSpaces.get(index).getHexagonStateContext().setHexagonState(new BlockedTile());
         }
