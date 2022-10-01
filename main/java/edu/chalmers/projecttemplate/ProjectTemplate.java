@@ -1,10 +1,12 @@
 package main.java.edu.chalmers.projecttemplate;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
+import main.java.edu.chalmers.projecttemplate.model.Board;
 import main.java.edu.chalmers.projecttemplate.model.Project;
 import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
 
 import javax.swing.SwingUtilities;
+import java.util.concurrent.TimeUnit;
 
 public final class ProjectTemplate {
 	private ProjectTemplate() {
