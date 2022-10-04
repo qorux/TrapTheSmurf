@@ -9,16 +9,22 @@ import java.util.List;
 import java.util.Random;
 
 public class Board {
-    private ArrayList <Hexagon> boardSpaces ;
+    private List<List<Hexagon>> boardColumns;
+    private List<Hexagon> boardRows;
 
     private PropertyChangeSupport support;
 
     public Board(){
         support = new PropertyChangeSupport(this);
-        boardSpaces = new ArrayList<Hexagon>();
-        for(int i=0;i<=121;i++){
-            boardSpaces.add(new Hexagon(i, support));
+        boardColumns = new ArrayList<>();
+        for(int i=0;i<11;i++) {
+            boardRows = new ArrayList<Hexagon>();
+            for (int o = 0; o < 11; o++) {
+                boardRows.add(new Hexagon((i * 11) + o, support));
+            }
+            boardColumns.add(boardRows);
         }
+        System.out.println("Size of col" + boardColumns.size());
 
     }
 
@@ -26,8 +32,8 @@ public class Board {
         support.addPropertyChangeListener(pcl);
     }
 
-    public ArrayList<Hexagon> getBoardSpaces() {
-        return boardSpaces;
+    public List<List<Hexagon>> getBoardSpaces() {
+        return boardColumns;
     }
 
 
@@ -41,7 +47,7 @@ public class Board {
         List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);//sizeofboard variable
 
         for(int i = 0; i < 121; i++) {
-            if (i<=totalBlockedTiles){
+            if (i<totalBlockedTiles){
                 shouldTileBeBlocked.add(true);
             }
             else {
@@ -57,6 +63,8 @@ public class Board {
             }
             index++;
         }
+        System.out.println("Index after for loop:" +
+                index);
     }
 
     public void blockTile(Integer index) {
@@ -65,8 +73,15 @@ public class Board {
             ;
         }
         else {
-            boardSpaces.get(index).getHexagonStateContext().setHexagonState(new BlockedTile());
+            getHexagon(index).getHexagonStateContext().setHexagonState(new BlockedTile());
         }
+    }
+
+    public Hexagon getHexagon(int index){
+        int col = index / 11;
+        int row = index % 11;
+
+        return boardColumns.get(col).get(row);
     }
 }
 

@@ -22,7 +22,7 @@ public class OHexagonButtonState implements PropertyChangeListener {
 
         Hexagon hexagon = ((Hexagon)evt.getOldValue());
         int pressedTileIndex = hexagon.getIndex();
-        System.out.println( pressedTileIndex);
+        System.out.println("Pressed tile index in view: " +pressedTileIndex);
 
         if (ClickableTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
             buttonBoard.get(pressedTileIndex).setBackground(Color.darkGray);

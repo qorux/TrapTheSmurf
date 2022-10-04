@@ -44,7 +44,7 @@ public class ProjectController {
   private void listenedObject_actionPerformed(ActionEvent evt) {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
-    project.getTile(pressedTileIndex).clickTile();
+    project.board.getHexagon(pressedTileIndex).clickTile();
 
     //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 

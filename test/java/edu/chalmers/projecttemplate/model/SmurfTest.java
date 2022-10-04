@@ -17,7 +17,7 @@ public class SmurfTest {
     public void testRouteCalculation() {
         Project project = new Project();
         myFirstForm projectView = new myFirstForm(project);
-        Smurf smurf = new Smurf(project.getTile(1));
+        Smurf smurf = new Smurf(project.board.getHexagon(1));
 
         final List<Integer> expectedResult = Arrays.asList(5,5,5,5);
         ArrayList<Integer> result = smurf.calculateRoute();
@@ -30,7 +30,7 @@ public class SmurfTest {
     public void testRouteCalculation2() {
         Project project = new Project();
         myFirstForm projectView = new myFirstForm(project);
-        Smurf smurf = new Smurf(project.getTile(1));
+        Smurf smurf = new Smurf(project.board.getHexagon(1));
 
         smurf.setyPos(6);
         smurf.setxPos(10);

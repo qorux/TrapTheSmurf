@@ -136,7 +136,7 @@ public class myFirstForm extends javax.swing.JFrame {
 
 
     public hexButton generateButton(Integer index){
-        hexButton generatedButton = new hexButton(project.getTile(index));
+        hexButton generatedButton = new hexButton(project.board.getHexagon(index));
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);

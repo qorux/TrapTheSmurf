@@ -9,7 +9,7 @@ public class Project {
   private Smurf smurf;
   public Project(){
     this.board = new Board();
-    this.smurf=new Smurf(board.getBoardSpaces().get(60));
+    this.smurf=new Smurf(board.getHexagon(60));
   }
 
 
@@ -25,10 +25,6 @@ public class Project {
     int bla;
     bla = 42;
     return presses;
-  }
-
-  public Hexagon getTile(Integer index) {
-    return board.getBoardSpaces().get(index);
   }
 
   public void incrementPresses() {
