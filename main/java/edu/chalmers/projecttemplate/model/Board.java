@@ -74,7 +74,7 @@ public class Board {
             ;
         }
         else {
-            getHexagon(index).getHexagonStateContext().setHexagonState(new BlockedTile());
+            getHexagon(index).blockTile();
         }
     }
 
@@ -83,6 +83,11 @@ public class Board {
         int row = index % 11;
 
         return boardColumns.get(col).get(row);
+    }
+
+    public Hexagon getHexagonCoordinate(int xPos, int yPos){
+
+        return boardColumns.get(yPos).get(xPos);
     }
 }
 
