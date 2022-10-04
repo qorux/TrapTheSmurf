@@ -7,9 +7,7 @@ import main.java.edu.chalmers.projecttemplate.model.Project;
 import main.java.edu.chalmers.projecttemplate.model.Smurf;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class SmurfTest {
 
@@ -20,7 +18,7 @@ public class SmurfTest {
         Smurf smurf = new Smurf(project.board);
 
         final List<Integer> expectedResult = Arrays.asList(5,5,5,5);
-        ArrayList<Integer> result = smurf.calculateRoute();
+        Map<String, Integer> result = smurf.getDirectionsRouteValues();
 
         assertEquals(expectedResult, result);
     }
@@ -35,7 +33,7 @@ public class SmurfTest {
         smurf.setyPos(6);
         smurf.setxPos(10);
         final List<Integer> expectedResult = Arrays.asList(5,1,9,5);
-        ArrayList<Integer> result = smurf.calculateRoute();
+        Map<String, Integer> result = smurf.getDirectionsRouteValues();
 
         assertEquals(expectedResult, result);
     }

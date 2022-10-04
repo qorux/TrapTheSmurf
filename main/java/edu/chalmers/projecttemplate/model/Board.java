@@ -24,7 +24,6 @@ public class Board {
             }
             boardColumns.add(boardRows);
         }
-        System.out.println("Size of col" + boardColumns.size());
 
     }
 
@@ -58,13 +57,12 @@ public class Board {
     public void shuffleBlockedTiles(List<Boolean> shouldTileBeBlocked) {
         Collections.shuffle(shouldTileBeBlocked);
         int index =0;
-        for (Boolean tile:shouldTileBeBlocked){
-            if (tile){
+        for (Boolean tile:shouldTileBeBlocked) {
+            if (tile) {
                 blockTile(index);
             }
             index++;
         }
-        System.out.println("Index after for loop:" + index);
     }
 
 

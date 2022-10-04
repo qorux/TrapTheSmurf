@@ -35,10 +35,6 @@ public class hexButton extends JButton {
         return hex;
     }
 
-    private void makeBlocked(){
-        System.out.println("Blocked hexagon button");
-    }
-
     @Override
     public boolean contains(Point p) {
         return hexagonalShape.contains(p);

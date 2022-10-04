@@ -40,7 +40,6 @@ public class myFirstForm extends javax.swing.JFrame {
         for(int i =0;i<=120;i++){
             buttonBoard.add(generateButton(i));
 
-//            System.out.println("hej");
         }
         observer = new OHexagonButtonState(buttonBoard, project.getBoard());
     }
