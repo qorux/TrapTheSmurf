@@ -24,9 +24,11 @@ public class OHexagonButtonState implements PropertyChangeListener {
         int pressedTileIndex = hexagon.getIndex();
         System.out.println("Pressed tile index in view: " +pressedTileIndex);
 
+
+        //stor bugg, clickabletile och blockedtile har bytit plats
         if (ClickableTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
             buttonBoard.get(pressedTileIndex).setBackground(Color.darkGray);
-            buttonBoard.get(pressedTileIndex).setEnabled(false);
+            buttonBoard.get(pressedTileIndex).setEnabled(true);
         }
         else if (OccupiedTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
             buttonBoard.get(pressedTileIndex).setBackground(Color.red);

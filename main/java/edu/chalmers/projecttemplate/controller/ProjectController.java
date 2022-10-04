@@ -46,6 +46,7 @@ public class ProjectController {
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
     project.board.getHexagon(pressedTileIndex).clickTile();
 
+    project.NewTurn();
     //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 
   }

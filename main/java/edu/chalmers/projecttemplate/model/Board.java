@@ -83,5 +83,10 @@ public class Board {
 
         return boardColumns.get(col).get(row);
     }
+
+    public Hexagon getHexagonCoordinate(int xPos, int yPos){
+
+        return boardColumns.get(yPos).get(xPos);
+    }
 }
 

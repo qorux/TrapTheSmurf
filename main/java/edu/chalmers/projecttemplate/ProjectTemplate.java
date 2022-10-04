@@ -26,10 +26,8 @@ public final class ProjectTemplate {
 				project.getSmurf().startPlaceSmurf();
 				project.board.randomizeBlockedTiles();
 
-				//project.getSmurf().moveSmurf(project.board.getBoardSpaces().get(58)); //hur gör vi här
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);
-
 			}
 		});
 	}
