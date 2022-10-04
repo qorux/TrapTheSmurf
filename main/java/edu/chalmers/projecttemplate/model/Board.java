@@ -73,7 +73,7 @@ public class Board {
             ;
         }
         else {
-            getHexagon(index).getHexagonStateContext().setHexagonState(new BlockedTile());
+            getHexagon(index).blockTile();
         }
     }
 

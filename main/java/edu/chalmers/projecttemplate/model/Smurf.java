@@ -24,7 +24,6 @@ public class Smurf {
         this.board = Board;
         this.hexagon = board.getHexagon(60);
 
-        hexagon.getHexagonStateContext().setHexagonState( new OccupiedTile());
         hexagon.occupyTile();
     }
 
@@ -38,13 +37,12 @@ public class Smurf {
 
 
     public void moveSmurf(){
-        hexagon.getHexagonStateContext().setHexagonState( new ClickableTile(hexagon));
+        hexagon.makeClickable();
         ArrayList<Integer> routes = calculateRoute();
         System.out.println(routes);
         Collections.sort(routes);
         moveNorth();     //ej klar
         hexagon = board.getHexagonCoordinate(xPos,yPos);
-        hexagon.getHexagonStateContext().setHexagonState( new OccupiedTile());
         hexagon.occupyTile();
     }
 
@@ -57,7 +55,7 @@ public class Smurf {
     //japp, onödig då vi gör detta i konstruktorn
     //måste fixa en upadteview först dock, men detta måste refractoras
     public void startPlaceSmurf(){
-        board.getHexagon(60).getHexagonStateContext().setHexagonState(new OccupiedTile());
+        hexagon.occupyTile();
     }
 
     public ArrayList<Integer> calculateRoute(){
