@@ -3,6 +3,7 @@ package test.java.edu.chalmers.projecttemplate.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
+import main.java.edu.chalmers.projecttemplate.model.HexagonStateContext;
 import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
 import main.java.edu.chalmers.projecttemplate.model.Project;
 import main.java.edu.chalmers.projecttemplate.model.Smurf;
@@ -23,9 +24,31 @@ public class BoardTest {
         }
         ProjectController.create(project, projectView);
         projectView.setVisible(true);
-
         assertEquals(true,true);
     }
 
+    @Test
+    void addPropertyChangeListener() {
+    }
 
+    @Test
+    void getBoardSpaces() {
+    }
+
+    @Test
+    void randomizeBlockedTiles() {
+    }
+
+    @Test
+    void blockTile() {
+        Project project = new Project();
+        myFirstForm projectView = new myFirstForm(project);
+        for(int i =0; i<=121;i++) {
+            project.board.blockTile(i);
+        }
+    }
+
+    @Test
+    void getHexagon() {
+    }
 }
