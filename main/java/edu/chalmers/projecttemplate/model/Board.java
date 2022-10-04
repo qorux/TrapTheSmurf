@@ -43,9 +43,7 @@ public class Board {
         Random random = new Random();
         int totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
         System.out.println("Number of blocked tiles this round: "+totalBlockedTiles);
-
         List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);//sizeofboard variable
-
         for(int i = 0; i < 121; i++) {
             if (i<totalBlockedTiles){
                 shouldTileBeBlocked.add(true);
@@ -54,8 +52,11 @@ public class Board {
                 shouldTileBeBlocked.add(false);
             }
         }
-        Collections.shuffle(shouldTileBeBlocked);
+        shuffleBlockedTiles(shouldTileBeBlocked);
+    }
 
+    public void shuffleBlockedTiles(List<Boolean> shouldTileBeBlocked) {
+        Collections.shuffle(shouldTileBeBlocked);
         int index =0;
         for (Boolean tile:shouldTileBeBlocked){
             if (tile){
@@ -63,9 +64,9 @@ public class Board {
             }
             index++;
         }
-        System.out.println("Index after for loop:" +
-                index);
+        System.out.println("Index after for loop:" + index);
     }
+
 
     public void blockTile(Integer index) {
         System.out.println("Tile "+index+" is blocked");
