@@ -116,10 +116,10 @@ public class myFirstForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
 
+    // End of variables declaration//GEN-END:variables
     public OHexagonButtonState getObserver() {
         return observer;
     }
-    // End of variables declaration//GEN-END:variables
 
     public JButton getjButton1() {
         return jButton1;

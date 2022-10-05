@@ -3,10 +3,8 @@ package test.java.edu.chalmers.projecttemplate.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
-import main.java.edu.chalmers.projecttemplate.model.HexagonStateContext;
+import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
-import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.model.Smurf;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -50,5 +48,43 @@ public class BoardTest {
 
     @Test
     void getHexagon() {
+    }
+
+    @Test
+    void getHexagonCoordinateTest() {
+        Project project= new Project();
+        Hexagon hexagonByCoordinate = project.board.getHexagonCoordinate(0,0);
+        Hexagon hexagonByIndex = project.board.getHexagon(0);
+        assertEquals(hexagonByIndex,hexagonByCoordinate);
+
+        hexagonByCoordinate = project.board.getHexagonCoordinate(10,10);
+        hexagonByIndex = project.board.getHexagon(120);
+        assertEquals(hexagonByIndex,hexagonByCoordinate);
+
+        hexagonByCoordinate = project.board.getHexagonCoordinate(5,5);
+        hexagonByIndex = project.board.getHexagon(60);
+        assertEquals(hexagonByIndex,hexagonByCoordinate);
+
+        hexagonByCoordinate = project.board.getHexagonCoordinate(6,5);
+        hexagonByIndex = project.board.getHexagon(61);
+        assertEquals(hexagonByIndex,hexagonByCoordinate);
+
+        hexagonByCoordinate = project.board.getHexagonCoordinate(4,5);
+        hexagonByIndex = project.board.getHexagon(59);
+        assertEquals(hexagonByIndex,hexagonByCoordinate);
+
+    }
+
+    @Test
+    void getHexagonCoordinateGetTest() {
+        Project project= new Project();
+        Hexagon hexagonByCoordinate = project.board.getHexagonCoordinate(0,0);
+        Hexagon hexagonByGet = project.board.getBoardSpaces().get(0).get(0);
+        assertEquals(hexagonByGet,hexagonByCoordinate);
+
+        hexagonByCoordinate = project.board.getHexagonCoordinate(4,5);
+        hexagonByGet = project.board.getBoardSpaces().get(5).get(4);
+        assertEquals(hexagonByGet,hexagonByCoordinate);
+
     }
 }

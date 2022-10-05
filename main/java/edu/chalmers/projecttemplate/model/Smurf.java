@@ -39,50 +39,58 @@ public class Smurf {
     public void moveSmurf(){
         hexagon.makeClickable();
         calculateRoute();
-        String direction = findShortestDirection();
-        moveInDirection(direction);
+        List<String> shortestDirections = findShortestDirection();
+        moveInDirection(randomElement(shortestDirections));
+        System.out.println("x=" + xPos + "y=" + yPos);
         hexagon = board.getHexagonCoordinate(xPos,yPos);
+        System.out.println("Hexagonindex:" + hexagon.getIndex());
         hexagon.occupyTile();
+    }
+
+    private String randomElement(List<String> Directions){
+        Random rand = new Random();
+        String randomElement = Directions.get(rand.nextInt(Directions.size()));
+        return randomElement;
     }
 
 
     public void moveInDirection(String Direction){
+       System.out.println(Direction);
        switch (Direction){
            case "N":
                yPos--;
+               break;
            case "E":
                xPos++;
+               break;
            case "W":
                xPos--;
+               break;
            case "S":
                yPos++;
+               break;
+           default:
+               break;
        }
     }
-    public String findShortestDirection(){
+    public List<String> findShortestDirection(){
         List<Integer> sortedRouteValues = new ArrayList<Integer>();
-        List<String> sortedRouteKeys = new ArrayList<String>();
         for (Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
             sortedRouteValues.add(entry.getValue());
         }
         Collections.sort(sortedRouteValues);
-        int value = sortedRouteValues.get(0);
-        String key = "";
-        for(Map.Entry<String, Integer> entry: directionsRouteValues.entrySet()) {
 
-            // if give value is equal to value from entry
-            // print the corresponding key
-            if(entry.getValue() == value) {
-                key = entry.getKey();
-                System.out.println("The key for value " + value + " is " + entry.getKey());
-                break;
+        int lowestValue = sortedRouteValues.get(0);
+        List<String> key = new ArrayList<>();
+
+        for(Map.Entry<String, Integer> entry: directionsRouteValues.entrySet()) {
+            if(entry.getValue() == lowestValue) {
+                key.add(entry.getKey());
+                System.out.println("The key for value " + lowestValue + " is " + entry.getKey());
             }
         }
-        System.out.println("Shortest path: " + value + key);
+        System.out.println("Shortest path/paths: " + lowestValue + key);
         return key;
-    }
-
-    private void moveNorth(){
-       yPos--;
     }
 
 //Detta är väl säkert mot law of demeter, men tycker det ser bättre ut än i ProjectTemplate
@@ -113,10 +121,10 @@ public class Smurf {
         while(!endTile){
             switch (direction){
                 case "N":
-                    searchY++;
+                    searchY--;
                     break;
                 case "S":
-                    searchY--;
+                    searchY++;
                     break;
                 case "E":
                     searchX++;
@@ -132,9 +140,13 @@ public class Smurf {
     }
 
     Boolean foundEndTile(int xPos,int yPos){
-        if (xPos>=11 || yPos>=11 || xPos<= 1 ||yPos <=1){
+        if (xPos>11 || yPos>11 || xPos< 0 ||yPos <0){
+            System.out.println("Galet fel i foundendtile");
+        }
+        if (xPos==10 || yPos==10 || xPos== 0 ||yPos ==0){
             return true;
         }
+
         return false;
     }
 
