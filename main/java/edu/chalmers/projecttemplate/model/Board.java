@@ -38,21 +38,22 @@ public class Board {
 
 
     //genererar två olika nummer för antalet blockerade tiles tror jag, måste skrivas om
-    //att vi skapar två olika instanser av random i två metoder borde inte vara rätt iaf
-    public void randomizeBlockedTiles(){
+
+    public List<Boolean> randomizeBlockedTiles(){
         Random random = new Random();
         int totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
         System.out.println("Number of blocked tiles this round: "+totalBlockedTiles);
         List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);//sizeofboard variable
         for(int i = 0; i < 121; i++) {
-            if (i<totalBlockedTiles){
+            if ((i<totalBlockedTiles) && (i != 60)){
                 shouldTileBeBlocked.add(true);
             }
             else {
                 shouldTileBeBlocked.add(false);
             }
         }
-        shuffleBlockedTiles(shouldTileBeBlocked);
+        System.out.println(shouldTileBeBlocked);
+        return shouldTileBeBlocked;
     }
 
     public void shuffleBlockedTiles(List<Boolean> shouldTileBeBlocked) {
