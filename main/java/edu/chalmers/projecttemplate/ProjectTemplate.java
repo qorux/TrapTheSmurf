@@ -6,6 +6,7 @@ import main.java.edu.chalmers.projecttemplate.model.Project;
 import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
 
 import javax.swing.SwingUtilities;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public final class ProjectTemplate {
@@ -24,7 +25,8 @@ public final class ProjectTemplate {
 
 				project.board.addPropertyChangeListener(ProjectView.getObserver());
 				project.getSmurf().startPlaceSmurf();
-				project.board.randomizeBlockedTiles();
+				List<Boolean> tilesToBlock = project.board.randomizeBlockedTiles();
+				project.board.shuffleBlockedTiles(tilesToBlock);
 
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);
