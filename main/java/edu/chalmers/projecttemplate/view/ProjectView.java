@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author linae
  */
 
-public class myFirstForm extends javax.swing.JFrame {
+public class ProjectView extends javax.swing.JFrame {
 
     /**
      * Creates new form myFirstForm
@@ -27,7 +27,7 @@ public class myFirstForm extends javax.swing.JFrame {
     private OHexagonButtonState observer;
 
 
-    public myFirstForm(Project Project) {
+    public ProjectView(Project Project) {
 
         int maxHeight = 11;
         int maxWidth = 11;

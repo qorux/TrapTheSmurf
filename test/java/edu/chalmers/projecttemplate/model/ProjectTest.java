@@ -12,7 +12,7 @@ public class ProjectTest {
 	@Test
 	public void testIncrementResult() {
 		final var project = new Project();
-		final var projectView = new myFirstForm(project);
+		final var projectView = new ProjectView(project);
 		//fixa packages
 
 		for (var i = 0; i < ProjectTest.NUM_INCREMENTATIONS; i++) {

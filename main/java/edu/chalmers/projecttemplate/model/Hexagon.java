@@ -36,6 +36,10 @@ public class Hexagon{
         wrapper.makeClickable();
     }
 
+    public Class<? extends HexagonState> getCurrentStateClass(){
+        return this.getHexagonStateContext().getCurrentState().getClass();
+    }
+
 
     public Integer getIndex() {
         return index;

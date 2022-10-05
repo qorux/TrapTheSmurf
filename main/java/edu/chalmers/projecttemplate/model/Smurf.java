@@ -8,7 +8,7 @@ public class Smurf {
     private boolean hasWon = false;
 
     //(NE,E,SE,SW,W,NW), alla möjliga directions smurfen kan ha?
-    final List<String> directions = Arrays.asList("N","E","W","S");
+    ArrayList<String> possibleDirections;
     Map<String, Integer> directionsRouteValues = new HashMap();
 
     private int xPos = 5;
@@ -20,11 +20,20 @@ public class Smurf {
    public Smurf(Board Board){
         this.board = Board;
         this.hexagon = board.getHexagon(60);
+        this.possibleDirections = new ArrayList<>();
+        resetPossibleDirections();
 
-       for (String direction:directions) {
+       for (String direction: possibleDirections) {
            directionsRouteValues.put(direction, 5);
        }
         hexagon.occupyTile();
+    }
+    private void resetPossibleDirections(){
+       possibleDirections.clear();
+        possibleDirections.add("N");
+        possibleDirections.add("E");
+        possibleDirections.add("W");
+        possibleDirections.add("S");
     }
 
     public void setxPos(int xPos) {
@@ -37,11 +46,16 @@ public class Smurf {
 
 
     public void moveSmurf(){
+        resetPossibleDirections();
+        directionsRouteValues.clear();
         hexagon.makeClickable();
+        possibleDirections = findBlockedDirections(possibleDirections);
+        System.out.println(possibleDirections);
         calculateRoute();
         List<String> shortestDirections = findShortestDirection();
         moveInDirection(randomElement(shortestDirections));
-        System.out.println("x=" + xPos + "y=" + yPos);
+
+
         hexagon = board.getHexagonCoordinate(xPos,yPos);
         System.out.println("Hexagonindex:" + hexagon.getIndex());
         hexagon.occupyTile();
@@ -73,6 +87,7 @@ public class Smurf {
                break;
        }
     }
+
     public List<String> findShortestDirection(){
         List<Integer> sortedRouteValues = new ArrayList<Integer>();
         for (Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
@@ -102,10 +117,29 @@ public class Smurf {
     }
 
     public void calculateRoute(){
-        for(String direction:directions){
+        for(String direction: possibleDirections){
             directionsRouteValues.put(direction, findLength(direction));
         }
         System.out.println(directionsRouteValues.entrySet());
+
+    }
+
+    private ArrayList<String> findBlockedDirections(ArrayList<String> PossibleDirections){    //command query?????
+       // NEWS
+        System.out.println(PossibleDirections);
+       if (board.getHexagonCoordinate(xPos,yPos-1).getCurrentStateClass() == BlockedTile.class){
+           PossibleDirections.remove("N");
+       }
+       if (board.getHexagonCoordinate(xPos+1,yPos).getCurrentStateClass() == BlockedTile.class){
+           PossibleDirections.remove("E");
+       }
+       if (board.getHexagonCoordinate(xPos-1,yPos).getCurrentStateClass() == BlockedTile.class){
+           PossibleDirections.remove("W");
+       }
+       if (board.getHexagonCoordinate(xPos,yPos+1).getCurrentStateClass() == BlockedTile.class){
+           PossibleDirections.remove("S");
+       }
+       return PossibleDirections;
     }
 
     public Map<String, Integer> getDirectionsRouteValues() {

@@ -5,14 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.*;
-import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
+import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.model.Smurf;
 import org.junit.jupiter.api.Test;
 
-import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BoardTest {
@@ -20,7 +16,7 @@ public class BoardTest {
     @Test
     public void testForOutOfBoundsError() {
         Project project = new Project();
-        myFirstForm projectView = new myFirstForm(project);
+        ProjectView projectView = new ProjectView(project);
         for (int i = 0; i < 121; i++) {
             project.board.blockTile(i);
         }

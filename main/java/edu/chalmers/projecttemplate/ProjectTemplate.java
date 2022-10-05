@@ -1,13 +1,11 @@
 package main.java.edu.chalmers.projecttemplate;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
-import main.java.edu.chalmers.projecttemplate.model.Board;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
+import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
 import javax.swing.SwingUtilities;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public final class ProjectTemplate {
 	private ProjectTemplate() {
@@ -21,7 +19,7 @@ public final class ProjectTemplate {
 			@Override
 			public void run() {
 				final Project project = new Project();
-				final myFirstForm ProjectView = new myFirstForm(project);
+				final ProjectView ProjectView = new ProjectView(project);
 
 				project.board.addPropertyChangeListener(ProjectView.getObserver());
 				project.getSmurf().startPlaceSmurf();

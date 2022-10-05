@@ -36,13 +36,11 @@ public class Board {
     }
 
 
-    //genererar två olika nummer för antalet blockerade tiles tror jag, måste skrivas om
-
     public List<Boolean> randomizeBlockedTiles(){
         Random random = new Random();
         int totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
         System.out.println("Number of blocked tiles this round: "+totalBlockedTiles);
-        List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);//sizeofboard variable
+        List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);
         for(int i = 0; i < 121; i++) {
             if ((i<totalBlockedTiles) && (i != 60)){
                 shouldTileBeBlocked.add(true);
