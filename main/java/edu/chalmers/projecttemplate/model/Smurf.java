@@ -1,10 +1,6 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Smurf {
 
@@ -13,6 +9,7 @@ public class Smurf {
 
     //(NE,E,SE,SW,W,NW), alla möjliga directions smurfen kan ha?
     final List<String> directions = Arrays.asList("N","E","W","S");
+    Map<String, Integer> directionsRouteValues = new HashMap();
 
     private int xPos = 5;
     private int yPos = 5;
@@ -24,6 +21,9 @@ public class Smurf {
         this.board = Board;
         this.hexagon = board.getHexagon(60);
 
+       for (String direction:directions) {
+           directionsRouteValues.put(direction, 5);
+       }
         hexagon.occupyTile();
     }
 
@@ -38,12 +38,47 @@ public class Smurf {
 
     public void moveSmurf(){
         hexagon.makeClickable();
-        ArrayList<Integer> routes = calculateRoute();
-        System.out.println(routes);
-        Collections.sort(routes);
-        moveNorth();     //ej klar
+        calculateRoute();
+        String direction = findShortestDirection();
+        moveInDirection(direction);
         hexagon = board.getHexagonCoordinate(xPos,yPos);
         hexagon.occupyTile();
+    }
+
+
+    public void moveInDirection(String Direction){
+       switch (Direction){
+           case "N":
+               yPos--;
+           case "E":
+               xPos++;
+           case "W":
+               xPos--;
+           case "S":
+               yPos++;
+       }
+    }
+    public String findShortestDirection(){
+        List<Integer> sortedRouteValues = new ArrayList<Integer>();
+        List<String> sortedRouteKeys = new ArrayList<String>();
+        for (Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
+            sortedRouteValues.add(entry.getValue());
+        }
+        Collections.sort(sortedRouteValues);
+        int value = sortedRouteValues.get(0);
+        String key = "";
+        for(Map.Entry<String, Integer> entry: directionsRouteValues.entrySet()) {
+
+            // if give value is equal to value from entry
+            // print the corresponding key
+            if(entry.getValue() == value) {
+                key = entry.getKey();
+                System.out.println("The key for value " + value + " is " + entry.getKey());
+                break;
+            }
+        }
+        System.out.println("Shortest path: " + value + key);
+        return key;
     }
 
     private void moveNorth(){
@@ -58,13 +93,15 @@ public class Smurf {
         hexagon.occupyTile();
     }
 
-    public ArrayList<Integer> calculateRoute(){
-        ArrayList<Integer> routeLengths = new ArrayList<Integer>();
+    public void calculateRoute(){
         for(String direction:directions){
-            routeLengths.add(findLength(direction));
+            directionsRouteValues.put(direction, findLength(direction));
         }
-        System.out.println(routeLengths);
-        return routeLengths;
+        System.out.println(directionsRouteValues.entrySet());
+    }
+
+    public Map<String, Integer> getDirectionsRouteValues() {
+        return directionsRouteValues;
     }
 
     public int findLength(String direction){
@@ -73,7 +110,6 @@ public class Smurf {
         int searchY = yPos;
         int length =0;
 
-        System.out.println(direction);
         while(!endTile){
             switch (direction){
                 case "N":
