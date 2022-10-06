@@ -7,7 +7,7 @@ import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
+import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
