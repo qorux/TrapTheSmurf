@@ -24,16 +24,20 @@ public class Hexagon{
     }
 
 
-    public void clickTile() {
-        wrapper.click();
-    }
-
     public void occupyTile() {
         wrapper.occupy();
     }
 
     public void blockTile() {
         wrapper.block();
+    }
+
+    public void makeClickable() {
+        wrapper.makeClickable();
+    }
+
+    public Class<? extends HexagonState> getCurrentStateClass(){
+        return this.getHexagonStateContext().getCurrentState().getClass();
     }
 
 

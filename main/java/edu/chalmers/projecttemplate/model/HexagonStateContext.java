@@ -25,18 +25,12 @@ public class HexagonStateContext {
     }
 
     public void setHexagonState(HexagonState newstate) {
-        support.firePropertyChange("Hexagonstate", hexagon, newstate);      //jäääääääätteaids super mega aids
         currentState = newstate;
+        support.firePropertyChange("Hexagonstate", hexagon, newstate);      //jäääääääätteaids super mega aids
     }
 
     public HexagonState getCurrentState() {
         return currentState;
-    }
-
-
-    public void click(){
-        currentState.clickTile();
-        setHexagonState(new BlockedTile());
     }
 
     public void occupy(){
@@ -47,5 +41,10 @@ public class HexagonStateContext {
     public void block(){
         currentState.blockTile();
         setHexagonState(new BlockedTile());
+
+    }
+
+    public void makeClickable() {
+        setHexagonState(new ClickableTile(hexagon));
     }
 }

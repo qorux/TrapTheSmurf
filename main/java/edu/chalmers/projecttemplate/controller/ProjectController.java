@@ -1,26 +1,22 @@
 package main.java.edu.chalmers.projecttemplate.controller;
 
 import main.java.edu.chalmers.projecttemplate.model.*;
+import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
-import main.java.edu.chalmers.projecttemplate.view.*;
-
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serial;
 
 public class ProjectController {
   private final Project project;
-  private final myFirstForm projectView;
+  private final ProjectView projectView;
 
   public static final int KO = 1;
 
-  public static ProjectController create(Project project, myFirstForm projectView) {
+  public static ProjectController create(Project project, ProjectView projectView) {
     return new ProjectController(project, projectView);
   }
 
-  private ProjectController(Project project, myFirstForm projectView) {
+  private ProjectController(Project project, ProjectView projectView) {
     this.project = project;
     this.projectView = projectView;
 
@@ -44,8 +40,9 @@ public class ProjectController {
   private void listenedObject_actionPerformed(ActionEvent evt) {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
-    project.board.getHexagon(pressedTileIndex).clickTile();
+    project.board.getHexagon(pressedTileIndex).blockTile();
 
+    project.NewTurn();
     //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 
   }
