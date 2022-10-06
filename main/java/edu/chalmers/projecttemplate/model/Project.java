@@ -37,4 +37,8 @@ public class Project {
   public void incrementPresses() {
     this.presses++;
   }
+
+  public int getTurn() {
+    return turn;
+  }
 }
