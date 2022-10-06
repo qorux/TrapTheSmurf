@@ -45,6 +45,18 @@ public class myFirstForm extends javax.swing.JFrame {
         observer = new OHexagonButtonState(buttonBoard, project.getBoard());
     }
 
+    public void repaint(){
+        new myFirstForm(project);
+    }
+
+    public void clearBoard(){
+        this.remove(this.jPanel1);
+        myFirstForm mfm = new myFirstForm(project);
+        this.add(mfm.jPanel1);
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

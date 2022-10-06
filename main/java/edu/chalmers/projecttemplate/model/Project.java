@@ -1,5 +1,11 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
+import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
+import main.java.edu.chalmers.projecttemplate.view.myFirstForm;
+
+import java.awt.event.ActionEvent;
+
 public class Project {
   public static final String PROJECT_WINDOW_TEXT = "ProjectTemplate";
   public static final String PROJECT_BUTTON_TEXT = "Press me!";
@@ -29,5 +35,18 @@ public class Project {
 
   public void incrementPresses() {
     this.presses++;
+  }
+
+  public void clearBoard(){
+    Project pr = new Project();
+    myFirstForm mfm = new myFirstForm(pr);
+    mfm.clearBoard();
+    //Project pr = new Project();
+   // myFirstForm mfm = new myFirstForm(pr);
+   // ProjectController.create(pr, mfm);
+   // mfm.setVisible(true);
+   // pr.board.addPropertyChangeListener(mfm.getObserver());
+   // pr.board.randomizeBlockedTiles();
+   // pr.getSmurf().startPlaceSmurf();
   }
 }

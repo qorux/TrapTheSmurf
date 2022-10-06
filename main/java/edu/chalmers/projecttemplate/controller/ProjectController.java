@@ -55,8 +55,17 @@ public class ProjectController {
   private class ProjectButtonPressed implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-      project.incrementPresses();
-      projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
+        System.out.println("Hej, jag kommer hit");
+
+        project.clearBoard();
+
+
+
+
+
+
+
+      //projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
     }
   }
 }

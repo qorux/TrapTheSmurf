@@ -19,16 +19,15 @@ public final class ProjectTemplate {
 
 			@Override
 			public void run() {
-				final Project project = new Project();
-				final myFirstForm ProjectView = new myFirstForm(project);
+				Project project = new Project();
+				myFirstForm ProjectView = new myFirstForm(project);
 
 				project.board.addPropertyChangeListener(ProjectView.getObserver());
 				project.getSmurf().startPlaceSmurf();
 				project.board.randomizeBlockedTiles();
-
-				//project.getSmurf().moveSmurf(project.board.getBoardSpaces().get(58)); //hur gör vi här
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);
+
 
 			}
 		});

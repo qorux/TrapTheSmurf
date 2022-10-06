@@ -12,6 +12,8 @@ public class Board {
     private List<List<Hexagon>> boardColumns;
     private List<Hexagon> boardRows;
 
+
+
     private PropertyChangeSupport support;
 
     public Board(){
@@ -41,7 +43,9 @@ public class Board {
     //att vi skapar två olika instanser av random i två metoder borde inte vara rätt iaf
     public void randomizeBlockedTiles(){
         Random random = new Random();
+
         int totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
+
         System.out.println("Number of blocked tiles this round: "+totalBlockedTiles);
 
         List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);//sizeofboard variable
@@ -83,5 +87,8 @@ public class Board {
 
         return boardColumns.get(col).get(row);
     }
+
+
+
 }
 
