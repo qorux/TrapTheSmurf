@@ -1,10 +1,13 @@
 package main.java.edu.chalmers.projecttemplate.controller;
 
+import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
 import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class ProjectController {
   private final Project project;
@@ -52,15 +55,21 @@ public class ProjectController {
   private class ProjectButtonPressed implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Hej, jag kommer hit");
-
-        project.clearBoard();
 
 
+      Project project = new Project();
+      ProjectView ProjectView = new ProjectView(project);
 
+      project.board.addPropertyChangeListener(ProjectView.getObserver());
+      project.getSmurf().startPlaceSmurf();
+      List<Boolean> tilesToBlock = project.board.randomizeBlockedTiles();
+      project.board.shuffleBlockedTiles(tilesToBlock);
 
+      ProjectController.create(project, ProjectView);
+      ProjectView.setVisible(true);
+      projectView.setVisible(false);
 
-
+      System.out.println("Hej, jag kommer hit");
 
       //projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
     }

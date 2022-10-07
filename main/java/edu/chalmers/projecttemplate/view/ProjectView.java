@@ -6,8 +6,9 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import javax.swing.*;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-
+import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
@@ -46,16 +47,11 @@ public class ProjectView extends javax.swing.JFrame {
         observer = new OHexagonButtonState(buttonBoard, project.getBoard(),this, project );
     }
 
-    public void repaint(){
-        new myFirstForm(project);
+    public void close(){
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
 
-    public void clearBoard(){
-        this.remove(this.jPanel1);
-        myFirstForm mfm = new myFirstForm(project);
-        this.add(mfm.jPanel1);
-        SwingUtilities.updateComponentTreeUI(this);
-    }
 
 
     /**
