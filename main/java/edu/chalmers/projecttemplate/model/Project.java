@@ -23,6 +23,10 @@ public class Project {
     return smurf;
   }
 
+  /**
+   * Increments the turn variable which is displayed in the game,
+   * then tells the smurf to make its move
+   */
   public void NewTurn(){
     turn++;
     smurf.moveSmurf();
