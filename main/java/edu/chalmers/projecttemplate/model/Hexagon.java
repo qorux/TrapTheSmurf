@@ -1,6 +1,7 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
 public class Hexagon{
     private HexagonStateContext wrapper;
@@ -8,15 +9,15 @@ public class Hexagon{
 
     private PropertyChangeSupport support;
 
-    public PropertyChangeSupport getSupport() {
-        return support;
-    }
+    private ArrayList<Hexagon> neighbours;
+    private Integer xPos;
+    private Integer yPos;
+
 
     public Hexagon(Integer boardIndex, PropertyChangeSupport Support) {
         this.support = Support;
         this.index= boardIndex;
         this.wrapper = new HexagonStateContext(this,support);
-
     }
 
     public HexagonStateContext getHexagonStateContext() {
@@ -45,5 +46,8 @@ public class Hexagon{
         return index;
     }
 
+    public PropertyChangeSupport getSupport() {
+        return support;
+    }
 
 }
