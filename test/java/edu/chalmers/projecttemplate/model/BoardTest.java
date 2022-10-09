@@ -7,6 +7,7 @@ import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import main.java.edu.chalmers.projecttemplate.model.Project;
+import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -131,7 +132,7 @@ public class BoardTest {
         assertEquals(22, boardNodesColumns.get(1).get(0).getNeighbors().get("SW").getHexagon().getIndex());
         assertEquals(23, boardNodesColumns.get(1).get(0).getNeighbors().get("SE").getHexagon().getIndex());
 
-        
+
         assertEquals(3, boardNodesColumns.get(2).get(0).getNeighbors().size());
         assertEquals(11, boardNodesColumns.get(2).get(0).getNeighbors().get("NE").getHexagon().getIndex());
         assertEquals(23, boardNodesColumns.get(2).get(0).getNeighbors().get("E").getHexagon().getIndex());

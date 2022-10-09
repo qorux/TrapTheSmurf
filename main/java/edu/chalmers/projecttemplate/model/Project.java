@@ -1,5 +1,11 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
+import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
+import main.java.edu.chalmers.projecttemplate.view.ProjectView;
+
+import java.util.List;
+
 public class Project {
   public static final String PROJECT_WINDOW_TEXT = "ProjectTemplate";
   public static final String PROJECT_BUTTON_TEXT = "Press me!";
@@ -23,6 +29,10 @@ public class Project {
     return smurf;
   }
 
+  /**
+   * Increments the turn variable which is displayed in the game,
+   * then tells the smurf to make its move
+   */
   public void NewTurn(){
     turn++;
     smurf.moveSmurf();
@@ -36,5 +46,14 @@ public class Project {
 
   public void incrementPresses() {
     this.presses++;
+  }
+
+  public int getTurn() {
+    return turn;
+  }
+
+  public void clearBoard(){
+
+    //Project.clearBoardJpanel();
   }
 }

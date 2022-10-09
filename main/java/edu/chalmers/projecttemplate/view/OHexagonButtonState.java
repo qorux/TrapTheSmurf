@@ -6,15 +6,18 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class OHexagonButtonState implements PropertyChangeListener {
 
     private ArrayList<hexButton> buttonBoard;
+    private ProjectView projectView;
+    private Project project;
     private Board hexagonBoard;
-    public OHexagonButtonState(ArrayList<hexButton> ButtonBoard, Board HexagonBoard) {
+    public OHexagonButtonState(ArrayList<hexButton> ButtonBoard, Board HexagonBoard, ProjectView projectView, Project project) {
         this.buttonBoard = ButtonBoard;
         this.hexagonBoard = HexagonBoard;
+        this.projectView = projectView;
+        this.project = project;
     }
 
 
@@ -22,6 +25,7 @@ public class OHexagonButtonState implements PropertyChangeListener {
 
         Hexagon hexagon = ((Hexagon)evt.getOldValue());
         int pressedTileIndex = hexagon.getIndex();
+        projectView.getjLabel2().setText("Number of turns: " + project.getTurn() + " ");
 
         //stor bugg, clickabletile och blockedtile har bytit plats
         if (ClickableTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
