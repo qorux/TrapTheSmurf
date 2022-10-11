@@ -22,24 +22,20 @@ public class OHexagonButtonState implements PropertyChangeListener {
 
 
     public void propertyChange(PropertyChangeEvent evt) {
-
-        //repaint all components every time
-        Hexagon hexagon = ((Hexagon)evt.getOldValue());
-        int pressedTileIndex = hexagon.getIndex();
         projectView.getjLabel2().setText("Number of turns: " + project.getTurn() + " ");
-
-        //stor bugg, clickabletile och blockedtile har bytit plats
-        if (ClickableTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
-            buttonBoard.get(pressedTileIndex).setBackground(Color.cyan);
-            buttonBoard.get(pressedTileIndex).setEnabled(true);
+        for(int i = 0; i<121; i++) {
+        if (ClickableTile.class.equals(project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())){
+            buttonBoard.get(i).setBackground(Color.cyan);
+            buttonBoard.get(i).setEnabled(true);
         }
-        else if (OccupiedTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
-            buttonBoard.get(pressedTileIndex).setBackground(Color.red);
-            buttonBoard.get(pressedTileIndex).setEnabled(false);
+        else if (OccupiedTile.class.equals(project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())) {
+            buttonBoard.get(i).setBackground(Color.red);
+            buttonBoard.get(i).setEnabled(false);
         }
-        else if (BlockedTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())){
-            buttonBoard.get(pressedTileIndex).setBackground(Color.darkGray);
-            buttonBoard.get(pressedTileIndex).setEnabled(false);
+        else if (BlockedTile.class.equals(project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())) {
+            buttonBoard.get(i).setBackground(Color.darkGray);
+            buttonBoard.get(i).setEnabled(false);
+        }
         }
     }
     // standard getter and setter

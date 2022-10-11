@@ -7,6 +7,7 @@ import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class ProjectController {
@@ -23,7 +24,13 @@ public class ProjectController {
     this.project = project;
     this.projectView = projectView;
 
+
     projectView.getjButton1().addActionListener(new ProjectButtonPressed());  //onödigt
+
+    MouseListenerHexagon mlh = new MouseListenerHexagon(project, projectView);
+    for (int i = 0; i<121; i++) {
+      projectView.buttonBoard.get(i).addMouseListener(mlh);
+    }
 
     boardPressedListenerAssigner();
 

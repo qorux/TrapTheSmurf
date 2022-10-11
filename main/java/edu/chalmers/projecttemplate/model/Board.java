@@ -128,8 +128,8 @@ public class Board {
     public List<Boolean> randomizeBlockedTiles(){
         Random random = new Random();
         int totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
-        List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);
-        for(int i = 0; i < 121; i++) {
+        List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(120);
+        for(int i = 0; i < 120; i++) {
             if ((i<totalBlockedTiles) && (i != 60)){
                 shouldTileBeBlocked.add(true);
             }
