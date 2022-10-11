@@ -1,7 +1,5 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
-import org.junit.Test;
-
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +15,9 @@ public class Smurf {
     private Node hexagonNode;
     private Hexagon hexagon;
 
-    //private ArrayList<String> possibleDirections;
+    private ArrayList<String> deadDirections;
+
+    private boolean isWandering = false;
 
     //private Map<String, Integer> directionsRouteValues = new HashMap<String, Integer>();
 
@@ -25,16 +25,40 @@ public class Smurf {
         this.board = Board;
         this.hexagonNode = board.getNode(60);
         this.hexagon = hexagonNode.getHexagon();
+        this.deadDirections = new ArrayList<String>();
         hexagon.occupyTile();
     }
 
 
     public void moveSmurf() {
         hexagon.makeClickable();
+
         ArrayList<String> possibleDirections = findBlockedDirections();
-        Map<String,Integer> directionRouteValues = calculateRoute(possibleDirections);
-        List<String> shortestDirections = findShortestDirection(directionRouteValues);
-        moveInDirection(randomElement(shortestDirections));
+        if (possibleDirections.size() == 0) {
+            isWandering = true;
+        }
+
+        List<String> bestDirections;
+        if (isWandering) {
+            bestDirections = wanderSmurf();
+        } else {
+            Map<String, Integer> directionRouteValues = calculateRoute(possibleDirections);
+            bestDirections = findShortestDirection(directionRouteValues);
+        }
+
+        moveInDirection(randomElement(bestDirections));
+    }
+
+    private ArrayList<String> wanderSmurf(){
+        System.out.println("Smurf is wandering!");
+        ArrayList<String> result = new ArrayList<String>();
+        result.add("NW");
+        result.add("NE");
+        result.add("E");
+        result.add("W");
+        result.add("SW");
+        result.add("SE");
+        return result;
     }
 
     private String randomElement(List<String> Directions) {
@@ -130,10 +154,20 @@ public class Smurf {
         result.add("W");
         result.add("SW");
         result.add("SE");
+        if (deadDirections.size()>0){
+            for(String direction:deadDirections){
+                result.remove(direction);
+            }
+        }
 
         for (Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
             if (entry.getValue().getHexagon().getCurrentStateClass() == BlockedTile.class) {
                 result.remove(entry.getKey());
+            }
+            if (isDeadEnd(entry.getValue())){
+                result.remove(entry.getKey());
+                deadDirections.add(entry.getKey());
+                System.out.println("Deaddirection added:" + entry.getKey());
             }
         }
 
@@ -153,6 +187,19 @@ public class Smurf {
 
          */
         return result;
+    }
+
+    public boolean isDeadEnd(Node node){
+        int counter = 0;
+        for(Map.Entry<String,Node> neighborEntry:node.getNeighbors().entrySet()){
+            if (neighborEntry.getValue().getHexagon().getCurrentStateClass() == BlockedTile.class){
+                counter++;
+            }
+        }
+        if (counter < 3){
+            return false;
+        }
+        return true;
     }
 
 

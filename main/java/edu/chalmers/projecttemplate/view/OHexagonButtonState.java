@@ -23,6 +23,7 @@ public class OHexagonButtonState implements PropertyChangeListener {
 
     public void propertyChange(PropertyChangeEvent evt) {
 
+        //repaint all components every time
         Hexagon hexagon = ((Hexagon)evt.getOldValue());
         int pressedTileIndex = hexagon.getIndex();
         projectView.getjLabel2().setText("Number of turns: " + project.getTurn() + " ");
