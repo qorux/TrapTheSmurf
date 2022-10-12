@@ -34,7 +34,6 @@ public class ProjectView extends javax.swing.JFrame {
         for(int i =0;i<=120;i++){
             buttonBoard.add(generateButton(i));
         }
-
         observer = new OHexagonButtonState(buttonBoard, project.getBoard(),this, project );
     }
 

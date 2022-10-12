@@ -125,7 +125,7 @@ public class Board {
      * The number of tiles are randomized following normal distribution.
      * @return a list of indexes for the tiles that are to be blocked
      */
-    public List<Boolean> randomizeBlockedTiles(){
+    private List<Boolean> generateBlockedTilesList(){
         Random random = new Random();
         int totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
         List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(120);
@@ -137,6 +137,7 @@ public class Board {
                 shouldTileBeBlocked.add(false);
             }
         }
+        Collections.shuffle(shouldTileBeBlocked);
         return shouldTileBeBlocked;
     }
 
@@ -144,8 +145,8 @@ public class Board {
      * Shuffles the tiles that should be blocked
      * @param shouldTileBeBlocked List of tiles that should be blocked
      */
-    public void shuffleBlockedTiles(List<Boolean> shouldTileBeBlocked) {
-        Collections.shuffle(shouldTileBeBlocked);
+    public void shuffleBlockedTiles() {
+        List<Boolean> shouldTileBeBlocked = generateBlockedTilesList();
         int index =0;
         for (Boolean tile:shouldTileBeBlocked) {
             if (tile) {

@@ -13,7 +13,7 @@ public class Project {
   public static final String PROJECT_BUTTON_TEXT = "Press me!";
   private int presses;
 
-  public boolean hasWon;
+  private boolean hasWon;
 
   private int turn = 0;
   private Board board;//borde va private
@@ -47,17 +47,15 @@ public class Project {
     smurf.moveSmurf(); }
   }
 
-  public void saveNumberOfTurns() {
-  }
 
   public int getTurn() {
     return turn;
   }
 
-  public void clearBoard(){
-
-    //Project.clearBoardJpanel();
+  public boolean isHasWon() {
+    return hasWon;
   }
+
 
 
 }

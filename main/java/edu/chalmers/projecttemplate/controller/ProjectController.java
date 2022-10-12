@@ -69,13 +69,11 @@ public class ProjectController {
 
       project.getBoard().addPropertyChangeListener(ProjectView.getObserver());
       project.getSmurf().startPlaceSmurf();
-      List<Boolean> tilesToBlock = project.getBoard().randomizeBlockedTiles();
-      project.getBoard().shuffleBlockedTiles(tilesToBlock);
+      project.getBoard().shuffleBlockedTiles();
 
       ProjectController.create(project, ProjectView);
       ProjectView.setVisible(true);
       projectView.setVisible(false);
-
     }
   }
 }
