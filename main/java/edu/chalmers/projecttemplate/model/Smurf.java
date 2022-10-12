@@ -270,6 +270,13 @@ public class Smurf {
         return checkFreeNeighbors().size() == 0;
     }
 
+    public boolean checkIfLost(){
+        if(hexagonNode.getNeighbors().entrySet().size() < 6){
+            return true;
+        }
+        return false;
+    }
+
     //Fuuuuuuuuult
     public List<Hexagon> checkFreeNeighbors() {
         List<Hexagon> FreeNeighbors = new ArrayList<>();

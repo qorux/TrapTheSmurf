@@ -1,6 +1,5 @@
 package main.java.edu.chalmers.projecttemplate.controller;
 
-import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
 import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
@@ -13,8 +12,6 @@ import java.util.List;
 public class ProjectController {
   private final Project project;
   private final ProjectView projectView;
-
-  public static final int KO = 1;
 
   public static ProjectController create(Project project, ProjectView projectView) {
     return new ProjectController(project, projectView);

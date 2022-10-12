@@ -3,7 +3,6 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import javax.swing.*;
 
-import main.java.edu.chalmers.projecttemplate.controller.hexButton;
 import main.java.edu.chalmers.projecttemplate.model.Project;
 
 import java.awt.*;
@@ -23,7 +22,7 @@ public class ProjectView extends javax.swing.JFrame {
 
     private Project project;
     public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
-    private OHexagonButtonState observer;
+    private OBoardState observer;
 
 
     public ProjectView(Project Project) {
@@ -34,7 +33,7 @@ public class ProjectView extends javax.swing.JFrame {
         for(int i =0;i<=120;i++){
             buttonBoard.add(generateButton(i));
         }
-        observer = new OHexagonButtonState(buttonBoard, project.getBoard(),this, project );
+        observer = new OBoardState(this, project );
     }
 
     /**
@@ -56,34 +55,42 @@ public class ProjectView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 575));
 
         jButton1.setBackground(new java.awt.Color(102, 255, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("Reset");
+        /*
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        
+         */
 
-
-        //jLabel1.setText("Counter:");
+        jLabel1.setText("Counter:");
 
         jPanel1.setMaximumSize(new java.awt.Dimension(548, 500));
         jPanel1.setMinimumSize(new java.awt.Dimension(548, 500));
         jPanel1.setPreferredSize(new java.awt.Dimension(548, 500));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel2.setText("Number of turns: 0");
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(86, 86, 86)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +110,7 @@ public class ProjectView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-//GEN-LAST:event_jButton1ActionPerformed
+                                        
 
     /**
      * @param args the command line arguments
@@ -114,10 +121,9 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-
     // End of variables declaration//GEN-END:variables
 
-    public OHexagonButtonState getObserver() {
+    public OBoardState getObserver() {
         return observer;
     }
     public JButton getjButton1() {

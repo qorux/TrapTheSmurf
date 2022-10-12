@@ -19,8 +19,8 @@ public class Board {
     /**
      * Sets up the board with 11 columns and 11 rows, adding up to 121 hexagons.
      */
-    public Board(){
-        support = new PropertyChangeSupport(this);
+    public Board(PropertyChangeSupport support){
+        this.support=support;
         boardColumns = new ArrayList<>();
         boardNodesColumns = new ArrayList<>();
 
@@ -143,7 +143,6 @@ public class Board {
 
     /**
      * Shuffles the tiles that should be blocked
-     * @param shouldTileBeBlocked List of tiles that should be blocked
      */
     public void shuffleBlockedTiles() {
         List<Boolean> shouldTileBeBlocked = generateBlockedTilesList();

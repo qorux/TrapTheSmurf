@@ -26,7 +26,7 @@ public class HexagonStateContext {
 
     public void setHexagonState(HexagonState newstate) {
         currentState = newstate;
-        support.firePropertyChange("Hexagonstate", hexagon, newstate);      //jäääääääätteaids super mega aids
+        support.firePropertyChange("Hexagonstate", hexagon, newstate);
     }
 
     public HexagonState getCurrentState() {

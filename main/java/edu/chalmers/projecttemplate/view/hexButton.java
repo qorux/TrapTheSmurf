@@ -1,4 +1,4 @@
-package main.java.edu.chalmers.projecttemplate.controller;
+package main.java.edu.chalmers.projecttemplate.view;
 
 import main.java.edu.chalmers.projecttemplate.model.Hexagon;
 
