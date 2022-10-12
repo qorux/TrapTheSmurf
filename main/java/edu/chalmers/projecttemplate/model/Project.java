@@ -35,6 +35,7 @@ public class Project {
    */
   public void NewTurn(){
     turn++;
+    //smurf.checkifsmurfwon; re
     smurf.moveSmurf();
   }
 

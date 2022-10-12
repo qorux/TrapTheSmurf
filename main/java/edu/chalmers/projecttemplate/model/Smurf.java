@@ -34,35 +34,27 @@ public class Smurf {
         hexagon.makeClickable();
 
         ArrayList<String> possibleDirections = findBlockedDirections();
-        if (possibleDirections.size() == 0) {
-            isWandering = true;
-        }
+        ArrayList<String> deadDirections = findDeadDirections(possibleDirections);
 
+        if (deadDirections.size() ==0){
+            isWandering= true;
+        }
         List<String> bestDirections;
         if (isWandering) {
-            bestDirections = wanderSmurf();
+            moveInDirection(randomElement(possibleDirections));
         } else {
-            Map<String, Integer> directionRouteValues = calculateRoute(possibleDirections);
+            Map<String, Integer> directionRouteValues = calculateRoute(findDeadDirections(possibleDirections));
             bestDirections = findShortestDirection(directionRouteValues);
+            moveInDirection(randomElement(bestDirections));
         }
 
-        moveInDirection(randomElement(bestDirections));
+
     }
 
-    private ArrayList<String> wanderSmurf(){
-        System.out.println("Smurf is wandering!");
-        ArrayList<String> result = new ArrayList<String>();
-        result.add("NW");
-        result.add("NE");
-        result.add("E");
-        result.add("W");
-        result.add("SW");
-        result.add("SE");
-        return result;
-    }
 
     private String randomElement(List<String> Directions) {
         Random rand = new Random();
+        System.out.println("rand" + Directions.size());
         String randomElement = Directions.get(rand.nextInt(Directions.size()));
         return randomElement;
     }
@@ -138,9 +130,15 @@ public class Smurf {
     }
 
 
-    public Map<String, Integer> calculateRoute(ArrayList<String> possibleDirections) {
+    public Map<String, Integer> calculateRoute(ArrayList<String> result) {
+        if (deadDirections.size()>0){
+            for(String direction:deadDirections){
+                result.remove(direction);
+            }
+        }
+
         Map<String,Integer> directionsRouteValues = new HashMap<String,Integer>();
-        for (String direction : possibleDirections) {
+        for (String direction : result) {
             directionsRouteValues.put(direction, findLength(direction));
         }
         return directionsRouteValues;
@@ -154,23 +152,12 @@ public class Smurf {
         result.add("W");
         result.add("SW");
         result.add("SE");
-        if (deadDirections.size()>0){
-            for(String direction:deadDirections){
-                result.remove(direction);
-            }
-        }
 
         for (Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
             if (entry.getValue().getHexagon().getCurrentStateClass() == BlockedTile.class) {
                 result.remove(entry.getKey());
             }
-            if (isDeadEnd(entry.getValue())){
-                result.remove(entry.getKey());
-                deadDirections.add(entry.getKey());
-                System.out.println("Deaddirection added:" + entry.getKey());
-            }
         }
-
         /*
        if (board.getHexagonCoordinate(xPos,yPos-1).getCurrentStateClass() == BlockedTile.class){
            neighbours.remove("N");
@@ -186,6 +173,27 @@ public class Smurf {
        }
 
          */
+        return result;
+    }
+
+    private ArrayList<String> findDeadDirections(ArrayList<String> possibleDirections){
+        ArrayList<String> result= new ArrayList<String>();
+        for (String direction:possibleDirections){
+            result.add(direction);
+        }
+        for (Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
+            if (isDeadEnd(entry.getValue())) {
+                if (!deadDirections.contains(entry.getKey())) {
+                    deadDirections.add(entry.getKey());
+                }
+            }
+        }
+        for(String direction:deadDirections){
+            if(result.contains(direction)){
+                result.remove(direction);
+            }
+        }
+
         return result;
     }
 
