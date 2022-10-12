@@ -4,12 +4,16 @@ import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Project {
   public static final String PROJECT_WINDOW_TEXT = "ProjectTemplate";
   public static final String PROJECT_BUTTON_TEXT = "Press me!";
   private int presses;
+
+  public boolean hasWon;
 
   private int turn = 0;
   public Board board;//borde va private
@@ -34,19 +38,16 @@ public class Project {
    * then tells the smurf to make its move
    */
   public void NewTurn(){
-    turn++;
-    //smurf.checkifsmurfwon; re
-    smurf.moveSmurf();
+    if (smurf.checkIfWon()) {
+      hasWon = true;
+      System.out.println("You won");
+    }
+    else {
+      turn++;
+    smurf.moveSmurf(); }
   }
 
-  public int getPresses() {
-    int bla;
-    bla = 42;
-    return presses;
-  }
-
-  public void incrementPresses() {
-    this.presses++;
+  public void saveNumberOfTurns() {
   }
 
   public int getTurn() {

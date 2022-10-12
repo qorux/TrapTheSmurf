@@ -25,7 +25,6 @@ public final class ProjectTemplate {
 				project.getSmurf().startPlaceSmurf();
 				List<Boolean> tilesToBlock = project.board.randomizeBlockedTiles();
 				project.board.shuffleBlockedTiles(tilesToBlock);
-
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);
 			}

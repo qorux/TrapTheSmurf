@@ -13,19 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProjectTest {
 	private static final int NUM_INCREMENTATIONS = 128;
 
-	@Test //Ta bort denna ?
-	public void testIncrementResult() {
-		final var project = new Project();
-		final var projectView = new ProjectView(project);
-		//fixa packages
-
-		for (var i = 0; i < ProjectTest.NUM_INCREMENTATIONS; i++) {
-			project.incrementPresses();
-		}
-
-		assertEquals(ProjectTest.NUM_INCREMENTATIONS, project.getPresses());
-	}
-
 	@Test
 	public void testOnlyOneOccupiedTile() {
 		Project project = new Project();

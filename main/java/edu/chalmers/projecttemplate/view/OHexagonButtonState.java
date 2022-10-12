@@ -37,6 +37,12 @@ public class OHexagonButtonState implements PropertyChangeListener {
             buttonBoard.get(i).setEnabled(false);
         }
         }
+        if (project.hasWon) {
+            for (int i = 0; i<121; i++) {
+                buttonBoard.get(i).setEnabled(false);
+                projectView.getjLabel2().setText("You won the game! You won in " + project.getTurn() + " turns. Press reset to play again");
+            }
+        }
     }
     // standard getter and setter
 }

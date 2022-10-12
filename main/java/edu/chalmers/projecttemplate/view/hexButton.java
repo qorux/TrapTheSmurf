@@ -73,12 +73,12 @@ public class hexButton extends JButton {
         hexagonalShape = getHexPolygon();
     }
 
-
+/*
     @Override
     protected void processMouseEvent(MouseEvent e) {
         if (contains(e.getPoint()))
             super.processMouseEvent(e);
-    }
+    }*/
 
 
     @Override

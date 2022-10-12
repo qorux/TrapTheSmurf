@@ -51,7 +51,6 @@ public class ProjectController {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
     project.board.getHexagon(pressedTileIndex).blockTile();
-
     project.NewTurn();
     //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 
@@ -62,7 +61,6 @@ public class ProjectController {
   private class ProjectButtonPressed implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-
 
       Project project = new Project();
       ProjectView ProjectView = new ProjectView(project);
@@ -75,10 +73,7 @@ public class ProjectController {
       ProjectController.create(project, ProjectView);
       ProjectView.setVisible(true);
       projectView.setVisible(false);
-
-      System.out.println("Hej, jag kommer hit");
-
-      //projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
+      
     }
   }
 }
