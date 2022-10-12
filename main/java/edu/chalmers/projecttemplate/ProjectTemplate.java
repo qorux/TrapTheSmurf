@@ -21,10 +21,10 @@ public final class ProjectTemplate {
 				final Project project = new Project();
 				final ProjectView ProjectView = new ProjectView(project);
 
-				project.board.addPropertyChangeListener(ProjectView.getObserver());
+				project.getBoard().addPropertyChangeListener(ProjectView.getObserver());
 				project.getSmurf().startPlaceSmurf();
-				List<Boolean> tilesToBlock = project.board.randomizeBlockedTiles();
-				project.board.shuffleBlockedTiles(tilesToBlock);
+				List<Boolean> tilesToBlock = project.getBoard().randomizeBlockedTiles();
+				project.getBoard().shuffleBlockedTiles(tilesToBlock);
 
 				ProjectController.create(project, ProjectView);
 				ProjectView.setVisible(true);

@@ -1,5 +1,6 @@
 package main.java.edu.chalmers.projecttemplate.view;
 
+import main.java.edu.chalmers.projecttemplate.controller.hexButton;
 import main.java.edu.chalmers.projecttemplate.model.*;
 
 import java.awt.*;
@@ -24,18 +25,18 @@ public class OHexagonButtonState implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         projectView.getjLabel2().setText("Number of turns: " + project.getTurn() + " ");
         for(int i = 0; i<121; i++) {
-        if (ClickableTile.class.equals(project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())){
-            buttonBoard.get(i).setBackground(Color.cyan);
-            buttonBoard.get(i).setEnabled(true);
-        }
-        else if (OccupiedTile.class.equals(project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())) {
-            buttonBoard.get(i).setBackground(Color.red);
-            buttonBoard.get(i).setEnabled(false);
-        }
-        else if (BlockedTile.class.equals(project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())) {
-            buttonBoard.get(i).setBackground(Color.darkGray);
-            buttonBoard.get(i).setEnabled(false);
-        }
+            if (ClickableTile.class.equals(project.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass())){
+                buttonBoard.get(i).setBackground(Color.cyan);
+                buttonBoard.get(i).setEnabled(true);
+            }
+            else if (OccupiedTile.class.equals(project.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass())) {
+                buttonBoard.get(i).setBackground(Color.red);
+                buttonBoard.get(i).setEnabled(false);
+            }
+            else if (BlockedTile.class.equals(project.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass())) {
+                buttonBoard.get(i).setBackground(Color.darkGray);
+                buttonBoard.get(i).setEnabled(false);
+            }
         }
     }
     // standard getter and setter

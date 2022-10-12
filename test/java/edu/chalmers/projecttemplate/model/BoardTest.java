@@ -20,7 +20,7 @@ public class BoardTest {
         Project project = new Project();
         ProjectView projectView = new ProjectView(project);
         for (int i = 0; i < 121; i++) {
-            project.board.blockTile(i);
+            project.getBoard().blockTile(i);
         }
         ProjectController.create(project, projectView);
         projectView.setVisible(true);
@@ -31,12 +31,12 @@ public class BoardTest {
     public void testBlockTile() {
         Project project = new Project();
         for (int i = 0; i < 121; i++) {
-            project.board.blockTile(i);
+            project.getBoard().blockTile(i);
             if (i == 60) {
-                assertEquals(project.board.getHexagon(60).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
+                assertEquals(project.getBoard().getHexagon(60).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
             }
             else {
-                assertEquals(project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
+                assertEquals(project.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
             }
         }
     }
@@ -44,17 +44,17 @@ public class BoardTest {
     @Test
     public void testRandomizeBlockedTiles() {
         Project project = new Project();
-        List<Boolean> tilesToBlock = project.board.randomizeBlockedTiles();
+        List<Boolean> tilesToBlock = project.getBoard().randomizeBlockedTiles();
         int expectedBlockedTiles = 0;
         for (Boolean aBoolean : tilesToBlock) {
             if (aBoolean == Boolean.TRUE) {
                 expectedBlockedTiles++;
             }
         }
-        project.board.shuffleBlockedTiles(tilesToBlock);
+        project.getBoard().shuffleBlockedTiles(tilesToBlock);
         int actualBlockedTiles = 0;
         for (int i = 0; i < 121; i++) {
-            if (project.board.getHexagon(i).getHexagonStateContext().getCurrentState().getClass().equals(BlockedTile.class)) {
+            if (project.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass().equals(BlockedTile.class)) {
                 actualBlockedTiles++;
             }
         }
@@ -64,24 +64,24 @@ public class BoardTest {
     @Test
     void getHexagonCoordinateTest() {
         Project project= new Project();
-        Hexagon hexagonByCoordinate = project.board.getHexagonCoordinate(0,0);
-        Hexagon hexagonByIndex = project.board.getHexagon(0);
+        Hexagon hexagonByCoordinate = project.getBoard().getHexagonCoordinate(0,0);
+        Hexagon hexagonByIndex = project.getBoard().getHexagon(0);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.board.getHexagonCoordinate(10,10);
-        hexagonByIndex = project.board.getHexagon(120);
+        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(10,10);
+        hexagonByIndex = project.getBoard().getHexagon(120);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.board.getHexagonCoordinate(5,5);
-        hexagonByIndex = project.board.getHexagon(60);
+        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(5,5);
+        hexagonByIndex = project.getBoard().getHexagon(60);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.board.getHexagonCoordinate(6,5);
-        hexagonByIndex = project.board.getHexagon(61);
+        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(6,5);
+        hexagonByIndex = project.getBoard().getHexagon(61);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.board.getHexagonCoordinate(4,5);
-        hexagonByIndex = project.board.getHexagon(59);
+        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(4,5);
+        hexagonByIndex = project.getBoard().getHexagon(59);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
     }
@@ -89,12 +89,12 @@ public class BoardTest {
     @Test
     void getHexagonCoordinateGetTest() {
         Project project= new Project();
-        Hexagon hexagonByCoordinate = project.board.getHexagonCoordinate(0,0);
-        Hexagon hexagonByGet = project.board.getBoardSpaces().get(0).get(0);
+        Hexagon hexagonByCoordinate = project.getBoard().getHexagonCoordinate(0,0);
+        Hexagon hexagonByGet = project.getBoard().getBoardSpaces().get(0).get(0);
         assertEquals(hexagonByGet,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.board.getHexagonCoordinate(4,5);
-        hexagonByGet = project.board.getBoardSpaces().get(5).get(4);
+        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(4,5);
+        hexagonByGet = project.getBoard().getBoardSpaces().get(5).get(4);
         assertEquals(hexagonByGet,hexagonByCoordinate);
 
     }
@@ -102,8 +102,8 @@ public class BoardTest {
     @Test
     void getHexagonNodeIndexTest() {
         Project project= new Project();
-        Node nodeByIndex = project.board.getNode(60);
-        Hexagon hexagonByIndex = project.board.getHexagon(60);
+        Node nodeByIndex = project.getBoard().getNode(60);
+        Hexagon hexagonByIndex = project.getBoard().getHexagon(60);
         assertEquals(nodeByIndex.getHexagon().getIndex(), hexagonByIndex.getIndex());
         assertEquals(nodeByIndex.getHexagon(), hexagonByIndex);
     }

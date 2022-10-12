@@ -12,7 +12,7 @@ public class Project {
   private int presses;
 
   private int turn = 0;
-  public Board board;//borde va private
+  private Board board;//borde va private
 
   private Smurf smurf;
   public Project(){
@@ -37,16 +37,6 @@ public class Project {
     turn++;
     //smurf.checkifsmurfwon; re
     smurf.moveSmurf();
-  }
-
-  public int getPresses() {
-    int bla;
-    bla = 42;
-    return presses;
-  }
-
-  public void incrementPresses() {
-    this.presses++;
   }
 
   public int getTurn() {

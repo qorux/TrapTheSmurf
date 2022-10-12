@@ -50,7 +50,7 @@ public class ProjectController {
   private void listenedObject_actionPerformed(ActionEvent evt) {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
-    project.board.getHexagon(pressedTileIndex).blockTile();
+    project.getBoard().getHexagon(pressedTileIndex).blockTile();
 
     project.NewTurn();
     //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
@@ -67,10 +67,10 @@ public class ProjectController {
       Project project = new Project();
       ProjectView ProjectView = new ProjectView(project);
 
-      project.board.addPropertyChangeListener(ProjectView.getObserver());
+      project.getBoard().addPropertyChangeListener(ProjectView.getObserver());
       project.getSmurf().startPlaceSmurf();
-      List<Boolean> tilesToBlock = project.board.randomizeBlockedTiles();
-      project.board.shuffleBlockedTiles(tilesToBlock);
+      List<Boolean> tilesToBlock = project.getBoard().randomizeBlockedTiles();
+      project.getBoard().shuffleBlockedTiles(tilesToBlock);
 
       ProjectController.create(project, ProjectView);
       ProjectView.setVisible(true);

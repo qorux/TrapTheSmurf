@@ -59,7 +59,7 @@ public class Smurf {
         return randomElement;
     }
 
-    public void moveInDirection(String Direction) {
+    private void moveInDirection(String Direction) {
         hexagonNode = hexagonNode.getNeighbors().get(Direction);
         hexagon = hexagonNode.getHexagon();
         System.out.println("Hexagonindex:" + hexagon.getIndex());
@@ -111,7 +111,7 @@ public class Smurf {
         */
     }
 
-    public List<String> findShortestDirection(Map<String,Integer> directionsRouteValues) {
+    private List<String> findShortestDirection(Map<String,Integer> directionsRouteValues) {
         List<Integer> sortedRouteValues = new ArrayList<Integer>();
         for (Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
             sortedRouteValues.add(entry.getValue());
@@ -130,7 +130,7 @@ public class Smurf {
     }
 
 
-    public Map<String, Integer> calculateRoute(ArrayList<String> result) {
+    private Map<String, Integer> calculateRoute(ArrayList<String> result) {
         if (deadDirections.size()>0){
             for(String direction:deadDirections){
                 result.remove(direction);
@@ -197,7 +197,7 @@ public class Smurf {
         return result;
     }
 
-    public boolean isDeadEnd(Node node){
+    private boolean isDeadEnd(Node node){
         int counter = 0;
         for(Map.Entry<String,Node> neighborEntry:node.getNeighbors().entrySet()){
             if (neighborEntry.getValue().getHexagon().getCurrentStateClass() == BlockedTile.class){
@@ -211,7 +211,7 @@ public class Smurf {
     }
 
 
-    public int findLength(String direction) {
+    private int findLength(String direction) {
         boolean endTile = false;
         Node searchNode = hexagonNode;
         int length = 0;
@@ -243,7 +243,7 @@ public class Smurf {
         return length;
     }
 
-    Boolean foundEndTile(Node searchNode) {
+    private Boolean foundEndTile(Node searchNode) {
         int xPos = (searchNode.getHexagon().getIndex() % 11);
         int yPos = (searchNode.getHexagon().getIndex() / 11);
         if (xPos > 11 || yPos > 11 || xPos < 0 || yPos < 0) {

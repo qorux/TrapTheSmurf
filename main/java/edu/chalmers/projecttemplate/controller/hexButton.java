@@ -1,4 +1,4 @@
-package main.java.edu.chalmers.projecttemplate.view;
+package main.java.edu.chalmers.projecttemplate.controller;
 
 import main.java.edu.chalmers.projecttemplate.model.Hexagon;
 
@@ -72,14 +72,6 @@ public class hexButton extends JButton {
         super.setBounds(r);
         hexagonalShape = getHexPolygon();
     }
-
-
-    @Override
-    protected void processMouseEvent(MouseEvent e) {
-        if (contains(e.getPoint()))
-            super.processMouseEvent(e);
-    }
-
 
     @Override
     protected void paintComponent(Graphics g) {

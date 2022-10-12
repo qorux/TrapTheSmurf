@@ -1,14 +1,12 @@
 package main.java.edu.chalmers.projecttemplate.view;
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 
 import javax.swing.*;
+
+import main.java.edu.chalmers.projecttemplate.controller.hexButton;
 import main.java.edu.chalmers.projecttemplate.model.Project;
-import java.awt.event.*;
+
 import java.awt.*;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
@@ -25,33 +23,20 @@ public class ProjectView extends javax.swing.JFrame {
 
     private Project project;
     public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
-
     private OHexagonButtonState observer;
 
 
     public ProjectView(Project Project) {
-
-        int maxHeight = 11;
-        int maxWidth = 11;
-
         initComponents();
         this.project=Project;
         jPanel1.setLayout(new FlowLayout(5,0,0 ));
 
         for(int i =0;i<=120;i++){
             buttonBoard.add(generateButton(i));
-
-       // jLabel2.setText("Number of turns: " + Project.getTurn() + " ");
-
         }
+
         observer = new OHexagonButtonState(buttonBoard, project.getBoard(),this, project );
     }
-
-    public void close(){
-        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,11 +57,7 @@ public class ProjectView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 575));
 
         jButton1.setBackground(new java.awt.Color(102, 255, 255));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+
 
         jLabel1.setText("Counter:");
 
@@ -123,9 +104,7 @@ public class ProjectView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,8 +135,8 @@ public class ProjectView extends javax.swing.JFrame {
     }
 
 
-    public hexButton generateButton(Integer index){
-        hexButton generatedButton = new hexButton(project.board.getHexagon(index));
+    private hexButton generateButton(Integer index){
+        hexButton generatedButton = new hexButton(project.getBoard().getHexagon(index));
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);
