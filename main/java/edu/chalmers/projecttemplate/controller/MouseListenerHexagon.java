@@ -24,7 +24,6 @@ public class MouseListenerHexagon extends Frame implements MouseListener {
 
     public void mouseExited(MouseEvent e) {
         Component c = e.getComponent();
-
         c.setBackground(Color.CYAN); //Funkar inte
     }
 

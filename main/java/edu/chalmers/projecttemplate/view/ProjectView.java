@@ -59,7 +59,7 @@ public class ProjectView extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(102, 255, 255));
 
 
-        jLabel1.setText("Counter:");
+        //jLabel1.setText("Counter:");
 
         jPanel1.setMaximumSize(new java.awt.Dimension(548, 500));
         jPanel1.setMinimumSize(new java.awt.Dimension(548, 500));
@@ -115,6 +115,7 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+
     // End of variables declaration//GEN-END:variables
 
     public OHexagonButtonState getObserver() {
@@ -129,6 +130,7 @@ public class ProjectView extends javax.swing.JFrame {
     }
 
     public JLabel getjLabel2() { return jLabel2; }
+
 
     public ArrayList<hexButton> getButtonBoard() {
         return buttonBoard;

@@ -146,6 +146,7 @@ public class Smurf {
 
     private ArrayList<String> findBlockedDirections() {
         ArrayList<String> result = new ArrayList<String>();
+
         result.add("NW");
         result.add("NE");
         result.add("E");
@@ -265,4 +266,31 @@ public class Smurf {
         hexagon.occupyTile();
     }
 
+    public boolean checkIfWon() {
+        return checkFreeNeighbors().size() == 0;
+    }
+
+    //Fuuuuuuuuult
+    public List<Hexagon> checkFreeNeighbors() {
+        List<Hexagon> FreeNeighbors = new ArrayList<>();
+        List<Hexagon> tilesToCheck = new ArrayList<>();
+
+        tilesToCheck.add(hexagonNode.getNeighbors().get("NW").getHexagon());
+        tilesToCheck.add(hexagonNode.getNeighbors().get("NE").getHexagon());
+        tilesToCheck.add(hexagonNode.getNeighbors().get("W").getHexagon());
+        tilesToCheck.add(hexagonNode.getNeighbors().get("E").getHexagon());
+        tilesToCheck.add(hexagonNode.getNeighbors().get("SE").getHexagon());
+        tilesToCheck.add(hexagonNode.getNeighbors().get("SW").getHexagon());
+
+        for (Hexagon hexagon : tilesToCheck) {
+            if (ClickableTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())) {
+                FreeNeighbors.add(hexagon);
+            }
+    }
+        return FreeNeighbors;
+    }
+
+    public Hexagon getSmurfHexagon() {
+        return hexagon;
+    }
 }

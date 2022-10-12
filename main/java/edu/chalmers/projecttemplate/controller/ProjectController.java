@@ -76,9 +76,6 @@ public class ProjectController {
       ProjectView.setVisible(true);
       projectView.setVisible(false);
 
-      System.out.println("Hej, jag kommer hit");
-
-      //projectView.getjLabel1().setText(String.valueOf(project.getPresses()));
     }
   }
 }

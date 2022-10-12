@@ -10,6 +10,7 @@ import main.java.edu.chalmers.projecttemplate.model.Project;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,23 @@ public class BoardTest {
         projectView.setVisible(true);
         assertTrue(true);
     }
+
+/*    //Bör läggas i en annan klass "TestVew" typ
+    @Test
+    public void testViewPropertyChange() {
+        Project project = new Project();
+        ProjectView projectView = new ProjectView(project); //Ok så efter lite googling verkar det inte som kan
+        for (int i = 0; i < 121; i++) {                     // JUnit testa viewn.. rip
+            project.board.getHexagon(i).makeClickable();
+        }
+        project.board.getHexagon(3).blockTile();
+        project.board.getHexagon(14).blockTile();
+        project.board.getHexagon(32).blockTile();
+        project.board.getHexagon(112).occupyTile();
+
+        projectView.setVisible(true);
+    }*/
+
 
     @Test
     public void testBlockTile() {
@@ -60,6 +78,8 @@ public class BoardTest {
         }
         assertEquals(expectedBlockedTiles, actualBlockedTiles);
     }
+
+
 
     @Test
     void getHexagonCoordinateTest() {
