@@ -54,6 +54,16 @@ public class ProjectController {
 
   }
 
+/*  public void difficultyPickedListener(ActionListener difficultyListener){
+    projectView.getjRadioButton1().addActionListener(difficultyListener);
+    projectView.getjRadioButton2().addActionListener(difficultyListener);
+    projectView.getjRadioButton3().addActionListener(difficultyListener);
+    if (projectView.getjRadioButton1().isSelected()) {
+      System.out.println("hehe");
+    }
+
+
+  }*/
 
 
   private class ProjectButtonPressed implements ActionListener {
@@ -71,6 +81,14 @@ public class ProjectController {
       ProjectController.create(project, ProjectView);
       ProjectView.setVisible(true);
       projectView.setVisible(false);
+/*
+      Project project = new Project();
+
+      projectView.setProject(project);
+      project.getBoard().addPropertyChangeListener(projectView.getObserver());
+      project.getSmurf().startPlaceSmurf();
+      project.getBoard().shuffleBlockedTiles();*/
+
     }
   }
 }

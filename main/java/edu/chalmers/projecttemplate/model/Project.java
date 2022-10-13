@@ -60,6 +60,9 @@ public class Project {
     return hasWon;
   }
 
+  public boolean isHasLost() {
+    return hasLost;
+  }
 
 
 }

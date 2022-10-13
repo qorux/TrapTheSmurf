@@ -58,7 +58,7 @@ public class ProjectView extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 575));
 
         jButton1.setBackground(new java.awt.Color(102, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         jButton1.setText("Reset");
         /*
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +69,7 @@ public class ProjectView extends javax.swing.JFrame {
 
          */
 
-        jLabel1.setText("Counter:");
+        //jLabel1.setText("Counter:");
 
         jPanel1.setMaximumSize(new java.awt.Dimension(548, 500));
         jPanel1.setMinimumSize(new java.awt.Dimension(548, 500));
@@ -77,6 +77,7 @@ public class ProjectView extends javax.swing.JFrame {
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel2.setText("Number of turns: ");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18));
 
         jRadioButton1.setText("Easy");
 
@@ -100,7 +101,7 @@ public class ProjectView extends javax.swing.JFrame {
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addGap(12, 12, 40)
+                                                                .addGap(1, 1, 40)
                                                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -109,10 +110,10 @@ public class ProjectView extends javax.swing.JFrame {
                                                                         .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                         .addGroup(layout.createSequentialGroup()
-                                                .addGap(86, 86, 86)
+                                                .addGap(40, 40, 86)
                                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -170,10 +171,20 @@ public class ProjectView extends javax.swing.JFrame {
 
     public JLabel getjLabel2() { return jLabel2; }
 
+    public JRadioButton getjRadioButton1() {
+        return jRadioButton1;
+    }
+    public JRadioButton getjRadioButton2() {
+        return jRadioButton2;
+    }
+    public JRadioButton getjRadioButton3() {
+        return jRadioButton3;
+    }
 
     public ArrayList<hexButton> getButtonBoard() {
         return buttonBoard;
     }
+
 
 
     private hexButton generateButton(Integer index){
@@ -190,5 +201,9 @@ public class ProjectView extends javax.swing.JFrame {
             }
         }
         return generatedButton;
+    }
+
+    public void setProject(Project project) {//slay
+        this.project = project;
     }
 }

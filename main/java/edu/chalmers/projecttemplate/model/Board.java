@@ -3,6 +3,7 @@ package main.java.edu.chalmers.projecttemplate.model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * This class contains the logic for the board of the game
@@ -15,6 +16,7 @@ public class Board {
     private List<Node> boardNodesRows;
 
     private PropertyChangeSupport support;
+
 
     /**
      * Sets up the board with 11 columns and 11 rows, adding up to 121 hexagons.
@@ -120,6 +122,24 @@ public class Board {
         return boardColumns;
     }
 
+    public int difficultyBlockedTiles(String difficulty) {
+        Random random = new Random();
+        int totalBlockedTiles = 0;
+        if (Objects.equals(difficulty, "Easy")) {
+            totalBlockedTiles = ThreadLocalRandom.current().nextInt(14, 19 + 1);
+        }
+        else if (Objects.equals(difficulty, "Hard")) {
+            totalBlockedTiles = ThreadLocalRandom.current().nextInt(2, 6 + 1);
+        }
+        else if (Objects.equals(difficulty, "Medium")) {
+            totalBlockedTiles = ThreadLocalRandom.current().nextInt(7, 13 + 1);
+        }
+        else {
+            totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
+        }
+       return totalBlockedTiles;
+    }
+
     /**
      * Randomizes how many tiles should be blocked and checks if the tiles are ok to block.
      * The number of tiles are randomized following normal distribution.
@@ -145,6 +165,7 @@ public class Board {
      * Shuffles the tiles that should be blocked
      */
     public void shuffleBlockedTiles() {
+        int tilesToBeBlocked = difficultyBlockedTiles("tihi");
         List<Boolean> shouldTileBeBlocked = generateBlockedTilesList();
         int index =0;
         for (Boolean tile:shouldTileBeBlocked) {

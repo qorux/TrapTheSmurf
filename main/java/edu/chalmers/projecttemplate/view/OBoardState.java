@@ -3,9 +3,11 @@ package main.java.edu.chalmers.projecttemplate.view;
 import main.java.edu.chalmers.projecttemplate.model.*;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class OBoardState implements PropertyChangeListener {
 
@@ -24,8 +26,12 @@ public class OBoardState implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         projectView.getjLabel2().setText("Number of turns: " + project.getTurn() + " ");
         for(int i = 0; i<121; i++) {
-            if (ClickableTile.class.equals(hexagonBoard.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())){
+            if (ClickableTile.class.equals(hexagonBoard.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())&& !buttonBoard.get(i).getIsHovered()){
                 buttonBoard.get(i).setBackground(Color.cyan);
+                buttonBoard.get(i).setEnabled(true);
+            }
+            else if (ClickableTile.class.equals(hexagonBoard.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())&& buttonBoard.get(i).getIsHovered()){
+                buttonBoard.get(i).setBackground(Color.getHSBColor(0.5f, 0.7f, 0.7f));
                 buttonBoard.get(i).setEnabled(true);
             }
             else if (OccupiedTile.class.equals(hexagonBoard.getHexagon(i).getHexagonStateContext().getCurrentState().getClass())) {
@@ -37,13 +43,13 @@ public class OBoardState implements PropertyChangeListener {
                 buttonBoard.get(i).setEnabled(false);
             }
         }
-        if (evt.getPropertyName() == "Won") {
+        if (Objects.equals(evt.getPropertyName(), "Won")) {
             for (int i = 0; i<121; i++) {
                 buttonBoard.get(i).setEnabled(false);
             }
             projectView.getjLabel2().setText("You won the game! You won in " + project.getTurn() + " turns. Press reset to play again");
         }
-        else if (evt.getPropertyName() == "Lost") {
+        else if (Objects.equals(evt.getPropertyName(), "Lost")) {
             for (int i = 0; i<121; i++) {
                 buttonBoard.get(i).setEnabled(false);
             }

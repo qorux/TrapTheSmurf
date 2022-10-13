@@ -7,8 +7,12 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class hexButton extends JButton {
-    Polygon hexagonalShape;
-    Hexagon hexagon;
+    private Polygon hexagonalShape;
+    private Hexagon hexagon;
+
+
+
+    private boolean isHovered = false;
 
     public hexButton(Hexagon Hexagon) {
         this.setOpaque(false);
@@ -82,5 +86,14 @@ public class hexButton extends JButton {
         g.fillPolygon(hexagonalShape);
     }
 
+    public void setHovered(boolean hovered) {   //aids
+        boolean oldValue = isHovered;
+        isHovered = hovered;
+        hexagon.getSupport().firePropertyChange("Hovered",oldValue,hovered);
+    }
+
+    public boolean getIsHovered() {
+        return isHovered;
+    }
 }
 
