@@ -42,6 +42,9 @@ public class Project {
       System.out.println("You won");
       hasWon=true;
     }
+    else if (smurf.checkIfLost()) {
+      System.out.println("smurf won");
+    }
     else {
       smurf.moveSmurf();
       if (smurf.checkIfLost()){
