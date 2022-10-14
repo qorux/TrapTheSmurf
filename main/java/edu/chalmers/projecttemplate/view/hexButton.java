@@ -86,6 +86,10 @@ public class hexButton extends JButton {
         g.fillPolygon(hexagonalShape);
     }
 
+    public void setNewHexagonBoard(Hexagon Hexagon){
+        this.hexagon = Hexagon;
+    }
+
     public void setHovered(boolean hovered) {   //aids
         boolean oldValue = isHovered;
         isHovered = hovered;

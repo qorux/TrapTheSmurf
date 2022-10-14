@@ -34,6 +34,7 @@ public class ProjectView extends javax.swing.JFrame {
             buttonBoard.add(generateButton(i));
         }
         observer = new OBoardState(this, project );
+        this.setTitle("Trap the smurf!");
     }
 
     /**
@@ -60,6 +61,7 @@ public class ProjectView extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(102, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         jButton1.setText("Reset");
+        jButton1.setToolTipText("Press to reset the game");
         /*
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,10 +82,11 @@ public class ProjectView extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18));
 
         jRadioButton1.setText("Easy");
-
+        jRadioButton1.setToolTipText("Choose easy difficulty, press reset to apply");
         jRadioButton2.setText("Medium");
-
+        jRadioButton2.setToolTipText("Choose medium difficulty, press reset to apply");
         jRadioButton3.setText("Hard");
+        jRadioButton3.setToolTipText("Choose hard difficulty, press reset to apply");
 
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioButton1);
@@ -101,7 +104,7 @@ public class ProjectView extends javax.swing.JFrame {
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addGap(1, 1, 40)
+                                                                .addGap(13, 13, 13)
                                                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(layout.createSequentialGroup()
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -128,7 +131,7 @@ public class ProjectView extends javax.swing.JFrame {
                                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(27, 27, 27)
+                                                .addGap(50, 50, 50)
                                                 .addComponent(jRadioButton1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jRadioButton2)
@@ -205,5 +208,9 @@ public class ProjectView extends javax.swing.JFrame {
 
     public void setProject(Project project) {//slay
         this.project = project;
+        this.observer = new OBoardState(this, project);
+        for(int i = 0; i<121 ;i++){
+            buttonBoard.get(i).setNewHexagonBoard(project.getBoard().getHexagon(i));
+        }
     }
 }

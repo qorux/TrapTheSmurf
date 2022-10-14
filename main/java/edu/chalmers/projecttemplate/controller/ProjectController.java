@@ -10,8 +10,10 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 public class ProjectController {
-  private final Project project;
+  private Project project;
   private final ProjectView projectView;
+
+  MouseListenerHexagon mlh;
 
   public static ProjectController create(Project project, ProjectView projectView) {
     return new ProjectController(project, projectView);
@@ -21,10 +23,9 @@ public class ProjectController {
     this.project = project;
     this.projectView = projectView;
 
+    ProjectButtonPressed();
 
-    projectView.getjButton1().addActionListener(new ProjectButtonPressed());  //onödigt
-
-    MouseListenerHexagon mlh = new MouseListenerHexagon(project, projectView);
+    MouseListenerHexagon mlh = new MouseListenerHexagon();
     for (int i = 0; i<121; i++) {
       projectView.buttonBoard.get(i).addMouseListener(mlh);
     }
@@ -44,6 +45,15 @@ public class ProjectController {
     }
   }
 
+  public void ProjectButtonPressed(){
+    this.projectView.getjButton1().addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+          resetGameCalled();
+        }
+      });
+    }
+
   private void listenedObject_actionPerformed(ActionEvent evt) {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
@@ -53,8 +63,26 @@ public class ProjectController {
     //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 
   }
+  public void difficultyRadioButtonPressed(){
+    ActionListener sliceActionListener = new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent) {
+        AbstractButton aButton = (AbstractButton) actionEvent.getSource();
+        System.out.println("Selected: " + aButton.getText());
+        if(aButton.getText() == "Easy"){
 
-/*  public void difficultyPickedListener(ActionListener difficultyListener){
+        } else if (aButton.getText() == "Medium") {
+
+        } else if (aButton.getText()=="Hard") {
+
+        }
+      }
+    };
+
+    projectView.getjRadioButton1().addActionListener(sliceActionListener);
+    projectView.getjRadioButton2().addActionListener(sliceActionListener);
+    projectView.getjRadioButton3().addActionListener(sliceActionListener);
+  }
+  public void difficultyPickedListener(ActionListener difficultyListener){
     projectView.getjRadioButton1().addActionListener(difficultyListener);
     projectView.getjRadioButton2().addActionListener(difficultyListener);
     projectView.getjRadioButton3().addActionListener(difficultyListener);
@@ -63,32 +91,23 @@ public class ProjectController {
     }
 
 
-  }*/
+  }
 
 
-  private class ProjectButtonPressed implements ActionListener {
-    @Override
-    public void actionPerformed(ActionEvent e) {
+  private void resetGameCalled (){
+    this.project = new Project();
 
 
-      Project project = new Project();
-      ProjectView ProjectView = new ProjectView(project);
-
-      project.getBoard().addPropertyChangeListener(ProjectView.getObserver());
-      project.getSmurf().startPlaceSmurf();
-      project.getBoard().shuffleBlockedTiles();
-
-      ProjectController.create(project, ProjectView);
-      ProjectView.setVisible(true);
-      projectView.setVisible(false);
-/*
-      Project project = new Project();
-
-      projectView.setProject(project);
-      project.getBoard().addPropertyChangeListener(projectView.getObserver());
-      project.getSmurf().startPlaceSmurf();
-      project.getBoard().shuffleBlockedTiles();*/
-
+    this.mlh = new MouseListenerHexagon();
+    for (int i = 0; i<121; i++) {
+      projectView.buttonBoard.get(i).addMouseListener(mlh);
     }
+
+    this.projectView.setProject(this.project);
+    this.project.getBoard().addPropertyChangeListener(this.projectView.getObserver());
+    this.project.getSmurf().startPlaceSmurf();
+    this.project.getBoard().shuffleBlockedTiles();
+
   }
 }
+

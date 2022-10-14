@@ -118,6 +118,10 @@ public class Board {
         support.addPropertyChangeListener(pcl);
     }
 
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
+    }
+
     public List<List<Hexagon>> getBoardSpaces() {
         return boardColumns;
     }

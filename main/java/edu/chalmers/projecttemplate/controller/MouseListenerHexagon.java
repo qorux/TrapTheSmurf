@@ -12,11 +12,8 @@ import main.java.edu.chalmers.projecttemplate.view.hexButton;
 
 public class MouseListenerHexagon extends Frame implements MouseListener {
 
-    Project project = new Project();
-    ProjectView ProjectView = new ProjectView(project);
-    MouseListenerHexagon(Project project, ProjectView projectView){
+    MouseListenerHexagon(){
         addMouseListener(this);
-
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -40,4 +37,5 @@ public class MouseListenerHexagon extends Frame implements MouseListener {
     public void mouseReleased(MouseEvent e) {
 
     }
+
 }

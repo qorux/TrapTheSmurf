@@ -18,7 +18,7 @@ public final class ProjectTemplate {
 
 			@Override
 			public void run() {
-				final Project project = new Project();
+				Project project = new Project();
 				final ProjectView ProjectView = new ProjectView(project);
 
 				project.getBoard().addPropertyChangeListener(ProjectView.getObserver());

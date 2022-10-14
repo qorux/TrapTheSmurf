@@ -38,15 +38,16 @@ public class Project {
   public void NewTurn(){
     turn++;
     if (smurf.checkIfWon()) {
-      support.firePropertyChange("Won", hasWon, true);
-      System.out.println("You won");
+      boolean oldValue = hasWon;
       hasWon=true;
+      support.firePropertyChange("Won", oldValue, true);
     }
     else {
       smurf.moveSmurf();
       if (smurf.checkIfLost()){
-        support.firePropertyChange("Lost", hasLost, true);
-        System.out.println("You Lost");
+        boolean oldValue = hasLost;
+        hasLost=true;
+        support.firePropertyChange("Lost", oldValue, true);
       }
     }
   }
