@@ -3,7 +3,7 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import javax.swing.*;
 
-import main.java.edu.chalmers.projecttemplate.model.Project;
+import main.java.edu.chalmers.projecttemplate.model.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,20 +20,20 @@ public class ProjectView extends javax.swing.JFrame {
      * Creates new form myFirstForm
      */
 
-    private Project project;
+    private Game game;
     public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
     private OBoardState observer;
 
 
-    public ProjectView(Project Project) {
+    public ProjectView(Game Game) {
         initComponents();
-        this.project=Project;
+        this.game = Game;
         jPanel1.setLayout(new FlowLayout(5,0,0 ));
 
         for(int i =0;i<=120;i++){
             buttonBoard.add(generateButton(i));
         }
-        observer = new OBoardState(this, project );
+        observer = new OBoardState(this, game);
         this.setTitle("Trap the smurf!");
     }
 
@@ -191,7 +191,7 @@ public class ProjectView extends javax.swing.JFrame {
 
 
     private hexButton generateButton(Integer index){
-        hexButton generatedButton = new hexButton(project.getBoard().getHexagon(index));
+        hexButton generatedButton = new hexButton(game.getBoard().getHexagon(index));
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);
@@ -206,11 +206,11 @@ public class ProjectView extends javax.swing.JFrame {
         return generatedButton;
     }
 
-    public void setProject(Project project) {//slay
-        this.project = project;
-        this.observer = new OBoardState(this, project);
+    public void setProject(Game game) {//slay
+        this.game = game;
+        this.observer = new OBoardState(this, game);
         for(int i = 0; i<121 ;i++){
-            buttonBoard.get(i).setNewHexagonBoard(project.getBoard().getHexagon(i));
+            buttonBoard.get(i).setNewHexagonBoard(game.getBoard().getHexagon(i));
         }
     }
 }

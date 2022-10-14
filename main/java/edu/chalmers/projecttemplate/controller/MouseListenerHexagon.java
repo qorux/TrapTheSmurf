@@ -3,11 +3,6 @@ package main.java.edu.chalmers.projecttemplate.controller;
 import java.awt.*;
 import java.awt.event.*;
 
-import main.java.edu.chalmers.projecttemplate.model.ClickableTile;
-import main.java.edu.chalmers.projecttemplate.model.Hexagon;
-import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.model.OccupiedTile;
-import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import main.java.edu.chalmers.projecttemplate.view.hexButton;
 
 public class MouseListenerHexagon extends Frame implements MouseListener {

@@ -1,11 +1,11 @@
 package main.java.edu.chalmers.projecttemplate;
 
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
-import main.java.edu.chalmers.projecttemplate.model.Project;
+import main.java.edu.chalmers.projecttemplate.model.Game;
+import main.java.edu.chalmers.projecttemplate.model.GameHandler;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
 import javax.swing.SwingUtilities;
-import java.util.List;
 
 public final class ProjectTemplate {
 	private ProjectTemplate() {
@@ -18,14 +18,16 @@ public final class ProjectTemplate {
 
 			@Override
 			public void run() {
-				Project project = new Project();
-				final ProjectView ProjectView = new ProjectView(project);
+				final GameHandler gameHandler = new GameHandler();
+				Game game = gameHandler.getCurrentGame();
+				final ProjectView ProjectView = new ProjectView(game);
 
-				project.getBoard().addPropertyChangeListener(ProjectView.getObserver());
-				project.getSmurf().startPlaceSmurf();
-				project.getBoard().shuffleBlockedTiles();
 
-				ProjectController.create(project, ProjectView);
+				game.getBoard().addPropertyChangeListener(ProjectView.getObserver());
+				game.getSmurf().startPlaceSmurf();
+				game.getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
+
+				ProjectController.create(gameHandler, ProjectView);
 				ProjectView.setVisible(true);
 
 			}

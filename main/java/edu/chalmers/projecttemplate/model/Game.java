@@ -1,15 +1,8 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
-import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
-import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
-import main.java.edu.chalmers.projecttemplate.view.ProjectView;
-
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-public class Project {
+public class Game {
   private boolean hasWon;
 
   private boolean hasLost;
@@ -18,9 +11,11 @@ public class Project {
   private Board board;
   private Smurf smurf;
 
+  final String difficulty = "Default";
+
   private PropertyChangeSupport support;
 
-  public Project(){
+  public Game(String difficulty){
     support = new PropertyChangeSupport(this);
     this.board = new Board(support);
     this.smurf=new Smurf(board);

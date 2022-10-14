@@ -130,13 +130,13 @@ public class Board {
         Random random = new Random();
         int totalBlockedTiles = 0;
         if (Objects.equals(difficulty, "Easy")) {
-            totalBlockedTiles = ThreadLocalRandom.current().nextInt(14, 19 + 1);
+            totalBlockedTiles = ThreadLocalRandom.current().nextInt(15, 19 + 1);
         }
         else if (Objects.equals(difficulty, "Hard")) {
             totalBlockedTiles = ThreadLocalRandom.current().nextInt(2, 6 + 1);
         }
         else if (Objects.equals(difficulty, "Medium")) {
-            totalBlockedTiles = ThreadLocalRandom.current().nextInt(7, 13 + 1);
+            totalBlockedTiles = ThreadLocalRandom.current().nextInt(7, 12 + 1);
         }
         else {
             totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
@@ -149,12 +149,10 @@ public class Board {
      * The number of tiles are randomized following normal distribution.
      * @return a list of indexes for the tiles that are to be blocked
      */
-    private List<Boolean> generateBlockedTilesList(){
-        Random random = new Random();
-        int totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));
+    private List<Boolean> generateBlockedTilesList(int tilesToBeBlocked){
         List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(120);
         for(int i = 0; i < 120; i++) {
-            if ((i<totalBlockedTiles) && (i != 60)){
+            if ((i<tilesToBeBlocked) && (i != 60)){
                 shouldTileBeBlocked.add(true);
             }
             else {
@@ -168,9 +166,9 @@ public class Board {
     /**
      * Shuffles the tiles that should be blocked
      */
-    public void shuffleBlockedTiles() {
-        int tilesToBeBlocked = difficultyBlockedTiles("tihi");
-        List<Boolean> shouldTileBeBlocked = generateBlockedTilesList();
+    public void shuffleBlockedTiles(String difficulty) {
+        int tilesToBeBlocked = difficultyBlockedTiles(difficulty);
+        List<Boolean> shouldTileBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
         int index =0;
         for (Boolean tile:shouldTileBeBlocked) {
             if (tile) {

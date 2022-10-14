@@ -2,14 +2,6 @@ package test.java.edu.chalmers.projecttemplate.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import main.java.edu.chalmers.projecttemplate.view.ProjectView;
-import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.model.Smurf;
-import main.java.edu.chalmers.projecttemplate.model.Hexagon;
-import org.junit.jupiter.api.Test;
-
-import java.util.*;
-
 public class SmurfTest {
 /*
     @Test

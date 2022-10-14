@@ -6,24 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
-import main.java.edu.chalmers.projecttemplate.model.Project;
-import main.java.edu.chalmers.projecttemplate.view.ProjectView;
+import main.java.edu.chalmers.projecttemplate.model.Game;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BoardTest {
 
     @Test
     public void testForOutOfBoundsError() {
-        Project project = new Project();
-        ProjectView projectView = new ProjectView(project);
+        GameHandler gameHandler = new GameHandler();
+        Game game = gameHandler.getCurrentGame();
+        ProjectView projectView = new ProjectView(game);
         for (int i = 0; i < 121; i++) {
-            project.getBoard().blockTile(i);
+            game.getBoard().blockTile(i);
         }
-        ProjectController.create(project, projectView);
+        ProjectController.create(gameHandler, projectView);
         projectView.setVisible(true);
         assertTrue(true);
     }
@@ -47,14 +45,14 @@ public class BoardTest {
 
     @Test
     public void testBlockTile() {
-        Project project = new Project();
+        Game game = new Game("Default");
         for (int i = 0; i < 121; i++) {
-            project.getBoard().blockTile(i);
+            game.getBoard().blockTile(i);
             if (i == 60) {
-                assertEquals(project.getBoard().getHexagon(60).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
+                assertEquals(game.getBoard().getHexagon(60).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
             }
             else {
-                assertEquals(project.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
+                assertEquals(game.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
             }
         }
     }
@@ -87,55 +85,55 @@ Gav private access till detta så nu funkar det inte längre
 
     @Test
     void getHexagonCoordinateTest() {
-        Project project= new Project();
-        Hexagon hexagonByCoordinate = project.getBoard().getHexagonCoordinate(0,0);
-        Hexagon hexagonByIndex = project.getBoard().getHexagon(0);
+        Game game = new Game("Default");
+        Hexagon hexagonByCoordinate = game.getBoard().getHexagonCoordinate(0,0);
+        Hexagon hexagonByIndex = game.getBoard().getHexagon(0);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(10,10);
-        hexagonByIndex = project.getBoard().getHexagon(120);
+        hexagonByCoordinate = game.getBoard().getHexagonCoordinate(10,10);
+        hexagonByIndex = game.getBoard().getHexagon(120);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(5,5);
-        hexagonByIndex = project.getBoard().getHexagon(60);
+        hexagonByCoordinate = game.getBoard().getHexagonCoordinate(5,5);
+        hexagonByIndex = game.getBoard().getHexagon(60);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(6,5);
-        hexagonByIndex = project.getBoard().getHexagon(61);
+        hexagonByCoordinate = game.getBoard().getHexagonCoordinate(6,5);
+        hexagonByIndex = game.getBoard().getHexagon(61);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(4,5);
-        hexagonByIndex = project.getBoard().getHexagon(59);
+        hexagonByCoordinate = game.getBoard().getHexagonCoordinate(4,5);
+        hexagonByIndex = game.getBoard().getHexagon(59);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
 
     }
 
     @Test
     void getHexagonCoordinateGetTest() {
-        Project project= new Project();
-        Hexagon hexagonByCoordinate = project.getBoard().getHexagonCoordinate(0,0);
-        Hexagon hexagonByGet = project.getBoard().getBoardSpaces().get(0).get(0);
+        Game game = new Game("Default");
+        Hexagon hexagonByCoordinate = game.getBoard().getHexagonCoordinate(0,0);
+        Hexagon hexagonByGet = game.getBoard().getBoardSpaces().get(0).get(0);
         assertEquals(hexagonByGet,hexagonByCoordinate);
 
-        hexagonByCoordinate = project.getBoard().getHexagonCoordinate(4,5);
-        hexagonByGet = project.getBoard().getBoardSpaces().get(5).get(4);
+        hexagonByCoordinate = game.getBoard().getHexagonCoordinate(4,5);
+        hexagonByGet = game.getBoard().getBoardSpaces().get(5).get(4);
         assertEquals(hexagonByGet,hexagonByCoordinate);
 
     }
 
     @Test
     void getHexagonNodeIndexTest() {
-        Project project= new Project();
-        Node nodeByIndex = project.getBoard().getNode(60);
-        Hexagon hexagonByIndex = project.getBoard().getHexagon(60);
+        Game game = new Game("Default");
+        Node nodeByIndex = game.getBoard().getNode(60);
+        Hexagon hexagonByIndex = game.getBoard().getHexagon(60);
         assertEquals(nodeByIndex.getHexagon().getIndex(), hexagonByIndex.getIndex());
         assertEquals(nodeByIndex.getHexagon(), hexagonByIndex);
     }
 
     @Test
     void getNeighboursTest() {
-        Project project= new Project();
-        List<List<Node>> boardNodesColumns = project.getBoard().getBoardNodesColumns();
+        Game game = new Game("Default");
+        List<List<Node>> boardNodesColumns = game.getBoard().getBoardNodesColumns();
 
         assertEquals(2, boardNodesColumns.get(0).get(0).getNeighbors().size());
         assertEquals(1, boardNodesColumns.get(0).get(0).getNeighbors().get("E").getHexagon().getIndex());
