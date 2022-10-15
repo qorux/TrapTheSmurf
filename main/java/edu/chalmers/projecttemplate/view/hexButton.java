@@ -90,7 +90,7 @@ public class hexButton extends JButton {
         this.hexagon = Hexagon;
     }
 
-    public void setHovered(boolean hovered) {   //aids
+    public void setHovered(boolean hovered) {
         boolean oldValue = isHovered;
         isHovered = hovered;
         hexagon.getSupport().firePropertyChange("Hovered",oldValue,hovered);

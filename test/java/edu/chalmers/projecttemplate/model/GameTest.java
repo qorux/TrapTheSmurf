@@ -23,7 +23,7 @@ public class GameTest {
 	}
 
 	@Test
-	public void testNewTurn() {
+	public void testSmurfMoves() {
 		Game game = new Game("Default");
 		int initialOccupiedTileIndex = 0;
 		int nextOccupiedTileIndex = 0;
@@ -39,6 +39,14 @@ public class GameTest {
 			}
 		}
 		assertNotEquals(initialOccupiedTileIndex, nextOccupiedTileIndex);
+	}
+
+	@Test
+	public void testNewTurn() {
+		Game game = new Game("Default");
+		int intialTurn = game.getTurn();
+		game.NewTurn();
+		assertEquals(intialTurn+1, game.getTurn());
 	}
 
 }
