@@ -257,15 +257,6 @@ public class Smurf {
         return false;
     }
 
-
-    //Detta är väl säkert mot law of demeter, men tycker det ser bättre ut än i ProjectTemplate
-    //fult, i know, kommer väl behövas skrivas om?
-    //japp, onödig då vi gör detta i konstruktorn
-    //måste fixa en upadteview först dock, men detta måste refractoras
-    public void startPlaceSmurf() {
-        hexagon.occupyTile();
-    }
-
     public boolean checkIfWon() {
         return checkFreeNeighbors().size() == 0;
     }

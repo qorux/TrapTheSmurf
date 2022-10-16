@@ -14,7 +14,7 @@ public class ProjectController {
   private Game game;
   private final ProjectView projectView;
 
-  MouseListenerHexagon mlh;
+  private MouseListenerHexagon mlh;
 
   public static ProjectController create(GameHandler gameHandler, ProjectView projectView) {
     return new ProjectController(gameHandler, projectView);
@@ -30,7 +30,7 @@ public class ProjectController {
 
     MouseListenerHexagon mlh = new MouseListenerHexagon();
     for (int i = 0; i<121; i++) {
-      projectView.buttonBoard.get(i).addMouseListener(mlh);
+      projectView.getButton(i).addMouseListener(mlh);
     }
 
     boardPressedListenerAssigner();
@@ -89,17 +89,12 @@ public class ProjectController {
 
 
   private void resetGameCalled (){
-    this.game = new Game(gameHandler.getDifficulty());
+    gameHandler.NewGame();
+    this.game=gameHandler.getCurrentGame();
 
-    this.mlh = new MouseListenerHexagon();
-    for (int i = 0; i<121; i++) {
-      projectView.buttonBoard.get(i).addMouseListener(mlh);
-    }
+    projectView.setProject(gameHandler.getCurrentGame());
 
-    this.projectView.setProject(this.game);
-    this.game.getBoard().addPropertyChangeListener(this.projectView.getObserver());
-    this.game.getSmurf().startPlaceSmurf();
-    this.game.getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
+    gameHandler.getCurrentGame().getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
 
   }
 }

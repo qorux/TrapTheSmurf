@@ -3,10 +3,15 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import javax.swing.*;
 
-import main.java.edu.chalmers.projecttemplate.model.Game;
+import main.java.edu.chalmers.projecttemplate.model.*;
 
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -14,26 +19,26 @@ import java.util.ArrayList;
  * @author linae
  */
 
-public class ProjectView extends javax.swing.JFrame {
+public class ProjectView extends javax.swing.JFrame implements PropertyChangeListener {
 
     /**
      * Creates new form myFirstForm
      */
 
     private Game game;
-    public ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
-    private OBoardState observer;
+    private ButtonBoard buttonBoard;
+    private Board hexagonBoard;
 
 
     public ProjectView(Game Game) {
         initComponents();
-        this.game = Game;
         jPanel1.setLayout(new FlowLayout(5,0,0 ));
 
-        for(int i =0;i<=120;i++){
-            buttonBoard.add(generateButton(i));
-        }
-        observer = new OBoardState(this, game);
+        this.game = Game;
+        this.buttonBoard = new ButtonBoard(game.getBoard(), jPanel1);
+        this.hexagonBoard = game.getBoard();
+
+
         this.setTitle("Trap the smurf!");
     }
 
@@ -161,9 +166,63 @@ public class ProjectView extends javax.swing.JFrame {
 
     // End of variables declaration//GEN-END:variables
 
-    public OBoardState getObserver() {
-        return observer;
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        if(!game.isHasLost() && !game.isHasWon()){
+            repaintBoardView();
+        }
+        else if (Objects.equals(evt.getPropertyName(), "Won")) {//aids
+            for (int i = 0; i<121; i++) {
+                buttonBoard.getButton(i).setEnabled(false);
+            }
+            getjLabel2().setText("You won the game! You won in " + game.getTurn() + " turns. Press reset to play again");
+        }
+        else if (Objects.equals(evt.getPropertyName(), "Lost")) {
+            for (int i = 0; i<121; i++) {
+                buttonBoard.getButton(i).setEnabled(false);
+            }
+            getjLabel2().setText("The Smurf won. It escaped in " + game.getTurn() + " turns. Press reset to play again");
+        }
     }
+
+    public void repaintBoardView(){
+        getjLabel2().setText("Number of turns: " + game.getTurn() + " ");
+        for(int i = 0; i<121; i++) {
+            if (ClickableTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())&& !buttonBoard.getButton(i).getIsHovered()){
+                buttonBoard.getButton(i).setBackground(Color.cyan);
+                buttonBoard.getButton(i).setEnabled(true);
+            }
+            else if (ClickableTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())&& buttonBoard.getButton(i).getIsHovered()){
+                buttonBoard.getButton(i).setBackground(Color.getHSBColor(0.5f, 0.7f, 0.7f));
+                buttonBoard.getButton(i).setEnabled(true);
+            }
+            else if (OccupiedTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())) {
+                try {
+                    setSmurfImage(i);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
+                buttonBoard.getButton(i).setEnabled(false);
+            }
+            else if (BlockedTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())) {
+                buttonBoard.getButton(i).setBackground(Color.darkGray);
+                buttonBoard.getButton(i).setEnabled(false);
+            }
+        }
+    }
+
+
+    public void setSmurfImage(int i) throws MalformedURLException { //Funkar inte , DMHB!
+        ImageIcon smurf = new ImageIcon(new URL("https://e7.pngegg.com/pngimages/1016/380/png-clipart-sticker-telegram-the-smurfs-text-viber-smurf-area-soccer.png"));
+        Image image = smurf.getImage();
+        Image smurfImage = image.getScaledInstance(10, 10,  java.awt.Image.SCALE_SMOOTH);
+        smurf = new ImageIcon(smurfImage);
+        buttonBoard.getButton(i).setIcon(smurf);
+        buttonBoard.getButton(i).setBackground(Color.RED);
+    }
+
+    // standard getter and setter
+
     public JButton getjButton1() {
         return jButton1;
     }
@@ -184,33 +243,22 @@ public class ProjectView extends javax.swing.JFrame {
         return jRadioButton3;
     }
 
+    public hexButton getButton(int Index) {
+        return buttonBoard.getButton(Index);
+    }
+
     public ArrayList<hexButton> getButtonBoard() {
-        return buttonBoard;
+        return buttonBoard.getButtonBoard();
     }
 
-
-
-    private hexButton generateButton(Integer index){
-        hexButton generatedButton = new hexButton(game.getBoard().getHexagon(index));
-        generatedButton.setBackground(Color.cyan);
-        generatedButton.setPreferredSize(new Dimension(40,40));
-        jPanel1.add(generatedButton);
-        jPanel1.add(Box.createRigidArea(new Dimension(8,0)));
-        if (index == 10 || index == 32 || index == 54 || index == 76 || index == 98){
-            for (int i = 0; i < 4 ; i++) {
-                JPanel jPanelMini = new JPanel();
-                jPanelMini.setSize(20,40);
-                jPanel1.add(jPanelMini);
-            }
-        }
-        return generatedButton;
-    }
-
-    public void setProject(Game game) {//slay
+    public void setProject(Game game) {
+        this.game.getBoard().removePropertyChangeListener(this);
         this.game = game;
-        this.observer = new OBoardState(this, game);
+        this.hexagonBoard = game.getBoard();
+        buttonBoard.setBoard(game.getBoard());
         for(int i = 0; i<121 ;i++){
-            buttonBoard.get(i).setNewHexagonBoard(game.getBoard().getHexagon(i));
+            buttonBoard.getButton(i).setNewHexagonBoard(this.game.getBoard().getHexagon(i));
         }
+        this.game.getBoard().addPropertyChangeListener(this);
     }
 }

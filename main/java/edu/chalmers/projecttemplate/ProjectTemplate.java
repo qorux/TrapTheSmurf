@@ -23,8 +23,7 @@ public final class ProjectTemplate {
 				final ProjectView ProjectView = new ProjectView(game);
 
 
-				game.getBoard().addPropertyChangeListener(ProjectView.getObserver());
-				game.getSmurf().startPlaceSmurf();
+				game.getBoard().addPropertyChangeListener(ProjectView);
 				game.getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
 
 				ProjectController.create(gameHandler, ProjectView);

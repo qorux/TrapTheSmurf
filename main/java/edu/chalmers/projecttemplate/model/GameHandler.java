@@ -10,8 +10,8 @@ public class GameHandler {
     }
 
 
-    public void NewGame(Game game){
-
+    public void NewGame(){
+        currentGame = new Game(difficulty);
     }
 
     public void setDifficulty(String difficulty) {

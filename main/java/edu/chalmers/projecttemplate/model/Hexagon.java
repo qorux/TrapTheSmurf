@@ -6,12 +6,7 @@ import java.util.ArrayList;
 public class Hexagon{
     private HexagonStateContext wrapper;
     private Integer index;
-
     private PropertyChangeSupport support;
-
-    private ArrayList<Hexagon> neighbours;
-    private Integer xPos;
-    private Integer yPos;
 
 
     public Hexagon(Integer boardIndex, PropertyChangeSupport Support) {
