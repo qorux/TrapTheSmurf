@@ -84,6 +84,27 @@ Gav private access till detta så nu funkar det inte längre
  */
 
     @Test
+    void easyDifficultyTest() {
+        Game game = new Game("Easy");
+        int blockedTiles = game.getBoard().difficultyBlockedTiles("Easy");
+        assertTrue(15 <= blockedTiles && blockedTiles <= 20);
+    }
+
+    @Test
+    void mediumDifficultyTest() {
+        Game game = new Game("Medium");
+        int blockedTiles = game.getBoard().difficultyBlockedTiles("Medium");
+        assertTrue(7 <= blockedTiles && blockedTiles <= 13);
+    }
+
+    @Test
+    void hardDifficultyTest() {
+        Game game = new Game("Hard");
+        int blockedTiles = game.getBoard().difficultyBlockedTiles("Hard");
+        assertTrue(2 <= blockedTiles && blockedTiles <= 7);
+    }
+
+    @Test
     void getHexagonCoordinateTest() {
         Game game = new Game("Default");
         Hexagon hexagonByCoordinate = game.getBoard().getHexagonCoordinate(0,0);
