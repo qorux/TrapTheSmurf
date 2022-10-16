@@ -22,7 +22,6 @@ public final class ProjectTemplate {
 				Game game = gameHandler.getCurrentGame();
 				final ProjectView ProjectView = new ProjectView(game);
 
-
 				game.getBoard().addPropertyChangeListener(ProjectView);
 				game.getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
 

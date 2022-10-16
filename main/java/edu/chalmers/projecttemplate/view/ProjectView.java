@@ -76,7 +76,7 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
 
          */
 
-        //jLabel1.setText("Counter:");
+        //jLabel1.setText("In your best game, you won in: ");
 
         jPanel1.setMaximumSize(new java.awt.Dimension(548, 500));
         jPanel1.setMinimumSize(new java.awt.Dimension(548, 500));

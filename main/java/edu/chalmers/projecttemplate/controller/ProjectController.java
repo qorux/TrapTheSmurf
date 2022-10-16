@@ -26,7 +26,7 @@ public class ProjectController {
 
     this.game = gameHandler.getCurrentGame();
 
-    ProjectButtonPressed();
+    GameButtonPressed();
 
     MouseListenerHexagon mlh = new MouseListenerHexagon();
     for (int i = 0; i<121; i++) {
@@ -50,7 +50,7 @@ public class ProjectController {
     }
   }
 
-  public void ProjectButtonPressed(){
+  public void GameButtonPressed(){
     this.projectView.getjButton1().addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -91,11 +91,8 @@ public class ProjectController {
   private void resetGameCalled (){
     gameHandler.NewGame();
     this.game=gameHandler.getCurrentGame();
-
     projectView.setProject(gameHandler.getCurrentGame());
-
     gameHandler.getCurrentGame().getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
-
   }
 }
 

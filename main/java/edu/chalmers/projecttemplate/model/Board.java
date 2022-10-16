@@ -126,6 +126,12 @@ public class Board {
         return boardColumns;
     }
 
+    /**
+     * Randomizes how many tiles should be blocked based on the difficulty the player wants
+     * If no difficulty is selected, the number of blocked tiles are randomized following normal distribution.
+     * @param difficulty the difficulty the game should have
+     * @return how many tiles that should be blocked
+     */
     public int difficultyBlockedTiles(String difficulty) {
         Random random = new Random();
         int totalBlockedTiles = 0;
@@ -145,13 +151,12 @@ public class Board {
     }
 
     /**
-     * Randomizes how many tiles should be blocked and checks if the tiles are ok to block.
-     * The number of tiles are randomized following normal distribution.
+     * Checks if the tiles are ok to block
      * @return a list of indexes for the tiles that are to be blocked
      */
     private List<Boolean> generateBlockedTilesList(int tilesToBeBlocked){
-        List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(120);
-        for(int i = 0; i < 120; i++) {
+        List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);
+        for(int i = 0; i < 121; i++) {
             if ((i<tilesToBeBlocked) && (i != 60)){
                 shouldTileBeBlocked.add(true);
             }
@@ -166,7 +171,7 @@ public class Board {
     /**
      * Shuffles the tiles that should be blocked
      */
-    public void shuffleBlockedTiles(String difficulty) {
+    public void shuffleBlockedTiles(String difficulty) { //Byta namn på denna metod kanske?
         int tilesToBeBlocked = difficultyBlockedTiles(difficulty);
         List<Boolean> shouldTileBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
         int index =0;
@@ -183,7 +188,6 @@ public class Board {
      * @param index the index of the tile that should be blocked
      */
     public void blockTile(Integer index) {
-        System.out.println("Tile "+index+" is blocked");
         if (index == 60) {  //smurftile
             ;
         }
