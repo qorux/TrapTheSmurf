@@ -8,68 +8,104 @@ public class GameHandler {
 
     Game currentGame;
 
+    int totalWins;
+
+    int totalLosses;
+
+    int recordTurns;
+
     public GameHandler() {
         currentGame = new Game(difficulty);
     }
 
 
     public void NewGame(){
-        if (getCurrentGame().isHasWon()) {
-            saveTurnsToWin();
+        if (getCurrentGame().isHasWon() || getCurrentGame().isHasLost()) {
+            saveStats();
+            System.out.println("Total losses: " + totalLosses);
+            System.out.println("Total wins: " + totalWins);
         }
         currentGame = new Game(difficulty);
     }
 
-    public void saveTurnsToWin() {
+    private void saveStats() {
         try {
-            File file = getFile();
-            FileWriter fw;
-            if (file.exists()) {
-                fw = new FileWriter(file,true); }
-            else {
-                file.createNewFile();
-                fw = new FileWriter(file); }
+            FileWriter fw = generateFileWriter();
 
             BufferedWriter writer = new BufferedWriter(fw);
 
             int turnsToWin = getCurrentGame().getTurn();
 
-            writer.write("\n");
+            writer.write(String.valueOf(getCurrentGame().isHasWon()) + " ");
             writer.write(Integer.toString(turnsToWin));
+            writer.write("\n");
             writer.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        getBestGame();
+        readStats();
     }
 
-    public int getBestGame() {
-        int lowestNumber = Integer.MAX_VALUE;
+    private void readStats() {
         File file = getFile();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
-            int number;
+            recordTurns = Integer.MAX_VALUE;
             while ((line = reader.readLine()) != null) {
                 try {
-                    number = Integer.parseInt(line);
-                    lowestNumber = Math.min(number, lowestNumber);
+                    String[] tokens = line.split(" ");
+                    int number = Integer.parseInt(tokens[1]);
+                    String outcome = tokens[0];
+
+                    if (outcome.equals("true")) {
+                        recordTurns = Math.min(number, recordTurns);
+                    totalWins++;
+                    }
+                    else if (outcome.equals("false")) {
+                       totalLosses++;
+                    }
                 } catch (NumberFormatException ex) {
                     System.out.println("No more saved games to check");
                 }
             }
             reader.close();
-            System.out.println("Best no. of turns is: " + lowestNumber);
+            System.out.println("Best no. of turns is: " + recordTurns);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return lowestNumber;
+    }
+
+    private FileWriter generateFileWriter() {
+        File file = getFile();
+        FileWriter fw;
+        try {
+        if (file.exists()) {
+            fw = new FileWriter(file,true); }
+        else {
+            file.createNewFile();
+            fw = new FileWriter(file); }}
+        catch (IOException e) {
+            throw new RuntimeException(e);}
+        return fw;
     }
 
     private File getFile() {
         File file = new File("C:\\TrapTheSmurf\\main\\java\\edu\\chalmers\\projecttemplate", "Stats.txt");
         return file;
+    }
+
+    public int getTotalWins() {
+        return totalWins;
+    }
+
+    public int getTotalLosses() {
+        return totalLosses;
+    }
+
+    public int getRecordTurns() {
+        return recordTurns;
     }
 
     public void setDifficulty(String difficulty) {
