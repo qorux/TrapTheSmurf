@@ -1,10 +1,10 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 
-public class ClickableTile implements HexagonState {
+public class FreeTile implements HexagonState {
 
     private Hexagon hexagon;
-    public ClickableTile(Hexagon Hexagon) {
+    public FreeTile(Hexagon Hexagon) {
         this.hexagon = Hexagon;
     }
 

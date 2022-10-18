@@ -3,9 +3,6 @@ package main.java.edu.chalmers.projecttemplate.model;
 import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
 
 import java.beans.PropertyChangeSupport;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Game {
   private boolean hasWon;

@@ -132,17 +132,17 @@ public class Board {
      * @param difficulty the difficulty the game should have
      * @return how many tiles that should be blocked
      */
-    public int difficultyBlockedTiles(String difficulty) {
+    public int difficultyBlockedTiles(String difficulty) { //Gör om svårighetsgraderna till enum istället för string
         Random random = new Random();
         int totalBlockedTiles = 0;
         if (Objects.equals(difficulty, "Easy")) {
-            totalBlockedTiles = ThreadLocalRandom.current().nextInt(15, 19 + 1);
+            totalBlockedTiles = random.nextInt(15, 19 + 1);
         }
         else if (Objects.equals(difficulty, "Hard")) {
-            totalBlockedTiles = ThreadLocalRandom.current().nextInt(2, 6 + 1);
+            totalBlockedTiles = random.nextInt(2, 6 + 1);
         }
         else if (Objects.equals(difficulty, "Medium")) {
-            totalBlockedTiles = ThreadLocalRandom.current().nextInt(7, 12 + 1);
+            totalBlockedTiles = random.nextInt(7, 12 + 1);
         }
         else {
             totalBlockedTiles = Math.abs((int) Math.floor(random.nextGaussian() * 5 + 12));

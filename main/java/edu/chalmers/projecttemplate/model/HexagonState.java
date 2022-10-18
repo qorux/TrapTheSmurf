@@ -1,5 +1,8 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Interface for the design pattern "state pattern". There are three different states the hexagons
  * can assume throughout the game:
@@ -11,4 +14,6 @@ public interface HexagonState{
     public void clickTile();
     public void occupyTile();
     public void blockTile();
+
+
 }

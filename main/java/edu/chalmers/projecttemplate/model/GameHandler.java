@@ -1,6 +1,8 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class GameHandler {
     private Game game;
@@ -48,7 +50,7 @@ public class GameHandler {
     }
 
     private void readStats() {
-        File file = getFile();
+        File file = new File(getPath());
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
@@ -78,22 +80,18 @@ public class GameHandler {
     }
 
     private FileWriter generateFileWriter() {
-        File file = getFile();
+        File file = new File(getPath());
         FileWriter fw;
         try {
-        if (file.exists()) {
             fw = new FileWriter(file,true); }
-        else {
-            file.createNewFile();
-            fw = new FileWriter(file); }}
         catch (IOException e) {
             throw new RuntimeException(e);}
         return fw;
     }
 
-    private File getFile() {
-        File file = new File("C:\\TrapTheSmurf\\main\\java\\edu\\chalmers\\projecttemplate", "Stats.txt");
-        return file;
+    private String getPath() {
+        Path path = Paths.get("TrapTheSmurfStats.txt");
+        return path.toString();
     }
 
     public int getTotalWins() {
@@ -119,4 +117,5 @@ public class GameHandler {
     public Game getCurrentGame() {
         return currentGame;
     }
+
 }

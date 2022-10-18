@@ -17,7 +17,7 @@ public class BoardTest {
     public void testForOutOfBoundsError() {
         GameHandler gameHandler = new GameHandler();
         Game game = gameHandler.getCurrentGame();
-        ProjectView projectView = new ProjectView(game);
+        ProjectView projectView = new ProjectView(gameHandler);
         for (int i = 0; i < 121; i++) {
             game.getBoard().blockTile(i);
         }

@@ -277,7 +277,7 @@ public class Smurf {
         tilesToCheck.add(hexagonNode.getNeighbors().get("SW").getHexagon());
 
         for (Hexagon hexagon : tilesToCheck) {
-            if (ClickableTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())) {
+            if (FreeTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())) {
                 FreeNeighbors.add(hexagon);
             }
     }

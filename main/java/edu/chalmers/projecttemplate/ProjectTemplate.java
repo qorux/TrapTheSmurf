@@ -20,7 +20,10 @@ public final class ProjectTemplate {
 			public void run() {
 				final GameHandler gameHandler = new GameHandler();
 				Game game = gameHandler.getCurrentGame();
-				final ProjectView ProjectView = new ProjectView(game);
+
+				//gör grejer här o kolla så att vyn visar rätt
+
+				final ProjectView ProjectView = new ProjectView(gameHandler);
 
 				game.getBoard().addPropertyChangeListener(ProjectView);
 				game.getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());

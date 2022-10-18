@@ -13,7 +13,7 @@ public class HexagonTest {
     void occupyTile() {
         Game game = new Game("Default");
         game.getBoard().getHexagon(1).makeClickable();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), ClickableTile.class);
+        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
         game.getBoard().getHexagon(1).occupyTile();
         assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
     }
@@ -22,7 +22,7 @@ public class HexagonTest {
     void blockTile() {
        Game game = new Game("Default");
        game.getBoard().getHexagon(1).makeClickable();
-       assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), ClickableTile.class);
+       assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
        game.getBoard().getHexagon(1).blockTile();
        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
     }
@@ -34,7 +34,7 @@ public class HexagonTest {
         game.getBoard().getHexagon(1).blockTile();
         assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
         game.getBoard().getHexagon(1).makeClickable();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), ClickableTile.class);
+        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class HexagonTest {
         game.getBoard().getHexagon(1).occupyTile();
         assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
         game.getBoard().getHexagon(1).makeClickable();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), ClickableTile.class);
+        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
     }
 
 

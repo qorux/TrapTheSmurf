@@ -13,7 +13,7 @@ public class HexagonStateContext {
     public HexagonStateContext(Hexagon Hexagon, PropertyChangeSupport Support) {
         this.support = Support;
         this.hexagon = Hexagon;
-        currentState = new ClickableTile(hexagon);
+        currentState = new FreeTile(hexagon);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener pcl) {
@@ -45,6 +45,6 @@ public class HexagonStateContext {
     }
 
     public void makeClickable() {
-        setHexagonState(new ClickableTile(hexagon));
+        setHexagonState(new FreeTile(hexagon));
     }
 }

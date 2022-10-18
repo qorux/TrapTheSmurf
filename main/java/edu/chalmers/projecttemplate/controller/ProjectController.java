@@ -91,7 +91,7 @@ public class ProjectController {
   private void resetGameCalled (){
     gameHandler.NewGame();
     this.game=gameHandler.getCurrentGame();
-    projectView.setProject(gameHandler.getCurrentGame());
+    projectView.setGame(gameHandler.getCurrentGame());
     gameHandler.getCurrentGame().getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
   }
 }
