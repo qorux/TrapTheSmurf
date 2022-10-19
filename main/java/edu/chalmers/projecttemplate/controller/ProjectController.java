@@ -29,7 +29,7 @@ public class ProjectController {
 
     GameButtonPressed();
 
-    MouseListenerHexagon mlh = new MouseListenerHexagon();
+    mlh = new MouseListenerHexagon();
     for (int i = 0; i<121; i++) {
       projectView.getButton(i).addMouseListener(mlh);
     }
@@ -63,10 +63,9 @@ public class ProjectController {
   private void listenedObject_actionPerformed(ActionEvent evt) {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
-    game.getBoard().getHexagon(pressedTileIndex).blockTile();
+    game.getBoard().getHexagon(pressedTileIndex).setHexagonState(Hexagon.State.BLOCKED);
 
     game.NewTurn();
-    //bygg ut denna till ett state pattern potentiellt ifall det behövs mer, resonera om varför/varför inte vi gör det
 
   }
   public void difficultyRadioButtonPressed(){

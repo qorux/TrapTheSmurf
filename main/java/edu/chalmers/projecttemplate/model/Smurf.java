@@ -1,7 +1,6 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Smurf {
@@ -25,14 +24,12 @@ public class Smurf {
         this.board = Board;
         this.hexagonNode = board.getNode(60);
         this.hexagon = hexagonNode.getHexagon();
+        hexagon.setHexagonState(Hexagon.State.OCCUPIED);
         this.deadDirections = new ArrayList<String>();
-        hexagon.occupyTile();
     }
 
 
     public void moveSmurf() {
-        hexagon.makeFree();
-
         ArrayList<String> possibleDirections = findBlockedDirections();
         ArrayList<String> deadDirections = findDeadDirections(possibleDirections);
 
@@ -60,11 +57,11 @@ public class Smurf {
     }
 
     private void moveInDirection(String Direction) {
+        hexagon.setHexagonState(Hexagon.State.FREE);
         hexagonNode = hexagonNode.getNeighbors().get(Direction);
         hexagon = hexagonNode.getHexagon();
+        hexagon.setHexagonState(Hexagon.State.OCCUPIED);
         System.out.println("Hexagonindex:" + hexagon.getIndex());
-        hexagon.occupyTile();
-
        /*
        switch (Direction){
            case "NW":
@@ -155,7 +152,7 @@ public class Smurf {
         result.add("SE");
 
         for (Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
-            if (entry.getValue().getHexagon().getCurrentStateClass() == BlockedTile.class) {
+            if (entry.getValue().getHexagon().getCurrentState() == Hexagon.State.BLOCKED) {
                 result.remove(entry.getKey());
             }
         }
@@ -201,7 +198,7 @@ public class Smurf {
     private boolean isDeadEnd(Node node){
         int counter = 0;
         for(Map.Entry<String,Node> neighborEntry:node.getNeighbors().entrySet()){
-            if (neighborEntry.getValue().getHexagon().getCurrentStateClass() == BlockedTile.class){
+            if (neighborEntry.getValue().getHexagon().getCurrentState() == Hexagon.State.BLOCKED){
                 counter++;
             }
         }
@@ -277,7 +274,7 @@ public class Smurf {
         tilesToCheck.add(hexagonNode.getNeighbors().get("SW").getHexagon());
 
         for (Hexagon hexagon : tilesToCheck) {
-            if (FreeTile.class.equals(hexagon.getHexagonStateContext().getCurrentState().getClass())) {
+            if (Hexagon.State.FREE.equals(hexagon.getCurrentState())) {
                 FreeNeighbors.add(hexagon);
             }
     }

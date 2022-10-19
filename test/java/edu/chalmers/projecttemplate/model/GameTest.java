@@ -18,7 +18,7 @@ public class GameTest {
 		Game game = new Game(Difficulty.DEFAULT);
 		List<Integer> tileList = new ArrayList<>();
 		for (int i = 0; i < 121; i++) {
-			if (game.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass().equals(OccupiedTile.class)) {
+			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
 				tileList.add(i);
 			}
 		}
@@ -31,13 +31,13 @@ public class GameTest {
 		int initialOccupiedTileIndex = 0;
 		int nextOccupiedTileIndex = 0;
 		for (int i = 0; i < 121; i++) {
-			if (game.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass().equals(OccupiedTile.class)) {
+			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
 				initialOccupiedTileIndex = game.getBoard().getHexagon(i).getIndex();
 			}
 		}
 		game.NewTurn();
 		for (int i = 0; i < 121; i++) {
-			if (game.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass().equals(OccupiedTile.class)) {
+			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
 				nextOccupiedTileIndex = game.getBoard().getHexagon(i).getIndex();
 			}
 		}

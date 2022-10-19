@@ -1,9 +1,15 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class Hexagon{
-    private HexagonStateContext wrapper;
+    private State currentState = State.FREE;
+    public enum State {
+        BLOCKED,
+        FREE,
+        OCCUPIED
+    }
     private Integer index;
     private PropertyChangeSupport support;
 
@@ -11,30 +17,25 @@ public class Hexagon{
     public Hexagon(Integer boardIndex, PropertyChangeSupport Support) {
         this.support = Support;
         this.index= boardIndex;
-        this.wrapper = new HexagonStateContext(this,support);
     }
 
-    public HexagonStateContext getHexagonStateContext() {
-        return wrapper;
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
     }
 
-
-    public void occupyTile() {
-        wrapper.occupy();
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
     }
 
-    public void blockTile() {
-        wrapper.block();
+    public void setHexagonState(State newstate) {
+        State oldState = currentState;
+        currentState = newstate;
+        support.firePropertyChange("Hexagonstate", oldState, newstate);
     }
 
-    public void makeFree() {
-        wrapper.makeFree();
+    public State getCurrentState() {
+        return currentState;
     }
-
-    public Class<? extends HexagonState> getCurrentStateClass(){
-        return this.getHexagonStateContext().getCurrentState().getClass();
-    }
-
 
     public Integer getIndex() {
         return index;

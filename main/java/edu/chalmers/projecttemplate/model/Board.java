@@ -194,7 +194,7 @@ public class Board {
             ;
         }
         else {
-            getHexagon(index).blockTile();
+            getHexagon(index).setHexagonState(Hexagon.State.BLOCKED);
         }
     }
 

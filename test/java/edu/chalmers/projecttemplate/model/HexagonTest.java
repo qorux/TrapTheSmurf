@@ -12,38 +12,38 @@ public class HexagonTest {
     @Test
     void occupyTile() {
         Game game = new Game(Difficulty.DEFAULT);
-        game.getBoard().getHexagon(1).makeFree();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
-        game.getBoard().getHexagon(1).occupyTile();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.FREE);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.FREE);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.OCCUPIED);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.OCCUPIED);
     }
 
     @Test
     void blockTile() {
-       Game game = new Game(Difficulty.DEFAULT);
-       game.getBoard().getHexagon(1).makeFree();
-       assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
-       game.getBoard().getHexagon(1).blockTile();
-       assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
+        Game game = new Game(Difficulty.DEFAULT);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.FREE);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.FREE);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.BLOCKED);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.BLOCKED);
     }
 
 
     @Test
     void makeClickableFromBlocked() {
         Game game = new Game(Difficulty.DEFAULT);
-        game.getBoard().getHexagon(1).blockTile();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
-        game.getBoard().getHexagon(1).makeFree();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.BLOCKED);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.BLOCKED);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.FREE);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.FREE);
     }
 
     @Test
     void makeClickableFromOccupied() {
         Game game = new Game(Difficulty.DEFAULT);
-        game.getBoard().getHexagon(1).occupyTile();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
-        game.getBoard().getHexagon(1).makeFree();
-        assertEquals(game.getBoard().getHexagon(1).getHexagonStateContext().getCurrentState().getClass(), FreeTile.class);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.OCCUPIED);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.OCCUPIED);
+        game.getBoard().getHexagon(1).setHexagonState(Hexagon.State.FREE);
+        assertEquals(game.getBoard().getHexagon(1).getCurrentState(), Hexagon.State.FREE);
     }
 
 

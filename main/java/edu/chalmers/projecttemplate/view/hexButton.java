@@ -2,15 +2,21 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import main.java.edu.chalmers.projecttemplate.model.Hexagon;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Path;
 
 public class hexButton extends JButton {
     private Polygon hexagonalShape;
     private Hexagon hexagon;
 
     private boolean isHovered = false;
+
+    private Painter painter;
 
     public hexButton(Hexagon Hexagon) {
         this.setOpaque(false);
@@ -35,6 +41,12 @@ public class hexButton extends JButton {
         hex.addPoint(0, ratio);
 
         return hex;
+    }
+
+    private Image smurfImage;
+
+    public void setSmurfImage(Image smurfImage) {
+        this.smurfImage = smurfImage;
     }
 
     @Override
@@ -77,12 +89,16 @@ public class hexButton extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         g.setColor(new Color(0.0f, 0.0f, 0.0f, 0.0f));
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(getBackground());
         g.drawPolygon(hexagonalShape);
         g.fillPolygon(hexagonalShape);
-
+        if (smurfImage != null){
+            smurfImage = smurfImage.getScaledInstance(30,40,Image.SCALE_AREA_AVERAGING);
+            g.drawImage(smurfImage,6,0,this);
+        }
     }
 
     public void setNewHexagonBoard(Hexagon Hexagon){

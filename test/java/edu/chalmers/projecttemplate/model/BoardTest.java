@@ -50,10 +50,10 @@ public class BoardTest {
         for (int i = 0; i < 121; i++) {
             game.getBoard().blockTile(i);
             if (i == 60) {
-                assertEquals(game.getBoard().getHexagon(60).getHexagonStateContext().getCurrentState().getClass(), OccupiedTile.class);
+                assertEquals(game.getBoard().getHexagon(60).getCurrentState(), Hexagon.State.OCCUPIED);
             }
             else {
-                assertEquals(game.getBoard().getHexagon(i).getHexagonStateContext().getCurrentState().getClass(), BlockedTile.class);
+                assertEquals(game.getBoard().getHexagon(60).getCurrentState(), Hexagon.State.BLOCKED);
             }
         }
     }

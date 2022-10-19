@@ -32,9 +32,12 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
      */
 
     //private Game game;
+
+
     private ButtonBoard buttonBoard;
     private Board hexagonBoard;
 
+    private BufferedImage bufferedImage;
     private GameHandler gameHandler;
 
 
@@ -45,6 +48,14 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
         this.gameHandler = gameHandler;
         this.buttonBoard = new ButtonBoard(gameHandler.getCurrentGame().getBoard(), jPanel1);
         this.hexagonBoard = gameHandler.getCurrentGame().getBoard();
+
+        try{
+            String path = "main/Resources/smurfy.png";
+            File file = new File(path);
+            this.bufferedImage=ImageIO.read(file);
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
 
 
         this.setTitle("Trap the smurf!");
@@ -218,24 +229,27 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
     public void repaintBoardView(){
         getjLabel2().setText("Number of wins: " + gameHandler.getCurrentGame().getTurn() + " ");
         setLabels();
+
         for(int i = 0; i<121; i++) {
-            if (FreeTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())&& !buttonBoard.getButton(i).getIsHovered()){
+
+            try {
+                setSmurfImage(i);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            if (Hexagon.State.FREE.equals(hexagonBoard.getHexagon(i).getCurrentState())&& !buttonBoard.getButton(i).getIsHovered()){
                 buttonBoard.getButton(i).setBackground(Color.cyan);
                 buttonBoard.getButton(i).setEnabled(true);
             }
-            else if (FreeTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())&& buttonBoard.getButton(i).getIsHovered()){
+            else if (Hexagon.State.FREE.equals(hexagonBoard.getHexagon(i).getCurrentState())&& buttonBoard.getButton(i).getIsHovered()){
                 buttonBoard.getButton(i).setBackground(Color.getHSBColor(0.5f, 0.7f, 0.7f));
                 buttonBoard.getButton(i).setEnabled(true);
             }
-            else if (OccupiedTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())) {
-                try {
-                    setSmurfImage(i);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+            else if (Hexagon.State.OCCUPIED.equals(hexagonBoard.getHexagon(i).getCurrentState())) {
                 buttonBoard.getButton(i).setEnabled(false);
             }
-            else if (BlockedTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())) {
+            else if (Hexagon.State.BLOCKED.equals(hexagonBoard.getHexagon(i).getCurrentState())) {
                 buttonBoard.getButton(i).setBackground(Color.darkGray);
                 buttonBoard.getButton(i).setEnabled(false);
             }
@@ -243,21 +257,13 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
     }
 
     public void setSmurfImage(int i) throws IOException { //Funkar inte , DMHB!
-        String path = "main/Resources/smurfy.png";
-        File file = new File(path);
-        BufferedImage bufferedImage=ImageIO.read(file);
-        ImageIcon imageIcon = new ImageIcon(bufferedImage);
 
-
-
-        buttonBoard.getButton(i).setIcon(imageIcon);
-        //buttonBoard.getButton(i).setBackground(Color.RED);
-
-
-               /* Image image = smurf.getImage();
-        Image smurfImage = image.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH);
-        smurf = new ImageIcon(smurfImage);*/
-
+        if(Hexagon.State.OCCUPIED.equals(hexagonBoard.getHexagon(i).getCurrentState())){
+            buttonBoard.getButton(i).setSmurfImage(bufferedImage);
+        }
+        else {
+            buttonBoard.getButton(i).setSmurfImage(null);
+        }
     }
 
     // standard getter and setter
