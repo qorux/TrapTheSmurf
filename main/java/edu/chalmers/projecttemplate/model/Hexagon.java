@@ -1,7 +1,6 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 
 public class Hexagon{
     private HexagonStateContext wrapper;
@@ -28,8 +27,8 @@ public class Hexagon{
         wrapper.block();
     }
 
-    public void makeClickable() {
-        wrapper.makeClickable();
+    public void makeFree() {
+        wrapper.makeFree();
     }
 
     public Class<? extends HexagonState> getCurrentStateClass(){

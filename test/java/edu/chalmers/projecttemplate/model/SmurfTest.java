@@ -1,5 +1,7 @@
 package test.java.edu.chalmers.projecttemplate.model;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SmurfTest {
@@ -33,4 +35,21 @@ public class SmurfTest {
         assertEquals(expectedResult, result);
     }
     */
+
+    @Test
+    public void testMoveSmurf(){
+
+    }
+    @Test
+    public void testCheckIfLost(){
+
+    }
+    @Test
+    public void testCheckIfWon(){
+
+    }
+    @Test
+    public void testCheckFreeNeighbours(){
+
+    }
 }

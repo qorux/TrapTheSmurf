@@ -8,6 +8,12 @@ public class GameHandler {
     private Game game;
     String difficulty = "Default";
 
+    enum Difficulty {
+        EASY,
+        MEDIUM,
+        HARD,
+        DEFAULT
+    }
     Game currentGame;
 
     int totalWins;
@@ -18,6 +24,7 @@ public class GameHandler {
 
     public GameHandler() {
         currentGame = new Game(difficulty);
+        readStats();
     }
 
 
@@ -51,6 +58,8 @@ public class GameHandler {
 
     private void readStats() {
         File file = new File(getPath());
+        totalWins = 0;
+        totalLosses = 0;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;

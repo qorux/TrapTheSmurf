@@ -21,17 +21,22 @@ public final class ProjectTemplate {
 				final GameHandler gameHandler = new GameHandler();
 				Game game = gameHandler.getCurrentGame();
 
-				//gör grejer här o kolla så att vyn visar rätt
+				//kan lägga in kod här och testa så att vyn målar rätt
 
-				final ProjectView ProjectView = new ProjectView(gameHandler);
+				final ProjectView projectView = new ProjectView(gameHandler);
 
-				game.getBoard().addPropertyChangeListener(ProjectView);
+				game.getBoard().addPropertyChangeListener(projectView);
 				game.getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
 
-				ProjectController.create(gameHandler, ProjectView);
-				ProjectView.setVisible(true);
+				ProjectController.create(gameHandler, projectView);
+				projectView.setVisible(true);
 
 			}
 		});
 	}
+	/*game.getBoard().getHexagon(3).blockTile();
+	game.getBoard().getHexagon(14).blockTile();
+	game.getBoard().getHexagon(32).blockTile();
+	game.getBoard().getHexagon(112).occupyTile();*/
+
 }

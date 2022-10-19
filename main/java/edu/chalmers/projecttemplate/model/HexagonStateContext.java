@@ -44,7 +44,7 @@ public class HexagonStateContext {
 
     }
 
-    public void makeClickable() {
+    public void makeFree() {
         setHexagonState(new FreeTile(hexagon));
     }
 }

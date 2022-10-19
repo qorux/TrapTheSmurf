@@ -10,6 +10,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -235,7 +237,6 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
             }
         }
     }
-
 
     public void setSmurfImage(int i) throws MalformedURLException { //Funkar inte , DMHB!
         ImageIcon smurf = new ImageIcon(new URL("https://e7.pngegg.com/pngimages/1016/380/png-clipart-sticker-telegram-the-smurfs-text-viber-smurf-area-soccer.png"));

@@ -126,6 +126,7 @@ public class Board {
         return boardColumns;
     }
 
+
     /**
      * Randomizes how many tiles should be blocked based on the difficulty the player wants
      * If no difficulty is selected, the number of blocked tiles are randomized following normal distribution.

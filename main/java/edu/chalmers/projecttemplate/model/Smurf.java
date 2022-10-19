@@ -31,7 +31,7 @@ public class Smurf {
 
 
     public void moveSmurf() {
-        hexagon.makeClickable();
+        hexagon.makeFree();
 
         ArrayList<String> possibleDirections = findBlockedDirections();
         ArrayList<String> deadDirections = findDeadDirections(possibleDirections);
@@ -265,7 +265,7 @@ public class Smurf {
         return hexagonNode.getNeighbors().entrySet().size() < 6;
     }
 
-    public List<Hexagon> checkFreeNeighbors() {
+    private List<Hexagon> checkFreeNeighbors() {
         List<Hexagon> FreeNeighbors = new ArrayList<>();
         List<Hexagon> tilesToCheck = new ArrayList<>();
 
