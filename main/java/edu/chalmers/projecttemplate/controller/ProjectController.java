@@ -2,6 +2,7 @@ package main.java.edu.chalmers.projecttemplate.controller;
 
 import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
+import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -74,11 +75,11 @@ public class ProjectController {
         AbstractButton aButton = (AbstractButton) actionEvent.getSource();
         System.out.println("Selected: " + aButton.getText());
         if(Objects.equals(aButton.getText(), "Easy")){
-            gameHandler.setDifficulty("Easy");
+            gameHandler.setDifficulty(Difficulty.EASY);
         } else if (Objects.equals(aButton.getText(), "Medium")) {
-            gameHandler.setDifficulty("Medium");
+            gameHandler.setDifficulty(Difficulty.MEDIUM);
         } else if (Objects.equals(aButton.getText(), "Hard")) {
-            gameHandler.setDifficulty("Hard");
+            gameHandler.setDifficulty(Difficulty.HARD);
         }
       }
     };
@@ -86,7 +87,6 @@ public class ProjectController {
     projectView.getjRadioButton2().addActionListener(sliceActionListener);
     projectView.getjRadioButton3().addActionListener(sliceActionListener);
   }
-
 
   private void resetGameCalled (){
     gameHandler.NewGame();

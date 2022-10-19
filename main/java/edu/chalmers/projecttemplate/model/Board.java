@@ -4,6 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
 /**
  * This class contains the logic for the board of the game
@@ -133,16 +134,16 @@ public class Board {
      * @param difficulty the difficulty the game should have
      * @return how many tiles that should be blocked
      */
-    public int difficultyBlockedTiles(String difficulty) { //Gör om svårighetsgraderna till enum istället för string
+    public int difficultyBlockedTiles(Difficulty difficulty) {
         Random random = new Random();
         int totalBlockedTiles = 0;
-        if (Objects.equals(difficulty, "Easy")) {
+        if (Objects.equals(difficulty, Difficulty.EASY)) {
             totalBlockedTiles = random.nextInt(15, 19 + 1);
         }
-        else if (Objects.equals(difficulty, "Hard")) {
+        else if (Objects.equals(difficulty, Difficulty.HARD)) {
             totalBlockedTiles = random.nextInt(2, 6 + 1);
         }
-        else if (Objects.equals(difficulty, "Medium")) {
+        else if (Objects.equals(difficulty, Difficulty.MEDIUM)) {
             totalBlockedTiles = random.nextInt(7, 12 + 1);
         }
         else {
@@ -172,7 +173,7 @@ public class Board {
     /**
      * Shuffles the tiles that should be blocked
      */
-    public void shuffleBlockedTiles(String difficulty) { //Byta namn på denna metod kanske?
+    public void shuffleBlockedTiles(Difficulty difficulty) { //Byta namn på denna metod kanske?
         int tilesToBeBlocked = difficultyBlockedTiles(difficulty);
         List<Boolean> shouldTileBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
         int index =0;

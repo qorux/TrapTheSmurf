@@ -8,6 +8,7 @@ import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import main.java.edu.chalmers.projecttemplate.model.Game;
 import org.junit.jupiter.api.Test;
+import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class BoardTest {
 
     @Test
     public void testBlockTile() {
-        Game game = new Game("Default");
+        Game game = new Game(Difficulty.DEFAULT);
         for (int i = 0; i < 121; i++) {
             game.getBoard().blockTile(i);
             if (i == 60) {
@@ -85,28 +86,28 @@ Gav private access till detta så nu funkar det inte längre
 
     @Test
     void easyDifficultyTest() {
-        Game game = new Game("Easy");
-        int blockedTiles = game.getBoard().difficultyBlockedTiles("Easy");
+        Game game = new Game(Difficulty.EASY);
+        int blockedTiles = game.getBoard().difficultyBlockedTiles(Difficulty.EASY);
         assertTrue(15 <= blockedTiles && blockedTiles <= 20);
     }
 
     @Test
     void mediumDifficultyTest() {
-        Game game = new Game("Medium");
-        int blockedTiles = game.getBoard().difficultyBlockedTiles("Medium");
+        Game game = new Game(Difficulty.MEDIUM);
+        int blockedTiles = game.getBoard().difficultyBlockedTiles(Difficulty.MEDIUM);
         assertTrue(7 <= blockedTiles && blockedTiles <= 13);
     }
 
     @Test
     void hardDifficultyTest() {
-        Game game = new Game("Hard");
-        int blockedTiles = game.getBoard().difficultyBlockedTiles("Hard");
+        Game game = new Game(Difficulty.HARD);
+        int blockedTiles = game.getBoard().difficultyBlockedTiles(Difficulty.HARD);
         assertTrue(2 <= blockedTiles && blockedTiles <= 7);
     }
 
     @Test
     void getHexagonCoordinateTest() {
-        Game game = new Game("Default");
+        Game game = new Game(Difficulty.DEFAULT);
         Hexagon hexagonByCoordinate = game.getBoard().getHexagonCoordinate(0,0);
         Hexagon hexagonByIndex = game.getBoard().getHexagon(0);
         assertEquals(hexagonByIndex,hexagonByCoordinate);
@@ -131,7 +132,7 @@ Gav private access till detta så nu funkar det inte längre
 
     @Test
     void getHexagonCoordinateGetTest() {
-        Game game = new Game("Default");
+        Game game = new Game(Difficulty.DEFAULT);
         Hexagon hexagonByCoordinate = game.getBoard().getHexagonCoordinate(0,0);
         Hexagon hexagonByGet = game.getBoard().getBoardSpaces().get(0).get(0);
         assertEquals(hexagonByGet,hexagonByCoordinate);
@@ -144,7 +145,7 @@ Gav private access till detta så nu funkar det inte längre
 
     @Test
     void getHexagonNodeIndexTest() {
-        Game game = new Game("Default");
+        Game game = new Game(Difficulty.DEFAULT);
         Node nodeByIndex = game.getBoard().getNode(60);
         Hexagon hexagonByIndex = game.getBoard().getHexagon(60);
         assertEquals(nodeByIndex.getHexagon().getIndex(), hexagonByIndex.getIndex());
@@ -153,7 +154,7 @@ Gav private access till detta så nu funkar det inte längre
 
     @Test
     void getNeighboursTest() {
-        Game game = new Game("Default");
+        Game game = new Game(Difficulty.DEFAULT);
         List<List<Node>> boardNodesColumns = game.getBoard().getBoardNodesColumns();
 
         assertEquals(2, boardNodesColumns.get(0).get(0).getNeighbors().size());

@@ -1,7 +1,5 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
-import main.java.edu.chalmers.projecttemplate.ProjectTemplate;
-
 import java.beans.PropertyChangeSupport;
 
 public class Game {
@@ -17,7 +15,7 @@ public class Game {
 
   private PropertyChangeSupport support;
 
-  public Game(String difficulty){
+  public Game(Enum difficulty){
     support = new PropertyChangeSupport(this);
     this.board = new Board(support);
     this.smurf=new Smurf(board);

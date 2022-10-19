@@ -6,21 +6,22 @@ import java.nio.file.Paths;
 
 public class GameHandler {
     private Game game;
-    String difficulty = "Default";
 
-    enum Difficulty {
+    private Difficulty difficulty = Difficulty.DEFAULT;
+
+    public enum Difficulty {
         EASY,
         MEDIUM,
         HARD,
         DEFAULT
     }
-    Game currentGame;
+    private Game currentGame;
 
-    int totalWins;
+    private int totalWins;
 
-    int totalLosses;
+    private int totalLosses;
 
-    int recordTurns;
+    private int recordTurns;
 
     public GameHandler() {
         currentGame = new Game(difficulty);
@@ -99,7 +100,7 @@ public class GameHandler {
     }
 
     private String getPath() {
-        Path path = Paths.get("TrapTheSmurfStats.txt");
+        Path path = Paths.get("main\\Resources\\TrapTheSmurfStats.txt");
         return path.toString();
     }
 
@@ -115,11 +116,11 @@ public class GameHandler {
         return recordTurns;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
