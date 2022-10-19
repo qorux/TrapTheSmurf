@@ -2,26 +2,24 @@ package main.java.edu.chalmers.projecttemplate.view;
 
 import main.java.edu.chalmers.projecttemplate.model.Hexagon;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.Path;
 
-public class hexButton extends JButton {
+
+public class HexButton extends JButton {
     private Polygon hexagonalShape;
     private Hexagon hexagon;
 
-    private boolean isHovered = false;
+    private Image smurfImage;
 
-    private Painter painter;
+    private boolean isHovered;
 
-    public hexButton(Hexagon Hexagon) {
+    //private Painter painter;
+
+    public HexButton(Hexagon hexagon) {
         this.setOpaque(false);
         hexagonalShape = getHexPolygon();
-        this.hexagon = Hexagon;
+        this.hexagon = hexagon;
     }
 
     /**
@@ -42,8 +40,6 @@ public class hexButton extends JButton {
 
         return hex;
     }
-
-    private Image smurfImage;
 
     public void setSmurfImage(Image smurfImage) {
         this.smurfImage = smurfImage;
@@ -101,8 +97,8 @@ public class hexButton extends JButton {
         }
     }
 
-    public void setNewHexagonBoard(Hexagon Hexagon){
-        this.hexagon = Hexagon;
+    public void setNewHexagonBoard(Hexagon hexagon){
+        this.hexagon = hexagon;
     }
 
     public void setHovered(boolean hovered) {
@@ -111,7 +107,7 @@ public class hexButton extends JButton {
         hexagon.getSupport().firePropertyChange("Hovered",oldValue,hovered);
     }
 
-    public boolean getIsHovered() {
+    public boolean isHexagonHovered() {
         return isHovered;
     }
 }

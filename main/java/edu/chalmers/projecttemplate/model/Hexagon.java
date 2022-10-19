@@ -10,12 +10,12 @@ public class Hexagon{
         FREE,
         OCCUPIED
     }
-    private Integer index;
-    private PropertyChangeSupport support;
+    private final Integer index;
+    private final PropertyChangeSupport support;
 
 
-    public Hexagon(Integer boardIndex, PropertyChangeSupport Support) {
-        this.support = Support;
+    public Hexagon(Integer boardIndex, PropertyChangeSupport support) {
+        this.support = support;
         this.index= boardIndex;
     }
 

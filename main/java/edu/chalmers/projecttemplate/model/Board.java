@@ -3,20 +3,19 @@ package main.java.edu.chalmers.projecttemplate.model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
 /**
  * This class contains the logic for the board of the game
  */
 public class Board {
-    private List<List<Hexagon>> boardColumns;
+    private final List<List<Hexagon>> boardColumns;
     private List<Hexagon> boardRows;
 
-    private List<List<Node>> boardNodesColumns;
+    private final List<List<Node>> boardNodesColumns;
     private List<Node> boardNodesRows;
 
-    private PropertyChangeSupport support;
+    private final PropertyChangeSupport support;
 
 
     /**
@@ -136,7 +135,7 @@ public class Board {
      */
     public int difficultyBlockedTiles(Difficulty difficulty) {
         Random random = new Random();
-        int totalBlockedTiles = 0;
+        int totalBlockedTiles;
         if (Objects.equals(difficulty, Difficulty.EASY)) {
             totalBlockedTiles = random.nextInt(15, 19 + 1);
         }
@@ -190,8 +189,8 @@ public class Board {
      * @param index the index of the tile that should be blocked
      */
     public void blockTile(Integer index) {
-        if (index == 60) {  //smurftile
-            ;
+        if (index == 60) {
+            getHexagon(index).setHexagonState(Hexagon.State.OCCUPIED);
         }
         else {
             getHexagon(index).setHexagonState(Hexagon.State.BLOCKED);

@@ -6,23 +6,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Smurf {
 
     //Kanske bör vara i Board/Application(projectTemplate)
-    private boolean hasWon = false;
+
 
     //(NE,E,SE,SW,W,NW), alla möjliga directions smurfen kan ha?
 
-    private Board board;
+    private final Board board;
     private Node hexagonNode;
     private Hexagon hexagon;
 
-    private ArrayList<String> deadDirections;
+    private final List<String> deadDirections;
 
-    private boolean isWandering = false;
+    private boolean isWandering;
 
     //private Map<String, Integer> directionsRouteValues = new HashMap<String, Integer>();
 
-    public Smurf(Board Board) {
-        this.board = Board;
-        this.hexagonNode = board.getNode(60);
+    public Smurf(Board board) {
+        this.board = board;
+        this.hexagonNode = this.board.getNode(60);
         this.hexagon = hexagonNode.getHexagon();
         hexagon.setHexagonState(Hexagon.State.OCCUPIED);
         this.deadDirections = new ArrayList<String>();
@@ -30,10 +30,10 @@ public class Smurf {
 
 
     public void moveSmurf() {
-        ArrayList<String> possibleDirections = findBlockedDirections();
-        ArrayList<String> deadDirections = findDeadDirections(possibleDirections);
+        List<String> possibleDirections = findBlockedDirections();
+        List<String> deadDirections = findDeadDirections(possibleDirections);
 
-        if (deadDirections.size() ==0){
+        if (deadDirections.isEmpty()){
             isWandering= true;
         }
         List<String> bestDirections;
@@ -49,19 +49,16 @@ public class Smurf {
     }
 
 
-    private String randomElement(List<String> Directions) {
+    private String randomElement(List<String> directions) {
         Random rand = new Random();
-        System.out.println("rand" + Directions.size());
-        String randomElement = Directions.get(rand.nextInt(Directions.size()));
-        return randomElement;
+        return directions.get(rand.nextInt(directions.size()));
     }
 
-    private void moveInDirection(String Direction) {
+    private void moveInDirection(String direction) {
         hexagon.setHexagonState(Hexagon.State.FREE);
-        hexagonNode = hexagonNode.getNeighbors().get(Direction);
+        hexagonNode = hexagonNode.getNeighbors().get(direction);
         hexagon = hexagonNode.getHexagon();
         hexagon.setHexagonState(Hexagon.State.OCCUPIED);
-        System.out.println("Hexagonindex:" + hexagon.getIndex());
        /*
        switch (Direction){
            case "NW":
@@ -127,8 +124,8 @@ public class Smurf {
     }
 
 
-    private Map<String, Integer> calculateRoute(ArrayList<String> result) {
-        if (deadDirections.size()>0){
+    private Map<String, Integer> calculateRoute(List<String> result) {
+        if (!deadDirections.isEmpty()){
             for(String direction:deadDirections){
                 result.remove(direction);
             }
@@ -141,8 +138,8 @@ public class Smurf {
         return directionsRouteValues;
     }
 
-    private ArrayList<String> findBlockedDirections() {
-        ArrayList<String> result = new ArrayList<String>();
+    private List<String> findBlockedDirections() {
+        List<String> result = new ArrayList<String>();
 
         result.add("NW");
         result.add("NE");
@@ -174,8 +171,8 @@ public class Smurf {
         return result;
     }
 
-    private ArrayList<String> findDeadDirections(ArrayList<String> possibleDirections){
-        ArrayList<String> result= new ArrayList<String>();
+    private List<String> findDeadDirections(List<String> possibleDirections){
+        List<String> result= new ArrayList<String>();
         for (String direction:possibleDirections){
             result.add(direction);
         }
@@ -187,9 +184,7 @@ public class Smurf {
             }
         }
         for(String direction:deadDirections){
-            if(result.contains(direction)){
-                result.remove(direction);
-            }
+            result.remove(direction);
         }
 
         return result;
@@ -202,10 +197,7 @@ public class Smurf {
                 counter++;
             }
         }
-        if (counter < 3){
-            return false;
-        }
-        return true;
+        return counter >= 3;
     }
 
 
@@ -216,24 +208,12 @@ public class Smurf {
 
         while (!endTile) {
             switch (direction) {
-                case "NW":
-                    searchNode = searchNode.getNeighbors().get("NW");
-                    break;
-                case "NE":
-                    searchNode = searchNode.getNeighbors().get("NE");
-                    break;
-                case "W":
-                    searchNode = searchNode.getNeighbors().get("W");
-                    break;
-                case "E":
-                    searchNode = searchNode.getNeighbors().get("E");
-                    break;
-                case "SW":
-                    searchNode = searchNode.getNeighbors().get("SW");
-                    break;
-                case "SE":
-                    searchNode = searchNode.getNeighbors().get("SE");
-                    break;
+                case "NW" -> searchNode = searchNode.getNeighbors().get("NW");
+                case "NE" -> searchNode = searchNode.getNeighbors().get("NE");
+                case "W" -> searchNode = searchNode.getNeighbors().get("W");
+                case "E" -> searchNode = searchNode.getNeighbors().get("E");
+                case "SW" -> searchNode = searchNode.getNeighbors().get("SW");
+                case "SE" -> searchNode = searchNode.getNeighbors().get("SE");
             }
             length++;
             endTile = foundEndTile(searchNode);
@@ -245,17 +225,12 @@ public class Smurf {
         int xPos = (searchNode.getHexagon().getIndex() % 11);
         int yPos = (searchNode.getHexagon().getIndex() / 11);
         if (xPos > 11 || yPos > 11 || xPos < 0 || yPos < 0) {
-            System.out.println("Galet fel i foundendtile");
         }
-        if (xPos == 10 || yPos == 10 || xPos == 0 || yPos == 0) {
-            return true;
-        }
-
-        return false;
+        return xPos == 10 || yPos == 10 || xPos == 0 || yPos == 0;
     }
 
     public boolean checkIfWon() {
-        return checkFreeNeighbors().size() == 0;
+        return checkFreeNeighbors().isEmpty();
     }
 
     public boolean checkIfLost(){
@@ -263,7 +238,7 @@ public class Smurf {
     }
 
     private List<Hexagon> checkFreeNeighbors() {
-        List<Hexagon> FreeNeighbors = new ArrayList<>();
+        List<Hexagon> freeNeighbors = new ArrayList<>();
         List<Hexagon> tilesToCheck = new ArrayList<>();
 
         tilesToCheck.add(hexagonNode.getNeighbors().get("NW").getHexagon());
@@ -275,10 +250,10 @@ public class Smurf {
 
         for (Hexagon hexagon : tilesToCheck) {
             if (Hexagon.State.FREE.equals(hexagon.getCurrentState())) {
-                FreeNeighbors.add(hexagon);
+                freeNeighbors.add(hexagon);
             }
     }
-        return FreeNeighbors;
+        return freeNeighbors;
     }
 
 

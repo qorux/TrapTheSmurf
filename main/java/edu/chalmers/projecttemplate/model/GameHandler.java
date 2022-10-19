@@ -1,12 +1,12 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.NoSuchElementException;
 
 public class GameHandler {
-    private Game game;
-
     private Difficulty difficulty = Difficulty.DEFAULT;
 
     public enum Difficulty {
@@ -24,18 +24,16 @@ public class GameHandler {
     private int recordTurns;
 
     public GameHandler() {
-        currentGame = new Game(difficulty);
+        currentGame = new Game();
         readStats();
     }
 
 
-    public void NewGame(){
+    public void newGame(){
         if (getCurrentGame().isHasWon() || getCurrentGame().isHasLost()) {
             saveStats();
-            System.out.println("Total losses: " + totalLosses);
-            System.out.println("Total wins: " + totalWins);
         }
-        currentGame = new Game(difficulty);
+        currentGame = new Game();
     }
 
     private void saveStats() {
@@ -46,7 +44,7 @@ public class GameHandler {
 
             int turnsToWin = getCurrentGame().getTurn();
 
-            writer.write(String.valueOf(getCurrentGame().isHasWon()) + " ");
+            writer.write(getCurrentGame().isHasWon() + " ");
             writer.write(Integer.toString(turnsToWin));
             writer.write("\n");
             writer.close();
@@ -72,15 +70,15 @@ public class GameHandler {
                         int number = Integer.parseInt(tokens[1]);
                         String outcome = tokens[0];
 
-                        if (outcome.equals("true")) {
+                        if ("true".equals(outcome)) {
                             recordTurns = Math.min(number, recordTurns);
                             totalWins++;
-                        } else if (outcome.equals("false")) {
+                        } else if ("false".equals(outcome)) {
                             totalLosses++;
                         }
                     }
                     catch (NumberFormatException ex) {
-                    System.out.println("No more saved games to check");
+                        throw new FileNotFoundException();
                     }
                 }
             }
@@ -88,9 +86,8 @@ public class GameHandler {
                 recordTurns = 0;
             }
             reader.close();
-            System.out.println("Best no. of turns is: " + recordTurns);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
     }
 

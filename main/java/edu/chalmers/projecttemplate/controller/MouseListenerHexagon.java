@@ -3,23 +3,23 @@ package main.java.edu.chalmers.projecttemplate.controller;
 import java.awt.*;
 import java.awt.event.*;
 
-import main.java.edu.chalmers.projecttemplate.view.hexButton;
+import main.java.edu.chalmers.projecttemplate.view.HexButton;
 
 public class MouseListenerHexagon extends Frame implements MouseListener {
 
-    MouseListenerHexagon(){
+    public MouseListenerHexagon(){
         addMouseListener(this);
     }
 
     public void mouseEntered(MouseEvent e) {
         Component c = e.getComponent();
-        hexButton hexbutton = (hexButton) c;
+        HexButton hexbutton = (HexButton) c;
         hexbutton.setHovered(true);
     }
 
     public void mouseExited(MouseEvent e) {
         Component c = e.getComponent();
-        hexButton hexbutton = (hexButton) c;
+        HexButton hexbutton = (HexButton) c;
         hexbutton.setHovered(false);
     }
 

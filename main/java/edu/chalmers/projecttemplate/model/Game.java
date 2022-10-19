@@ -1,5 +1,4 @@
 package main.java.edu.chalmers.projecttemplate.model;
-
 import java.beans.PropertyChangeSupport;
 
 public class Game {
@@ -7,15 +6,13 @@ public class Game {
 
   private boolean hasLost;
 
-  private int turn = 0;
-  private Board board;
-  private Smurf smurf;
+  private int turn;
+  private final Board board;
+  private final Smurf smurf;
 
-  final String difficulty = "Default";
+  private final PropertyChangeSupport support;
 
-  private PropertyChangeSupport support;
-
-  public Game(Enum difficulty){
+  public Game(){
     support = new PropertyChangeSupport(this);
     this.board = new Board(support);
     this.smurf=new Smurf(board);
@@ -30,7 +27,7 @@ public class Game {
     return smurf;
   }
 
-  public void NewTurn(){
+  public void newTurn(){
     turn++;
     if (smurf.checkIfWon()) {
       boolean oldValue = hasWon;

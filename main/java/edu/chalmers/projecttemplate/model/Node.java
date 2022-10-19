@@ -1,15 +1,15 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 public class Node {
     public Hexagon hexagon;
     private Node next;
 
-    private Map<String, Node> neighbors;
+    private final Map<String, Node> neighbors;
 
     public Node(Hexagon data) {
         this.neighbors = new HashMap<String,Node>();

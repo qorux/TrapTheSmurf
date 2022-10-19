@@ -12,10 +12,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -25,7 +21,7 @@ import java.util.Objects;
  * @author linae
  */
 
-public class ProjectView extends javax.swing.JFrame implements PropertyChangeListener {
+public class ProjectView extends JFrame implements PropertyChangeListener {
 
     /**
      * Creates new form myFirstForm
@@ -34,11 +30,11 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
     //private Game game;
 
 
-    private ButtonBoard buttonBoard;
+    private final ButtonBoard buttonBoard;
     private Board hexagonBoard;
 
-    private BufferedImage bufferedImage;
-    private GameHandler gameHandler;
+    private final BufferedImage bufferedImage;
+    private final GameHandler gameHandler;
 
 
     public ProjectView(GameHandler gameHandler) {
@@ -70,23 +66,23 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabelWinLose = new javax.swing.JLabel();
-        jLabelRecord = new javax.swing.JLabel();
-        jLabelRule = new javax.swing.JLabel();
+        jButton1 = new JButton();
+        jPanel1 = new JPanel();
+        jRadioButton1 = new JRadioButton();
+        jRadioButton2 = new JRadioButton();
+        jRadioButton3 = new JRadioButton();
+        jLabel2 = new JLabel();
+        jLabelWinLose = new JLabel();
+        jLabelRecord = new JLabel();
+        jLabelRule = new JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 575));
-        setMinimumSize(new java.awt.Dimension(800, 575));
+        setMaximumSize(new Dimension(800, 575));
+        setMinimumSize(new Dimension(800, 575));
 
-        jButton1.setBackground(new java.awt.Color(102, 255, 255));
+        jButton1.setBackground(new Color(102, 255, 255));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,18 +93,18 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
                         .addGap(0, 151, Short.MAX_VALUE)
         );
 
-        jPanel1.setMaximumSize(new java.awt.Dimension(548, 500));
-        jPanel1.setMinimumSize(new java.awt.Dimension(548, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(548, 500));
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel1.setMaximumSize(new Dimension(548, 500));
+        jPanel1.setMinimumSize(new Dimension(548, 500));
+        jPanel1.setPreferredSize(new Dimension(548, 500));
+        jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabelRule, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelRule, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                                 .addGap(101, 101, 160))
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(101, 101, 101)
@@ -172,26 +168,27 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelRecord;
-    private javax.swing.JLabel jLabelRule;
-    private javax.swing.JLabel jLabelWinLose;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private JButton jButton1;
+    private JLabel jLabel2;
+    private JLabel jLabelRecord;
+    private JLabel jLabelRule;
+    private JLabel jLabelWinLose;
+    private JPanel jPanel1;
+    private JRadioButton jRadioButton1;
+    private JRadioButton jRadioButton2;
+    private JRadioButton jRadioButton3;
     // End of variables declaration//GEN-END:variables
 
     public void setLabels() {
-        jButton1.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18)); // NOI18N
+        jButton1.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         jButton1.setText("Reset game");
         jButton1.setToolTipText("Press to reset the game");
 
-        jLabel2.setText("Number of turns: ");
-        jLabel2.setFont(new java.awt.Font("Segoe UI", Font.BOLD, 18));
+        jLabel2.setText("Number of turns: " + gameHandler.getCurrentGame().getTurn());
+        jLabel2.setFont(new Font("Segoe UI", Font.BOLD, 18));
 
-        jLabelRule.setText("<html> Your record: "+gameHandler.getRecordTurns()+"<br> Total wins: "+gameHandler.getTotalWins()+"<br> Total losses: "+gameHandler.getTotalLosses()+"</html>");
+        jLabelRule.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        jLabelRule.setText("<html>Stats: <br> Your record: "+gameHandler.getRecordTurns()+"<br> Total wins: "+gameHandler.getTotalWins()+"<br> Total losses: "+gameHandler.getTotalLosses()+"</html>");
         jLabelRule.setToolTipText("Your record displays the least amount of turns it took you to beat the smurf");
 
         jRadioButton1.setText("Easy");
@@ -238,11 +235,11 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
                 throw new RuntimeException(e);
             }
 
-            if (Hexagon.State.FREE.equals(hexagonBoard.getHexagon(i).getCurrentState())&& !buttonBoard.getButton(i).getIsHovered()){
+            if (Hexagon.State.FREE.equals(hexagonBoard.getHexagon(i).getCurrentState())&& !buttonBoard.getButton(i).isHexagonHovered()){
                 buttonBoard.getButton(i).setBackground(Color.cyan);
                 buttonBoard.getButton(i).setEnabled(true);
             }
-            else if (Hexagon.State.FREE.equals(hexagonBoard.getHexagon(i).getCurrentState())&& buttonBoard.getButton(i).getIsHovered()){
+            else if (Hexagon.State.FREE.equals(hexagonBoard.getHexagon(i).getCurrentState())&& buttonBoard.getButton(i).isHexagonHovered()){
                 buttonBoard.getButton(i).setBackground(Color.getHSBColor(0.5f, 0.7f, 0.7f));
                 buttonBoard.getButton(i).setEnabled(true);
             }
@@ -284,11 +281,11 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
         return jRadioButton3;
     }
 
-    public hexButton getButton(int Index) {
-        return buttonBoard.getButton(Index);
+    public HexButton getButton(int index) {
+        return buttonBoard.getButton(index);
     }
 
-    public ArrayList<hexButton> getButtonBoard() {
+    public ArrayList<HexButton> getButtonBoard() {
         return buttonBoard.getButtonBoard();
     }
 

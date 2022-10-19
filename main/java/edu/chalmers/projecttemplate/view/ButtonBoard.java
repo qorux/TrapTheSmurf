@@ -7,9 +7,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ButtonBoard {
-    private JPanel jPanel1;
+    private final JPanel jPanel1;
     private Board board;
-    private ArrayList<hexButton> buttonBoard = new ArrayList<hexButton>();
+    private final ArrayList<HexButton> buttonBoard = new ArrayList<HexButton>();
 
     public ButtonBoard(Board board, JPanel jPanel1) {
         this.jPanel1 = jPanel1;
@@ -19,11 +19,11 @@ public class ButtonBoard {
         }
     }
 
-    public hexButton getButton(int Index) {
-        return buttonBoard.get(Index);
+    public HexButton getButton(int index) {
+        return buttonBoard.get(index);
     }
 
-    public ArrayList<hexButton> getButtonBoard() {
+    public ArrayList<HexButton> getButtonBoard() {
         return buttonBoard;
     }
 
@@ -31,8 +31,8 @@ public class ButtonBoard {
         this.board = board;
     }
 
-    private hexButton generateButton(Integer index){
-        hexButton generatedButton = new hexButton(board.getHexagon(index));
+    private HexButton generateButton(Integer index){
+        HexButton generatedButton = new HexButton(board.getHexagon(index));
         generatedButton.setBackground(Color.cyan);
         generatedButton.setPreferredSize(new Dimension(40,40));
         jPanel1.add(generatedButton);

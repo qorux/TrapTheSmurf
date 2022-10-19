@@ -9,13 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class ProjectController {
+public final class ProjectController {
   final private GameHandler gameHandler;
 
   private Game game;
   private final ProjectView projectView;
 
-  private MouseListenerHexagon mlh;
+  private final MouseListenerHexagon mlh;
 
   public static ProjectController create(GameHandler gameHandler, ProjectView projectView) {
     return new ProjectController(gameHandler, projectView);
@@ -27,7 +27,7 @@ public class ProjectController {
 
     this.game = gameHandler.getCurrentGame();
 
-    GameButtonPressed();
+    gameButtonPressed();
 
     mlh = new MouseListenerHexagon();
     for (int i = 0; i<121; i++) {
@@ -45,13 +45,13 @@ public class ProjectController {
       this.projectView.getButtonBoard().get(counter).addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
-          listenedObject_actionPerformed(evt);
+          listenedObjectActionPerformed(evt);
         }
       });
     }
   }
 
-  public void GameButtonPressed(){
+  public void gameButtonPressed(){
     this.projectView.getjButton1().addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -60,19 +60,18 @@ public class ProjectController {
       });
     }
 
-  private void listenedObject_actionPerformed(ActionEvent evt) {
+  private void listenedObjectActionPerformed(ActionEvent evt) {
     Object pressedTile = evt.getSource();
     int pressedTileIndex = projectView.getButtonBoard().indexOf(pressedTile);
     game.getBoard().getHexagon(pressedTileIndex).setHexagonState(Hexagon.State.BLOCKED);
 
-    game.NewTurn();
+    game.newTurn();
 
   }
   public void difficultyRadioButtonPressed(){
     ActionListener sliceActionListener = new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
         AbstractButton aButton = (AbstractButton) actionEvent.getSource();
-        System.out.println("Selected: " + aButton.getText());
         if(Objects.equals(aButton.getText(), "Easy")){
             gameHandler.setDifficulty(Difficulty.EASY);
         } else if (Objects.equals(aButton.getText(), "Medium")) {
@@ -88,7 +87,7 @@ public class ProjectController {
   }
 
   private void resetGameCalled (){
-    gameHandler.NewGame();
+    gameHandler.newGame();
     this.game=gameHandler.getCurrentGame();
     projectView.setGame(gameHandler.getCurrentGame());
     gameHandler.getCurrentGame().getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());

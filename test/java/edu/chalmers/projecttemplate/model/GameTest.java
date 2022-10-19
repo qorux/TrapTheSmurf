@@ -1,10 +1,7 @@
 package test.java.edu.chalmers.projecttemplate.model;
 
-import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.*;
-import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 import org.junit.jupiter.api.Test;
-import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +12,7 @@ public class GameTest {
 
 	@Test
 	public void testOnlyOneOccupiedTile() {
-		Game game = new Game(Difficulty.DEFAULT);
+		Game game = new Game();
 		List<Integer> tileList = new ArrayList<>();
 		for (int i = 0; i < 121; i++) {
 			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
@@ -27,7 +24,7 @@ public class GameTest {
 
 	@Test
 	public void testSmurfMoves() {
-		Game game = new Game(Difficulty.DEFAULT);
+		Game game = new Game();
 		int initialOccupiedTileIndex = 0;
 		int nextOccupiedTileIndex = 0;
 		for (int i = 0; i < 121; i++) {
@@ -35,7 +32,7 @@ public class GameTest {
 				initialOccupiedTileIndex = game.getBoard().getHexagon(i).getIndex();
 			}
 		}
-		game.NewTurn();
+		game.newTurn();
 		for (int i = 0; i < 121; i++) {
 			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
 				nextOccupiedTileIndex = game.getBoard().getHexagon(i).getIndex();
@@ -46,9 +43,9 @@ public class GameTest {
 
 	@Test
 	public void testNewTurn() {
-		Game game = new Game(Difficulty.DEFAULT);
+		Game game = new Game();
 		int intialTurn = game.getTurn();
-		game.NewTurn();
+		game.newTurn();
 		assertEquals(intialTurn+1, game.getTurn());
 	}
 
