@@ -11,13 +11,13 @@ public class Node {
 
     private final Map<String, Node> neighbors;
 
-    public Node(Hexagon data) {
+    public Node(final Hexagon data) {
         this.neighbors = new HashMap<String,Node>();
         this.hexagon = data;
         this.next = null;
     }
 
-    public void setNextNode(Node node) {
+    public void setNextNode(final Node node) {
         this.next = node;
     }
 

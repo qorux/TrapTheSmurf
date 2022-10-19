@@ -5,6 +5,9 @@ import main.java.edu.chalmers.projecttemplate.model.Hexagon;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Makes the tiles (jButtons) hexagonal instead of square.
+ */
 
 public class HexButton extends JButton {
     private Polygon hexagonalShape;
@@ -26,16 +29,16 @@ public class HexButton extends JButton {
      * Generates a hexagon button instead of default button (square).
      */
     private Polygon getHexPolygon() {
-        Polygon hex = new Polygon();
-        int w = getWidth() - 1;
-        int h = getHeight() - 1;
-        int ratio = (int) (h * .25);
+        final Polygon hex = new Polygon();
+        final int width = getWidth() - 1;
+        final int height = getHeight() - 1;
+        final int ratio = (int) (height * .25);
 
-        hex.addPoint(w / 2, 0);
-        hex.addPoint(w, ratio);
-        hex.addPoint(w, h - ratio);
-        hex.addPoint(w / 2, h);
-        hex.addPoint(0, h - ratio);
+        hex.addPoint(width / 2, 0);
+        hex.addPoint(width, ratio);
+        hex.addPoint(width, height - ratio);
+        hex.addPoint(width / 2, height);
+        hex.addPoint(0, height - ratio);
         hex.addPoint(0, ratio);
 
         return hex;
@@ -46,63 +49,67 @@ public class HexButton extends JButton {
     }
 
     @Override
-    public boolean contains(Point p) {
-        return hexagonalShape.contains(p);
+    public boolean contains(final Point point) {
+        return hexagonalShape.contains(point);
     }
 
 
     @Override
-    public boolean contains(int x, int y) {
+    public boolean contains(final int x, final int y) {
         return hexagonalShape.contains(x, y);
     }
 
 
     @Override
-    public void setSize(Dimension d) {
-        super.setSize(d);
+    public void setSize(final Dimension dimension) {
+        super.setSize(dimension);
         hexagonalShape = getHexPolygon();
     }
 
     @Override
-    public void setSize(int w, int h) {
-        super.setSize(w, h);
+    public void setSize(final int width, final int height) {
+        super.setSize(width, height);
         hexagonalShape = getHexPolygon();
     }
 
 
     @Override
-    public void setBounds(int x, int y, int width, int height) {
+    public void setBounds(final int x,final int y, final int width, final int height) {
         super.setBounds(x, y, width, height);
         hexagonalShape = getHexPolygon();
     }
 
 
     @Override
-    public void setBounds(Rectangle r) {
-        super.setBounds(r);
+    public void setBounds(Rectangle rectangle) {
+        super.setBounds(rectangle);
         hexagonalShape = getHexPolygon();
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(new Color(0.0f, 0.0f, 0.0f, 0.0f));
-        g.fillRect(0, 0, getWidth(), getHeight());
-        g.setColor(getBackground());
-        g.drawPolygon(hexagonalShape);
-        g.fillPolygon(hexagonalShape);
+    protected void paintComponent(final Graphics graphics) {
+        super.paintComponent(graphics);
+        graphics.setColor(new Color(0.0f, 0.0f, 0.0f, 0.0f));
+        graphics.fillRect(0, 0, getWidth(), getHeight());
+        graphics.setColor(getBackground());
+        graphics.drawPolygon(hexagonalShape);
+        graphics.fillPolygon(hexagonalShape);
         if (smurfImage != null){
             smurfImage = smurfImage.getScaledInstance(30,40,Image.SCALE_AREA_AVERAGING);
-            g.drawImage(smurfImage,6,0,this);
+            graphics.drawImage(smurfImage,6,0,this);
         }
     }
 
-    public void setNewHexagonBoard(Hexagon hexagon){
+    public void setNewHexagonBoard(final Hexagon hexagon){
         this.hexagon = hexagon;
     }
 
+    /**
+     *
+     *
+     */
     public void setHovered(boolean hovered) {
-        boolean oldValue = isHovered;
+        final boolean oldValue = isHovered;
         isHovered = hovered;
         hexagon.getSupport().firePropertyChange("Hovered",oldValue,hovered);
     }

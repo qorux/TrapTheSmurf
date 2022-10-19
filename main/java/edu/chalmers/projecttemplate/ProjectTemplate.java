@@ -19,7 +19,7 @@ public final class ProjectTemplate {
 			@Override
 			public void run() {
 				final GameHandler gameHandler = new GameHandler();
-				Game game = gameHandler.getCurrentGame();
+				final Game game = gameHandler.getCurrentGame();
 
 				//kan lägga in kod här och testa så att vyn målar rätt
 

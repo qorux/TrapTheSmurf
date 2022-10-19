@@ -6,7 +6,9 @@ import java.util.*;
 import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
 /**
- * This class contains the logic for the board of the game
+ * This class contains the logic for the board of the game.
+ * This includes setting up the board in rows and columns,
+ * and randomizing the blocked tiles the board is initiated with.
  */
 public class Board {
     private final List<List<Hexagon>> boardColumns;
@@ -21,7 +23,7 @@ public class Board {
     /**
      * Sets up the board with 11 columns and 11 rows, adding up to 121 hexagons.
      */
-    public Board(PropertyChangeSupport support){
+    public Board(final PropertyChangeSupport support){
         this.support=support;
         boardColumns = new ArrayList<>();
         boardNodesColumns = new ArrayList<>();
@@ -46,14 +48,14 @@ public class Board {
     private void buildNeighboursList(){
         for (int r = 0; r <= 10; r++) {
             for (int c = 0; c <= 10; c++) {
-                Node n = boardNodesColumns.get(r).get(c);
-                Map<String, Node> neighbors = n.getNeighbors();
+                final Node node = boardNodesColumns.get(r).get(c);
+                final Map<String, Node> neighbors = node.getNeighbors();
                 if (r > 0) {     // has NorthWest
                     if ((c == 0) && (r%2 == 1)){    //udda c0
                         neighbors.put("NW", boardNodesColumns.get(r-1).get(c));
                     }
                     else if ((c == 0) && (r%2 == 0) ){  //jämn c0
-                        ;
+
                     }
                     else if ((c>0) && (r%2 == 1)){ //udda rad
                         neighbors.put("NW", boardNodesColumns.get(r-1).get(c));
@@ -64,7 +66,7 @@ public class Board {
                 }
                 if (r > 0) {     // has NorthEast
                     if ((c == 10) && (r%2 == 1)){    //ojämn c11
-                        ;
+
                     }
                     else if ((c == 10) && (r%2 == 0)) {  //jämn c11
                         neighbors.put("NE", boardNodesColumns.get(r-1).get(c));
@@ -87,7 +89,7 @@ public class Board {
                         neighbors.put("SW", boardNodesColumns.get(r+1).get(c));
                     }
                     else if ((c == 0) && (r%2 == 0)) {  //jämn c0
-                        ;
+
                     }
                     else if ((c>0) && (r%2 == 1)){ //udda rad
                         neighbors.put("SW", boardNodesColumns.get(r+1).get(c));
@@ -98,7 +100,7 @@ public class Board {
                 }
                 if (r < 10) {     // has SouthEast
                     if ((c == 10) && (r%2 == 1)){    //udda c11
-                        ;
+
                     }
                     else if ((c == 10) && (r%2 == 0)) {  //jämn c11
                         neighbors.put("SE", boardNodesColumns.get(r+1).get(c));
@@ -114,11 +116,11 @@ public class Board {
         }
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+    public void addPropertyChangeListener(final PropertyChangeListener pcl) {
         support.addPropertyChangeListener(pcl);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+    public void removePropertyChangeListener(final PropertyChangeListener pcl) {
         support.removePropertyChangeListener(pcl);
     }
 
@@ -129,12 +131,13 @@ public class Board {
 
     /**
      * Randomizes how many tiles should be blocked based on the difficulty the player wants
-     * If no difficulty is selected, the number of blocked tiles are randomized following normal distribution.
+     * If no difficulty is selected, the number of blocked tiles are randomized following normal
+     * distribution.
      * @param difficulty the difficulty the game should have
      * @return how many tiles that should be blocked
      */
-    public int difficultyBlockedTiles(Difficulty difficulty) {
-        Random random = new Random();
+    public int difficultyBlockedTiles(final Difficulty difficulty) {
+        final Random random = new Random();
         int totalBlockedTiles;
         if (Objects.equals(difficulty, Difficulty.EASY)) {
             totalBlockedTiles = random.nextInt(15, 19 + 1);
@@ -151,32 +154,29 @@ public class Board {
        return totalBlockedTiles;
     }
 
-    /**
-     * Checks if the tiles are ok to block
-     * @return a list of indexes for the tiles that are to be blocked
-     */
-    private List<Boolean> generateBlockedTilesList(int tilesToBeBlocked){
-        List<Boolean> shouldTileBeBlocked = new ArrayList<Boolean>(121);
+
+    private List<Boolean> generateBlockedTilesList(final int tilesToBeBlocked){
+        final List<Boolean> shouldBeBlocked = new ArrayList<Boolean>(121);
         for(int i = 0; i < 121; i++) {
             if ((i<tilesToBeBlocked) && (i != 60)){
-                shouldTileBeBlocked.add(true);
+                shouldBeBlocked.add(true);
             }
             else {
-                shouldTileBeBlocked.add(false);
+                shouldBeBlocked.add(false);
             }
         }
-        Collections.shuffle(shouldTileBeBlocked);
-        return shouldTileBeBlocked;
+        Collections.shuffle(shouldBeBlocked);
+        return shouldBeBlocked;
     }
 
     /**
      * Shuffles the tiles that should be blocked
      */
-    public void shuffleBlockedTiles(Difficulty difficulty) { //Byta namn på denna metod kanske?
-        int tilesToBeBlocked = difficultyBlockedTiles(difficulty);
-        List<Boolean> shouldTileBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
+    public void shuffleBlockedTiles(final Difficulty difficulty) { //Byta namn på denna metod kanske?
+        final int tilesToBeBlocked = difficultyBlockedTiles(difficulty);
+        final List<Boolean> shouldBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
         int index =0;
-        for (Boolean tile:shouldTileBeBlocked) {
+        for (final Boolean tile:shouldBeBlocked) {
             if (tile) {
                 blockTile(index);
             }
@@ -188,9 +188,9 @@ public class Board {
      * Blocks a tile, with exception of the tile the smurf is on
      * @param index the index of the tile that should be blocked
      */
-    public void blockTile(Integer index) {
+    public void blockTile(final Integer index) {
         if (index == 60) {
-            getHexagon(index).setHexagonState(Hexagon.State.OCCUPIED);
+
         }
         else {
             getHexagon(index).setHexagonState(Hexagon.State.BLOCKED);
@@ -202,21 +202,21 @@ public class Board {
      * @param index the index of the tile that we want to get the coordinates for
      * @return the coordinates for a tile
      */
-    public Hexagon getHexagon(int index){
-        int col = index / 11;
-        int row = index % 11;
+    public Hexagon getHexagon(final int index){
+        final int col = index / 11;
+        final int row = index % 11;
 
         return boardColumns.get(col).get(row);
     }
 
-    public Node getNode(int index){
-        int col = index / 11;
-        int row = index % 11;
+    public Node getNode(final int index){
+        final int col = index / 11;
+        final int row = index % 11;
 
         return boardNodesColumns.get(col).get(row);
     }
 
-    public Hexagon getHexagonCoordinate(int xPos, int yPos){
+    public Hexagon getHexagonCoordinate(final int xPos,final int yPos){
 
         return boardColumns.get(yPos).get(xPos);
     }

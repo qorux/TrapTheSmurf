@@ -3,6 +3,10 @@ package main.java.edu.chalmers.projecttemplate.model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * Handles the different states of the hexagons, declaring
+ * them as enums.
+ */
 public class Hexagon{
     private State currentState = State.FREE;
     public enum State {
@@ -14,23 +18,23 @@ public class Hexagon{
     private final PropertyChangeSupport support;
 
 
-    public Hexagon(Integer boardIndex, PropertyChangeSupport support) {
+    public Hexagon(final Integer boardIndex, final PropertyChangeSupport support) {
         this.support = support;
         this.index= boardIndex;
     }
 
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+    public void addPropertyChangeListener(final PropertyChangeListener pcl) {
         support.addPropertyChangeListener(pcl);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+    public void removePropertyChangeListener(final PropertyChangeListener pcl) {
         support.removePropertyChangeListener(pcl);
     }
 
-    public void setHexagonState(State newstate) {
-        State oldState = currentState;
-        currentState = newstate;
-        support.firePropertyChange("Hexagonstate", oldState, newstate);
+    public void setHexagonState(final State newState) {
+        final State oldState = currentState;
+        currentState = newState;
+        support.firePropertyChange("Hexagonstate", oldState, newState);
     }
 
     public State getCurrentState() {

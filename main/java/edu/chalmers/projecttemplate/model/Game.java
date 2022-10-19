@@ -1,6 +1,10 @@
 package main.java.edu.chalmers.projecttemplate.model;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * Sets up the game with a board and a smurf.
+ * Also handles the turns and checks if the game is won or lost.
+ */
 public class Game {
   private boolean hasWon;
 
@@ -27,17 +31,23 @@ public class Game {
     return smurf;
   }
 
+  /**
+   * Checks whether the game is won, if not the smurf makes
+   * it move, and then checks if the game is lost.
+   * Also increments the turn variable, which is used to keep
+   * track of how many turns it takes to win or lose.
+   */
   public void newTurn(){
     turn++;
     if (smurf.checkIfWon()) {
-      boolean oldValue = hasWon;
+      final boolean oldValue = hasWon;
       hasWon=true;
       support.firePropertyChange("Won", oldValue, true);
     }
     else {
       smurf.moveSmurf();
       if (smurf.checkIfLost()){
-        boolean oldValue = hasLost;
+        final boolean oldValue = hasLost;
         hasLost=true;
         support.firePropertyChange("Lost", oldValue, true);
       }

@@ -11,25 +11,25 @@ public class MouseListenerHexagon extends Frame implements MouseListener {
         addMouseListener(this);
     }
 
-    public void mouseEntered(MouseEvent e) {
-        Component c = e.getComponent();
-        HexButton hexbutton = (HexButton) c;
+    public void mouseEntered(final MouseEvent event) {
+        final Component c = event.getComponent();
+        final HexButton hexbutton = (HexButton) c;
         hexbutton.setHovered(true);
     }
 
-    public void mouseExited(MouseEvent e) {
-        Component c = e.getComponent();
-        HexButton hexbutton = (HexButton) c;
+    public void mouseExited(final MouseEvent event) {
+        final Component c = event.getComponent();
+        final HexButton hexbutton = (HexButton) c;
         hexbutton.setHovered(false);
     }
 
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(final MouseEvent event) {
 
     }
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(final MouseEvent event) {
 
     }
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(final MouseEvent event) {
 
     }
 

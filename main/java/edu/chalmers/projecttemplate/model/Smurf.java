@@ -3,6 +3,10 @@ package main.java.edu.chalmers.projecttemplate.model;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Handles all the logic for the smurf, such as how it
+ * determines where to go and how it's allowed to move
+ */
 public class Smurf {
 
     //Kanske bör vara i Board/Application(projectTemplate)
@@ -20,7 +24,7 @@ public class Smurf {
 
     //private Map<String, Integer> directionsRouteValues = new HashMap<String, Integer>();
 
-    public Smurf(Board board) {
+    public Smurf(final Board board) {
         this.board = board;
         this.hexagonNode = this.board.getNode(60);
         this.hexagon = hexagonNode.getHexagon();
@@ -28,10 +32,12 @@ public class Smurf {
         this.deadDirections = new ArrayList<String>();
     }
 
-
+    /**
+     *
+     */
     public void moveSmurf() {
-        List<String> possibleDirections = findBlockedDirections();
-        List<String> deadDirections = findDeadDirections(possibleDirections);
+        final List<String> possibleDirections = findBlockedDirections();
+        final List<String> deadDirections = findDeadDirections(possibleDirections);
 
         if (deadDirections.isEmpty()){
             isWandering= true;
@@ -40,7 +46,7 @@ public class Smurf {
         if (isWandering) {
             moveInDirection(randomElement(possibleDirections));
         } else {
-            Map<String, Integer> directionRouteValues = calculateRoute(findDeadDirections(possibleDirections));
+            final Map<String, Integer> directionRouteValues = calculateRoute(findDeadDirections(possibleDirections));
             bestDirections = findShortestDirection(directionRouteValues);
             moveInDirection(randomElement(bestDirections));
         }
@@ -49,12 +55,12 @@ public class Smurf {
     }
 
 
-    private String randomElement(List<String> directions) {
-        Random rand = new Random();
+    private String randomElement(final List<String> directions) {
+        final Random rand = new Random();
         return directions.get(rand.nextInt(directions.size()));
     }
 
-    private void moveInDirection(String direction) {
+    private void moveInDirection(final String direction) {
         hexagon.setHexagonState(Hexagon.State.FREE);
         hexagonNode = hexagonNode.getNeighbors().get(direction);
         hexagon = hexagonNode.getHexagon();
@@ -105,17 +111,17 @@ public class Smurf {
         */
     }
 
-    private List<String> findShortestDirection(Map<String,Integer> directionsRouteValues) {
-        List<Integer> sortedRouteValues = new ArrayList<Integer>();
-        for (Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
+    private List<String> findShortestDirection(final Map<String,Integer> directionsRouteValues) {
+        final List<Integer> sortedRouteValues = new ArrayList<Integer>();
+        for (final Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
             sortedRouteValues.add(entry.getValue());
         }
         Collections.sort(sortedRouteValues);
 
-        int lowestValue = sortedRouteValues.get(0);
-        List<String> key = new ArrayList<>();
+        final int lowestValue = sortedRouteValues.get(0);
+        final List<String> key = new ArrayList<>();
 
-        for (Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
+        for (final Map.Entry<String, Integer> entry : directionsRouteValues.entrySet()) {
             if (entry.getValue() == lowestValue) {
                 key.add(entry.getKey());
             }
@@ -124,22 +130,22 @@ public class Smurf {
     }
 
 
-    private Map<String, Integer> calculateRoute(List<String> result) {
+    private Map<String, Integer> calculateRoute(final List<String> result) {
         if (!deadDirections.isEmpty()){
-            for(String direction:deadDirections){
+            for(final String direction:deadDirections){
                 result.remove(direction);
             }
         }
 
-        Map<String,Integer> directionsRouteValues = new HashMap<String,Integer>();
-        for (String direction : result) {
+        final Map<String,Integer> directionsRouteValues = new HashMap<String,Integer>();
+        for (final String direction : result) {
             directionsRouteValues.put(direction, findLength(direction));
         }
         return directionsRouteValues;
     }
 
     private List<String> findBlockedDirections() {
-        List<String> result = new ArrayList<String>();
+        final List<String> result = new ArrayList<String>();
 
         result.add("NW");
         result.add("NE");
@@ -148,7 +154,7 @@ public class Smurf {
         result.add("SW");
         result.add("SE");
 
-        for (Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
+        for (final Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
             if (entry.getValue().getHexagon().getCurrentState() == Hexagon.State.BLOCKED) {
                 result.remove(entry.getKey());
             }
@@ -171,28 +177,28 @@ public class Smurf {
         return result;
     }
 
-    private List<String> findDeadDirections(List<String> possibleDirections){
-        List<String> result= new ArrayList<String>();
-        for (String direction:possibleDirections){
+    private List<String> findDeadDirections(final List<String> possibleDirections){
+        final List<String> result= new ArrayList<String>();
+        for (final String direction:possibleDirections){
             result.add(direction);
         }
-        for (Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
+        for (final Map.Entry<String, Node> entry : hexagonNode.getNeighbors().entrySet()) {
             if (isDeadEnd(entry.getValue())) {
                 if (!deadDirections.contains(entry.getKey())) {
                     deadDirections.add(entry.getKey());
                 }
             }
         }
-        for(String direction:deadDirections){
+        for(final String direction:deadDirections){
             result.remove(direction);
         }
 
         return result;
     }
 
-    private boolean isDeadEnd(Node node){
+    private boolean isDeadEnd(final Node node){
         int counter = 0;
-        for(Map.Entry<String,Node> neighborEntry:node.getNeighbors().entrySet()){
+        for(final Map.Entry<String,Node> neighborEntry:node.getNeighbors().entrySet()){
             if (neighborEntry.getValue().getHexagon().getCurrentState() == Hexagon.State.BLOCKED){
                 counter++;
             }
@@ -201,7 +207,7 @@ public class Smurf {
     }
 
 
-    private int findLength(String direction) {
+    private int findLength(final String direction) {
         boolean endTile = false;
         Node searchNode = hexagonNode;
         int length = 0;
@@ -221,25 +227,36 @@ public class Smurf {
         return length;
     }
 
-    private Boolean foundEndTile(Node searchNode) {
-        int xPos = (searchNode.getHexagon().getIndex() % 11);
-        int yPos = (searchNode.getHexagon().getIndex() / 11);
+    private Boolean foundEndTile(final Node searchNode) {
+        final int xPos = (searchNode.getHexagon().getIndex() % 11);
+        final int yPos = (searchNode.getHexagon().getIndex() / 11);
         if (xPos > 11 || yPos > 11 || xPos < 0 || yPos < 0) {
         }
         return xPos == 10 || yPos == 10 || xPos == 0 || yPos == 0;
     }
 
+    /**
+     * checks if the game is won by checking if the smurf
+     * has no more free tiles surrounding it.
+     * @return boolean stating true if the smurf is blocked, false if not
+     */
     public boolean checkIfWon() {
         return checkFreeNeighbors().isEmpty();
     }
 
+    /**
+     * checks if the game is lost by checking if the smurf has
+     * less than 6 tiles surrounding it. If so, the smurf must have reached
+     * the edge of the board.
+     * @return boolean stating true if the smurf reached the edge, false if not
+     */
     public boolean checkIfLost(){
         return hexagonNode.getNeighbors().entrySet().size() < 6;
     }
 
     private List<Hexagon> checkFreeNeighbors() {
-        List<Hexagon> freeNeighbors = new ArrayList<>();
-        List<Hexagon> tilesToCheck = new ArrayList<>();
+        final List<Hexagon> freeNeighbors = new ArrayList<>();
+        final List<Hexagon> tilesToCheck = new ArrayList<>();
 
         tilesToCheck.add(hexagonNode.getNeighbors().get("NW").getHexagon());
         tilesToCheck.add(hexagonNode.getNeighbors().get("NE").getHexagon());
@@ -248,7 +265,7 @@ public class Smurf {
         tilesToCheck.add(hexagonNode.getNeighbors().get("SE").getHexagon());
         tilesToCheck.add(hexagonNode.getNeighbors().get("SW").getHexagon());
 
-        for (Hexagon hexagon : tilesToCheck) {
+        for (final Hexagon hexagon : tilesToCheck) {
             if (Hexagon.State.FREE.equals(hexagon.getCurrentState())) {
                 freeNeighbors.add(hexagon);
             }

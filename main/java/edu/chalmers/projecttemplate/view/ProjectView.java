@@ -18,26 +18,20 @@ import java.util.Objects;
 
 /**
  *
- * @author linae
+ * @author linae, josefinek
  */
 
 public class ProjectView extends JFrame implements PropertyChangeListener {
-
-    /**
-     * Creates new form myFirstForm
-     */
-
-    //private Game game;
 
 
     private final ButtonBoard buttonBoard;
     private Board hexagonBoard;
 
-    private final BufferedImage bufferedImage;
+    private BufferedImage bufferedImage;
     private final GameHandler gameHandler;
 
 
-    public ProjectView(GameHandler gameHandler) {
+    public ProjectView(final GameHandler gameHandler) {
         initComponents();
         jPanel1.setLayout(new FlowLayout(5,0,0 ));
 
@@ -47,10 +41,11 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
 
         try{
             String path = "main/Resources/smurfy.png";
-            File file = new File(path);
+            final File file = new File(path);
             this.bufferedImage=ImageIO.read(file);
         }catch (IOException e){
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            System.exit(1);
         }
 
 
@@ -82,7 +77,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
 
         jButton1.setBackground(new Color(102, 255, 255));
 
-        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        final GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +93,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         jPanel1.setPreferredSize(new Dimension(548, 500));
         jPanel1.setLayout(new BoxLayout(jPanel1, BoxLayout.LINE_AXIS));
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        final GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -179,7 +174,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
     private JRadioButton jRadioButton3;
     // End of variables declaration//GEN-END:variables
 
-    public void setLabels() {
+    private void setLabels() {
         jButton1.setFont(new Font("Segoe UI", Font.BOLD, 18)); // NOI18N
         jButton1.setText("Reset game");
         jButton1.setToolTipText("Press to reset the game");
@@ -198,13 +193,13 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         jRadioButton3.setText("Hard");
         jRadioButton3.setToolTipText("Choose hard difficulty, press reset to apply");
 
-        ButtonGroup group = new ButtonGroup();
+        final ButtonGroup group = new ButtonGroup();
         group.add(jRadioButton1);
         group.add(jRadioButton2);
         group.add(jRadioButton3);
     }
 
-    public void propertyChange(PropertyChangeEvent evt) {
+    public void propertyChange(final PropertyChangeEvent evt) {
 
         if(!gameHandler.getCurrentGame().isHasLost() && !gameHandler.getCurrentGame().isHasWon()){
             repaintBoardView();
@@ -223,7 +218,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         }
     }
 
-    public void repaintBoardView(){
+    private void repaintBoardView(){
         getjLabel2().setText("Number of wins: " + gameHandler.getCurrentGame().getTurn() + " ");
         setLabels();
 
@@ -232,7 +227,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
             try {
                 setSmurfImage(i);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                buttonBoard.getButton(i).setBackground(Color.RED);
             }
 
             if (Hexagon.State.FREE.equals(hexagonBoard.getHexagon(i).getCurrentState())&& !buttonBoard.getButton(i).isHexagonHovered()){
@@ -253,13 +248,13 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         }
     }
 
-    public void setSmurfImage(int i) throws IOException { //Funkar inte , DMHB!
+    private void setSmurfImage(final int index) throws IOException { //Funkar inte , DMHB!
 
-        if(Hexagon.State.OCCUPIED.equals(hexagonBoard.getHexagon(i).getCurrentState())){
-            buttonBoard.getButton(i).setSmurfImage(bufferedImage);
+        if(Hexagon.State.OCCUPIED.equals(hexagonBoard.getHexagon(index).getCurrentState())){
+            buttonBoard.getButton(index).setSmurfImage(bufferedImage);
         }
         else {
-            buttonBoard.getButton(i).setSmurfImage(null);
+            buttonBoard.getButton(index).setSmurfImage(null);
         }
     }
 
@@ -281,7 +276,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         return jRadioButton3;
     }
 
-    public HexButton getButton(int index) {
+    public HexButton getButton(final int index) {
         return buttonBoard.getButton(index);
     }
 
@@ -289,7 +284,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         return buttonBoard.getButtonBoard();
     }
 
-    public void setGame(Game game) {
+    public void setGame(final Game game) {
         this.gameHandler.getCurrentGame().getBoard().removePropertyChangeListener(this);
         this.hexagonBoard = game.getBoard();
         buttonBoard.setBoard(game.getBoard());

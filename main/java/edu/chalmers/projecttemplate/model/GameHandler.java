@@ -6,6 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 
+/**
+ * Handles the information that needs to be saved when the game
+ * is reset or closed, such as difficulties and statistics of played games.
+ */
 public class GameHandler {
     private Difficulty difficulty = Difficulty.DEFAULT;
 
@@ -29,6 +33,10 @@ public class GameHandler {
     }
 
 
+    /**
+     * Saves the stats of the current game, then creates a new one.
+     */
+
     public void newGame(){
         if (getCurrentGame().isHasWon() || getCurrentGame().isHasLost()) {
             saveStats();
@@ -38,11 +46,11 @@ public class GameHandler {
 
     private void saveStats() {
         try {
-            FileWriter fw = generateFileWriter();
+            final FileWriter fileWriter = generateFileWriter();
 
-            BufferedWriter writer = new BufferedWriter(fw);
+            final BufferedWriter writer = new BufferedWriter(fileWriter);
 
-            int turnsToWin = getCurrentGame().getTurn();
+            final int turnsToWin = getCurrentGame().getTurn();
 
             writer.write(getCurrentGame().isHasWon() + " ");
             writer.write(Integer.toString(turnsToWin));
@@ -51,24 +59,26 @@ public class GameHandler {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+            //e.printStackTrace();
+            //System.exit(1);
         }
         readStats();
     }
 
     private void readStats() { //Lite väl lång men men
-        File file = new File(getPath());
+        final File file = new File(getPath());
         totalWins = 0;
         totalLosses = 0;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            final BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             recordTurns = Integer.MAX_VALUE;
             if (file.length() > 0) {
                 while ((line = reader.readLine()) != null) {
                     try {
-                        String[] tokens = line.split(" ");
-                        int number = Integer.parseInt(tokens[1]);
-                        String outcome = tokens[0];
+                        final String[] tokens = line.split(" ");
+                        final int number = Integer.parseInt(tokens[1]);
+                        final String outcome = tokens[0];
 
                         if ("true".equals(outcome)) {
                             recordTurns = Math.min(number, recordTurns);
@@ -87,22 +97,25 @@ public class GameHandler {
             }
             reader.close();
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
+            //e.printStackTrace();
+            //System.exit(1);
         }
     }
 
     private FileWriter generateFileWriter() {
-        File file = new File(getPath());
-        FileWriter fw;
+        final File file = new File(getPath());
+        FileWriter fileWriter;
         try {
-            fw = new FileWriter(file,true); }
+            fileWriter = new FileWriter(file,true); }
         catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);}
-        return fw;
+        return fileWriter;
     }
 
     private String getPath() {
-        Path path = Paths.get("main\\Resources\\TrapTheSmurfStats.txt");
+        final Path path = Paths.get("main\\Resources\\TrapTheSmurfStats.txt");
         return path.toString();
     }
 
@@ -118,7 +131,7 @@ public class GameHandler {
         return recordTurns;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
+    public void setDifficulty(final Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
