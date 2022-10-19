@@ -1,13 +1,17 @@
 package main.java.edu.chalmers.projecttemplate.view;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import main.java.edu.chalmers.projecttemplate.model.*;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -226,7 +230,7 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
             else if (OccupiedTile.class.equals(hexagonBoard.getHexagon(i).getCurrentStateClass())) {
                 try {
                     setSmurfImage(i);
-                } catch (MalformedURLException e) {
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
                 buttonBoard.getButton(i).setEnabled(false);
@@ -238,13 +242,22 @@ public class ProjectView extends javax.swing.JFrame implements PropertyChangeLis
         }
     }
 
-    public void setSmurfImage(int i) throws MalformedURLException { //Funkar inte , DMHB!
-        ImageIcon smurf = new ImageIcon(new URL("https://e7.pngegg.com/pngimages/1016/380/png-clipart-sticker-telegram-the-smurfs-text-viber-smurf-area-soccer.png"));
-        Image image = smurf.getImage();
-        Image smurfImage = image.getScaledInstance(10, 10,  java.awt.Image.SCALE_SMOOTH);
-        smurf = new ImageIcon(smurfImage);
-        buttonBoard.getButton(i).setIcon(smurf);
-        buttonBoard.getButton(i).setBackground(Color.RED);
+    public void setSmurfImage(int i) throws IOException { //Funkar inte , DMHB!
+        String path = "main/Resources/smurfy.png";
+        File file = new File(path);
+        BufferedImage bufferedImage=ImageIO.read(file);
+        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+
+
+
+        buttonBoard.getButton(i).setIcon(imageIcon);
+        //buttonBoard.getButton(i).setBackground(Color.RED);
+
+
+               /* Image image = smurf.getImage();
+        Image smurfImage = image.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH);
+        smurf = new ImageIcon(smurfImage);*/
+
     }
 
     // standard getter and setter

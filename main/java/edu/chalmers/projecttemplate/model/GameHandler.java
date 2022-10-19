@@ -57,7 +57,7 @@ public class GameHandler {
         readStats();
     }
 
-    private void readStats() {
+    private void readStats() { //Lite väl lång men men
         File file = new File(getPath());
         totalWins = 0;
         totalLosses = 0;
@@ -65,22 +65,27 @@ public class GameHandler {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             recordTurns = Integer.MAX_VALUE;
-            while ((line = reader.readLine()) != null) {
-                try {
-                    String[] tokens = line.split(" ");
-                    int number = Integer.parseInt(tokens[1]);
-                    String outcome = tokens[0];
+            if (file.length() > 0) {
+                while ((line = reader.readLine()) != null) {
+                    try {
+                        String[] tokens = line.split(" ");
+                        int number = Integer.parseInt(tokens[1]);
+                        String outcome = tokens[0];
 
-                    if (outcome.equals("true")) {
-                        recordTurns = Math.min(number, recordTurns);
-                    totalWins++;
+                        if (outcome.equals("true")) {
+                            recordTurns = Math.min(number, recordTurns);
+                            totalWins++;
+                        } else if (outcome.equals("false")) {
+                            totalLosses++;
+                        }
                     }
-                    else if (outcome.equals("false")) {
-                       totalLosses++;
-                    }
-                } catch (NumberFormatException ex) {
+                    catch (NumberFormatException ex) {
                     System.out.println("No more saved games to check");
+                    }
                 }
+            }
+            else {
+                recordTurns = 0;
             }
             reader.close();
             System.out.println("Best no. of turns is: " + recordTurns);

@@ -82,6 +82,7 @@ public class hexButton extends JButton {
         g.setColor(getBackground());
         g.drawPolygon(hexagonalShape);
         g.fillPolygon(hexagonalShape);
+
     }
 
     public void setNewHexagonBoard(Hexagon Hexagon){
