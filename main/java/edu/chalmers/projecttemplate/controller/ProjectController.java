@@ -9,13 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public final class ProjectController {
+public class ProjectController {
   final private GameHandler gameHandler;
 
   private Game game;
   private final ProjectView projectView;
-
-  private final MouseListenerHexagon mlh;
 
   public static ProjectController create(final GameHandler gameHandler,final ProjectView projectView) {
     return new ProjectController(gameHandler, projectView);
@@ -29,7 +27,7 @@ public final class ProjectController {
 
     gameButtonPressed();
 
-    mlh = new MouseListenerHexagon();
+    MouseListenerHexagon mlh = new MouseListenerHexagon();
     for (int i = 0; i<121; i++) {
       projectView.getButton(i).addMouseListener(mlh);
     }
@@ -91,6 +89,7 @@ public final class ProjectController {
     this.game=gameHandler.getCurrentGame();
     projectView.setGame(gameHandler.getCurrentGame());
     gameHandler.getCurrentGame().getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
+    game.getSmurf().getSmurfHexagon().setHexagonState(Hexagon.State.OCCUPIED);
   }
 }
 

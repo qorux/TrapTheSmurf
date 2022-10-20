@@ -3,6 +3,7 @@ package main.java.edu.chalmers.projecttemplate;
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.Game;
 import main.java.edu.chalmers.projecttemplate.model.GameHandler;
+import main.java.edu.chalmers.projecttemplate.model.Hexagon;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
 import javax.swing.SwingUtilities;
@@ -27,6 +28,7 @@ public final class ProjectTemplate {
 
 				game.getBoard().addPropertyChangeListener(projectView);
 				game.getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
+				game.getSmurf().getSmurfHexagon().setHexagonState(Hexagon.State.OCCUPIED);
 
 				ProjectController.create(gameHandler, projectView);
 				projectView.setVisible(true);

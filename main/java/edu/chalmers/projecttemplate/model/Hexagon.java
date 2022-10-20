@@ -23,13 +23,13 @@ public class Hexagon{
         this.index= boardIndex;
     }
 
-    public void addPropertyChangeListener(final PropertyChangeListener pcl) {
+  /*  public void addPropertyChangeListener(final PropertyChangeListener pcl) {
         support.addPropertyChangeListener(pcl);
     }
 
     public void removePropertyChangeListener(final PropertyChangeListener pcl) {
         support.removePropertyChangeListener(pcl);
-    }
+    }*/
 
     public void setHexagonState(final State newState) {
         final State oldState = currentState;

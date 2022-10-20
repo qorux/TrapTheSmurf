@@ -1,8 +1,5 @@
 package test.java.edu.chalmers.projecttemplate.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import main.java.edu.chalmers.projecttemplate.controller.ProjectController;
 import main.java.edu.chalmers.projecttemplate.model.*;
 import main.java.edu.chalmers.projecttemplate.view.ProjectView;
@@ -10,7 +7,10 @@ import main.java.edu.chalmers.projecttemplate.model.Game;
 import org.junit.jupiter.api.Test;
 import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
+import java.beans.PropertyChangeListener;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
 
@@ -27,33 +27,16 @@ public class BoardTest {
         assertTrue(true);
     }
 
-/*    //Bör läggas i en annan klass "TestVew" typ
-    @Test
-    public void testViewPropertyChange() {
-        Project project = new Project();
-        ProjectView projectView = new ProjectView(project); //Ok så efter lite googling verkar det inte som kan
-        for (int i = 0; i < 121; i++) {                     // JUnit testa viewn.. rip
-            project.board.getHexagon(i).makeClickable();
-        }
-        project.board.getHexagon(3).blockTile();
-        project.board.getHexagon(14).blockTile();
-        project.board.getHexagon(32).blockTile();
-        project.board.getHexagon(112).occupyTile();
-
-        projectView.setVisible(true);
-    }*/
-
-
     @Test
     public void testBlockTile() {
         Game game = new Game();
         for (int i = 0; i < 121; i++) {
             game.getBoard().blockTile(i);
             if (i == 60) {
-                assertEquals(game.getBoard().getHexagon(60).getCurrentState(), Hexagon.State.OCCUPIED);
+                assertNotEquals(Hexagon.State.BLOCKED, game.getBoard().getHexagon(60).getCurrentState());
             }
             else {
-                assertEquals(game.getBoard().getHexagon(60).getCurrentState(), Hexagon.State.BLOCKED);
+                assertEquals(Hexagon.State.BLOCKED, game.getBoard().getHexagon(i).getCurrentState());
             }
         }
     }
@@ -84,6 +67,7 @@ Gav private access till detta så nu funkar det inte längre
 
  */
 
+
     @Test
     void easyDifficultyTest() {
         Game game = new Game();
@@ -103,6 +87,13 @@ Gav private access till detta så nu funkar det inte längre
         Game game = new Game();
         int blockedTiles = game.getBoard().difficultyBlockedTiles(Difficulty.HARD);
         assertTrue(2 <= blockedTiles && blockedTiles <= 7);
+    }
+
+    @Test
+    void defaultDifficultyTest() {
+        Game game = new Game();
+        int blockedTiles = game.getBoard().difficultyBlockedTiles(Difficulty.DEFAULT);
+        assertTrue(0 <= blockedTiles && blockedTiles <= 20);
     }
 
     @Test
@@ -197,4 +188,25 @@ Gav private access till detta så nu funkar det inte längre
 
 
     }
+
+    @Test
+    void shuffleBlockedTiles() {
+        Game game = new Game();
+        game.getBoard().shuffleBlockedTiles(Difficulty.MEDIUM);
+        int blockedTiles = game.getBoard().difficultyBlockedTiles(Difficulty.MEDIUM);
+        assertTrue(7 <= blockedTiles && blockedTiles <= 13);
+        assertNotEquals(game.getBoard().getHexagon(60).getCurrentState(), Hexagon.State.BLOCKED);
+    }
+
+    @Test
+    void addPropertyChangeListener() {
+        Game game = new Game();
+    }
+
+    @Test
+    void removePropertyChangeListener() {
+        Game game = new Game();
+    }
+
+
 }

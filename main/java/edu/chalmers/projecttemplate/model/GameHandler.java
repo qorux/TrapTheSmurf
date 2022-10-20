@@ -4,7 +4,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * Handles the information that needs to be saved when the game
@@ -58,9 +60,7 @@ public class GameHandler {
             writer.close();
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
-            //e.printStackTrace();
-            //System.exit(1);
+
         }
         readStats();
     }
@@ -70,7 +70,7 @@ public class GameHandler {
         totalWins = 0;
         totalLosses = 0;
         try {
-            final BufferedReader reader = new BufferedReader(new FileReader(file));
+            final BufferedReader reader = Files.newBufferedReader(Paths.get("main\\Resources\\TrapTheSmurfStats.txt"));
             String line;
             recordTurns = Integer.MAX_VALUE;
             if (file.length() > 0) {
@@ -88,7 +88,7 @@ public class GameHandler {
                         }
                     }
                     catch (NumberFormatException ex) {
-                        throw new FileNotFoundException();
+
                     }
                 }
             }
@@ -97,22 +97,21 @@ public class GameHandler {
             }
             reader.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
-            //e.printStackTrace();
-            //System.exit(1);
+
         }
     }
 
     private FileWriter generateFileWriter() {
         final File file = new File(getPath());
-        FileWriter fileWriter;
+        FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(file,true); }
         catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);}
+
+        }
         return fileWriter;
     }
+
 
     private String getPath() {
         final Path path = Paths.get("main\\Resources\\TrapTheSmurfStats.txt");

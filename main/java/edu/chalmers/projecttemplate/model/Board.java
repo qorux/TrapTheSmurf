@@ -12,10 +12,9 @@ import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
  */
 public class Board {
     private final List<List<Hexagon>> boardColumns;
-    private List<Hexagon> boardRows;
 
     private final List<List<Node>> boardNodesColumns;
-    private List<Node> boardNodesRows;
+
 
     private final PropertyChangeSupport support;
 
@@ -29,8 +28,8 @@ public class Board {
         boardNodesColumns = new ArrayList<>();
 
         for(int i=0;i<11;i++) {
-            boardRows = new ArrayList<Hexagon>();
-            boardNodesRows = new ArrayList<Node>();
+            final List<Hexagon> boardRows = new ArrayList<Hexagon>();
+            final List<Node> boardNodesRows = new ArrayList<Node>();
             for (int o = 0; o < 11; o++) {
                 boardRows.add(new Hexagon((i * 11) + o, support));
                 boardNodesRows.add(new Node(boardRows.get(o)));
@@ -41,9 +40,7 @@ public class Board {
         buildNeighboursList();
     }
 
-    public List<List<Node>> getBoardNodesColumns() {
-        return boardNodesColumns;
-    }
+
 
     private void buildNeighboursList(){
         for (int r = 0; r <= 10; r++) {
@@ -116,19 +113,6 @@ public class Board {
         }
     }
 
-    public void addPropertyChangeListener(final PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
-    }
-
-    public void removePropertyChangeListener(final PropertyChangeListener pcl) {
-        support.removePropertyChangeListener(pcl);
-    }
-
-    public List<List<Hexagon>> getBoardSpaces() {
-        return boardColumns;
-    }
-
-
     /**
      * Randomizes how many tiles should be blocked based on the difficulty the player wants
      * If no difficulty is selected, the number of blocked tiles are randomized following normal
@@ -156,17 +140,17 @@ public class Board {
 
 
     private List<Boolean> generateBlockedTilesList(final int tilesToBeBlocked){
-        final List<Boolean> shouldBeBlocked = new ArrayList<Boolean>(121);
+        final List<Boolean> okToBlock = new ArrayList<Boolean>(121);
         for(int i = 0; i < 121; i++) {
             if ((i<tilesToBeBlocked) && (i != 60)){
-                shouldBeBlocked.add(true);
+                okToBlock.add(true);
             }
             else {
-                shouldBeBlocked.add(false);
+                okToBlock.add(false);
             }
         }
-        Collections.shuffle(shouldBeBlocked);
-        return shouldBeBlocked;
+        Collections.shuffle(okToBlock);
+        return okToBlock;
     }
 
     /**
@@ -174,9 +158,9 @@ public class Board {
      */
     public void shuffleBlockedTiles(final Difficulty difficulty) { //Byta namn på denna metod kanske?
         final int tilesToBeBlocked = difficultyBlockedTiles(difficulty);
-        final List<Boolean> shouldBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
-        int index =0;
-        for (final Boolean tile:shouldBeBlocked) {
+        final List<Boolean> toBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
+        int index = 0;
+        for (final Boolean tile:toBeBlocked) {
             if (tile) {
                 blockTile(index);
             }
@@ -197,6 +181,15 @@ public class Board {
         }
     }
 
+
+    public void addPropertyChangeListener(final PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    public void removePropertyChangeListener(final PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
+    }
+
     /**
      * Converts an index to coordinates
      * @param index the index of the tile that we want to get the coordinates for
@@ -208,6 +201,8 @@ public class Board {
 
         return boardColumns.get(col).get(row);
     }
+
+
 
     public Node getNode(final int index){
         final int col = index / 11;
@@ -221,6 +216,13 @@ public class Board {
         return boardColumns.get(yPos).get(xPos);
     }
 
+    public List<List<Hexagon>> getBoardSpaces() {
+        return boardColumns;
+    }
+
+    public List<List<Node>> getBoardNodesColumns() {
+        return boardNodesColumns;
+    }
 
 }
 

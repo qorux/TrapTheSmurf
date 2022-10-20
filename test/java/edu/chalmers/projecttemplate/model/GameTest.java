@@ -13,9 +13,10 @@ public class GameTest {
 	@Test
 	public void testOnlyOneOccupiedTile() {
 		Game game = new Game();
+		game.getSmurf().getSmurfHexagon().setHexagonState(Hexagon.State.OCCUPIED);
 		List<Integer> tileList = new ArrayList<>();
 		for (int i = 0; i < 121; i++) {
-			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
+			if (game.getBoard().getHexagon(i).getCurrentState().equals(Hexagon.State.OCCUPIED)) {
 				tileList.add(i);
 			}
 		}
@@ -28,13 +29,13 @@ public class GameTest {
 		int initialOccupiedTileIndex = 0;
 		int nextOccupiedTileIndex = 0;
 		for (int i = 0; i < 121; i++) {
-			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
+			if (game.getBoard().getHexagon(i).getCurrentState().equals(Hexagon.State.OCCUPIED)) {
 				initialOccupiedTileIndex = game.getBoard().getHexagon(i).getIndex();
 			}
 		}
 		game.newTurn();
 		for (int i = 0; i < 121; i++) {
-			if (game.getBoard().getHexagon(i).getCurrentState().getClass().equals(Hexagon.State.OCCUPIED)) {
+			if (game.getBoard().getHexagon(i).getCurrentState().equals(Hexagon.State.OCCUPIED)) {
 				nextOccupiedTileIndex = game.getBoard().getHexagon(i).getIndex();
 			}
 		}

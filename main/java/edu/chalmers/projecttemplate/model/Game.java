@@ -23,14 +23,6 @@ public class Game {
   }
 
 
-  public Board getBoard() {
-    return board;
-  }
-
-  public Smurf getSmurf() {
-    return smurf;
-  }
-
   /**
    * Checks whether the game is won, if not the smurf makes
    * it move, and then checks if the game is lost.
@@ -52,6 +44,15 @@ public class Game {
         support.firePropertyChange("Lost", oldValue, true);
       }
     }
+  }
+
+
+  public Board getBoard() {
+    return board;
+  }
+
+  public Smurf getSmurf() {
+    return smurf;
   }
 
   public int getTurn() {
