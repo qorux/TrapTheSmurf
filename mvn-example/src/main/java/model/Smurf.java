@@ -27,7 +27,6 @@ public class Smurf {
         this.board = board;
         this.hexagonNode = this.board.getNode(60);
         this.hexagon = hexagonNode.getHexagon();
-        hexagon.setHexagonState(Hexagon.State.OCCUPIED);
         this.deadDirections = new ArrayList<String>();
     }
 

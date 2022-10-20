@@ -91,6 +91,7 @@ public final class ProjectController {
     this.game=gameHandler.getCurrentGame();
     projectView.setGame(gameHandler.getCurrentGame());
     gameHandler.getCurrentGame().getBoard().shuffleBlockedTiles(gameHandler.getDifficulty());
+    game.getSmurf().getSmurfHexagon().setHexagonState(Hexagon.State.OCCUPIED);
   }
 }
 
