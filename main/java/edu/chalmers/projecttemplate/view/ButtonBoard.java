@@ -6,6 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Responsibility: generate the board of the game as buttons that the user can interact with.
+ * Uses: HexButton, Board
+ * Used by: ProjectView
+ */
 public class ButtonBoard {
     private final JPanel jPanel1;
     private Board board;

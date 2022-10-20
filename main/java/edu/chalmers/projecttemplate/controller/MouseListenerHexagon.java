@@ -5,6 +5,11 @@ import java.awt.event.*;
 
 import main.java.edu.chalmers.projecttemplate.view.HexButton;
 
+/**
+ * Responsibility: make the hexagons indicate clickability
+ * Uses: -
+ * Used by: ProjectController
+ */
 public class MouseListenerHexagon extends Frame implements MouseListener {
 
     public MouseListenerHexagon(){

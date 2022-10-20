@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Handles additional logic for the board of the game
+ * Responsibility: Uses "Node"s to create a data structure to
+ * describe the board of the game.
+ * Uses: -
+ * Used by: Smurf, Board
  */
 public class Node {
     public Hexagon hexagon;
-    //private Node next;
 
     private final Map<String, Node> neighbors;
 
@@ -20,17 +22,9 @@ public class Node {
         //this.next = null;
     }
 
-   /* public void setNextNode(final Node node) {
-        this.next = node;
-    }
-*/
     public Hexagon getHexagon() {
         return hexagon;
     }
-
-   /* public Node getNextNode() {
-        return this.next;
-    }*/
 
     public Map<String,Node> getNeighbors() {
         return neighbors;

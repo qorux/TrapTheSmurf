@@ -1,27 +1,20 @@
 package main.java.edu.chalmers.projecttemplate.model;
 
 import java.util.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Handles all the logic for the smurf, such as how it
+ * Responsibility: the logic for the smurf, such as how it
  * determines where to go and how it's allowed to move
+ * Uses: Board, Hexagon, Node
+ * Used by: Game
  */
 public class Smurf {
-
-    //Kanske bör vara i Board/Application(projectTemplate)
-
-
-    //(NE,E,SE,SW,W,NW), alla möjliga directions smurfen kan ha?
-
-    private Node hexagonNode;
+        private Node hexagonNode;
     private Hexagon hexagon;
 
     private final List<String> deadDirections;
 
     private boolean isWandering;
-
-    //private Map<String, Integer> directionsRouteValues = new HashMap<String, Integer>();
 
     public Smurf(final Board board) {
         this.hexagonNode = board.getNode(60);
@@ -30,7 +23,10 @@ public class Smurf {
     }
 
     /**
-     *
+     * Moves the smurf. The smurf can have 6 possible directions: (NE,E,SE,SW,W,NW)
+     * The smurf will search for the shortest possible direction to the edge of the board.
+     * If one direction is blocked, it will not search for ways to the edge in that way anymore.
+     * When all directions have been blocked, it will randomize where to go.
      */
     public void moveSmurf() {
         final List<String> possibleDirections = findBlockedDirections();
@@ -62,50 +58,6 @@ public class Smurf {
         hexagonNode = hexagonNode.getNeighbors().get(direction);
         hexagon = hexagonNode.getHexagon();
         hexagon.setHexagonState(Hexagon.State.OCCUPIED);
-       /*
-       switch (Direction){
-           case "NW":
-               if (yPos % 2 == 0){ // even
-                   xPos--;
-                   yPos--;
-               }
-               else if (yPos % 2 == 1){ //odd
-                   yPos--;
-               }
-           case "NE":
-               if (yPos % 2 == 0){ // even
-                   yPos--;
-               }
-               else if (yPos % 2 == 1){ //odd
-                   yPos--;
-                   xPos++;
-               }
-           case "E":
-               xPos++;
-               break;
-           case "W":
-               xPos--;
-               break;
-           case "SW":
-               if (yPos % 2 == 0){ // even
-                   yPos++;
-                   xPos--;
-               }
-               else if (yPos % 2 == 1){ //odd
-                   yPos++;
-               }
-           case "SE":
-               if (yPos % 2 == 0){ // even
-                   yPos++;
-               }
-               else if (yPos % 2 == 1){ //odd
-                   yPos++;
-                   xPos--;
-               }
-           default:
-               break;
-
-        */
     }
 
     private List<String> findShortestDirection(final Map<String,Integer> directionsRouteValues) {
@@ -156,21 +108,6 @@ public class Smurf {
                 result.remove(entry.getKey());
             }
         }
-        /*
-       if (board.getHexagonCoordinate(xPos,yPos-1).getCurrentStateClass() == BlockedTile.class){
-           neighbours.remove("N");
-       }
-       if (board.getHexagonCoordinate(xPos+1,yPos).getCurrentStateClass() == BlockedTile.class){
-           neighbours.remove("E");
-       }
-       if (board.getHexagonCoordinate(xPos-1,yPos).getCurrentStateClass() == BlockedTile.class){
-           neighbours.remove("W");
-       }
-       if (board.getHexagonCoordinate(xPos,yPos+1).getCurrentStateClass() == BlockedTile.class){
-           neighbours.remove("S");
-       }
-
-         */
         return result;
     }
 

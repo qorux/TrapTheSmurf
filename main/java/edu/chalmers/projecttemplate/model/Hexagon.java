@@ -4,8 +4,10 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
- * Handles the different states of the hexagons, declaring
- * them as enums.
+ * Responsibility: the different states the hexagons can
+ * assume, declaring them as enums.
+ * Uses: -
+ * Used by: Board, Smurf, HexButton
  */
 public class Hexagon{
     private State currentState = State.FREE;
@@ -22,14 +24,6 @@ public class Hexagon{
         this.support = support;
         this.index= boardIndex;
     }
-
-  /*  public void addPropertyChangeListener(final PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
-    }
-
-    public void removePropertyChangeListener(final PropertyChangeListener pcl) {
-        support.removePropertyChangeListener(pcl);
-    }*/
 
     public void setHexagonState(final State newState) {
         final State oldState = currentState;

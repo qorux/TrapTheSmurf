@@ -6,9 +6,11 @@ import java.util.*;
 import main.java.edu.chalmers.projecttemplate.model.GameHandler.Difficulty;
 
 /**
- * This class contains the logic for the board of the game.
+ * Responsibility: the logic for the board of the game.
  * This includes setting up the board in rows and columns,
  * and randomizing the blocked tiles the board is initiated with.
+ * Used by: Game, ButtonBoard
+ * Uses: Hexagon, Node, Smurf
  */
 public class Board {
     private final List<List<Hexagon>> boardColumns;
@@ -154,9 +156,9 @@ public class Board {
     }
 
     /**
-     * Shuffles the tiles that should be blocked
+     * Randomizes and shuffles the tiles that are to be blocked
      */
-    public void shuffleBlockedTiles(final Difficulty difficulty) { //Byta namn på denna metod kanske?
+    public void shuffleBlockedTiles(final Difficulty difficulty) {
         final int tilesToBeBlocked = difficultyBlockedTiles(difficulty);
         final List<Boolean> toBeBlocked = generateBlockedTilesList(tilesToBeBlocked);
         int index = 0;
@@ -190,19 +192,12 @@ public class Board {
         support.removePropertyChangeListener(pcl);
     }
 
-    /**
-     * Converts an index to coordinates
-     * @param index the index of the tile that we want to get the coordinates for
-     * @return the coordinates for a tile
-     */
     public Hexagon getHexagon(final int index){
         final int col = index / 11;
         final int row = index % 11;
 
         return boardColumns.get(col).get(row);
     }
-
-
 
     public Node getNode(final int index){
         final int col = index / 11;

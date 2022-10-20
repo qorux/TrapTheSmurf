@@ -9,6 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * Responsibility: handle the input from the player and update the view
+ * accordingly. Also informs the model of the input it needs to know.
+ * Uses: ProjectView, Game, GameHandler
+ * Used by: -
+ */
+
 public class ProjectController {
   final private GameHandler gameHandler;
 

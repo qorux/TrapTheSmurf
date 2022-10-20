@@ -6,7 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Makes the tiles (jButtons) hexagonal instead of square.
+ * Responsibility: Makes the tiles (jButtons) hexagonal instead of square.
+ * Uses: Hexagon
+ * Used by: ButtonBoard
  */
 
 public class HexButton extends JButton {
@@ -16,8 +18,6 @@ public class HexButton extends JButton {
     private Image smurfImage;
 
     private boolean isHovered;
-
-    //private Painter painter;
 
     public HexButton(Hexagon hexagon) {
         this.setOpaque(false);

@@ -2,8 +2,10 @@ package main.java.edu.chalmers.projecttemplate.model;
 import java.beans.PropertyChangeSupport;
 
 /**
- * Sets up the game with a board and a smurf.
- * Also handles the turns and checks if the game is won or lost.
+ * Responsibility: Sets up the game with a board and a smurf,
+ * also handles the turns and checks if the game is won or lost.
+ * Uses: Board, Smurf,
+ * Used by: GameHandler, ProjectView, ProjectController
  */
 public class Game {
   private boolean hasWon;

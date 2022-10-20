@@ -17,8 +17,10 @@ import java.util.Objects;
 
 
 /**
- *
- * @author linae, josefinek
+ *Responsibility: the main class for the view. Sets the
+ * visual components of the game.
+ * Uses: ButtonBoard, Game, GameHandler
+ * Used by: ProjectController
  */
 
 public class ProjectView extends JFrame implements PropertyChangeListener {
@@ -204,7 +206,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         if(!gameHandler.getCurrentGame().isHasLost() && !gameHandler.getCurrentGame().isHasWon()){
             repaintBoardView();
         }
-        else if (Objects.equals(evt.getPropertyName(), "Won")) {//aids
+        else if (Objects.equals(evt.getPropertyName(), "Won")) {
             for (int i = 0; i<121; i++) {
                 buttonBoard.getButton(i).setEnabled(false);
             }
@@ -248,7 +250,7 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
         }
     }
 
-    private void setSmurfImage(final int index) throws IOException { //Funkar inte , DMHB!
+    private void setSmurfImage(final int index) throws IOException {
 
         if(Hexagon.State.OCCUPIED.equals(hexagonBoard.getHexagon(index).getCurrentState())){
             buttonBoard.getButton(index).setSmurfImage(bufferedImage);
@@ -257,8 +259,6 @@ public class ProjectView extends JFrame implements PropertyChangeListener {
             buttonBoard.getButton(index).setSmurfImage(null);
         }
     }
-
-    // standard getter and setter
 
     public JButton getjButton1() {
         return jButton1;

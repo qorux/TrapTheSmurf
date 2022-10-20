@@ -4,13 +4,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 /**
- * Handles the information that needs to be saved when the game
+ * Responsibility: information that needs to be saved when the game
  * is reset or closed, such as difficulties and statistics of played games.
+ * Uses: Game
+ * Used by: ProjectView, ProjectController
  */
 public class GameHandler {
     private Difficulty difficulty = Difficulty.DEFAULT;
@@ -36,7 +35,8 @@ public class GameHandler {
 
 
     /**
-     * Saves the stats of the current game, then creates a new one.
+     * Saves the statistics of the current game in a text file,
+     * then creates a new game.
      */
 
     public void newGame(){
@@ -65,7 +65,7 @@ public class GameHandler {
         readStats();
     }
 
-    private void readStats() { //Lite väl lång men men
+    private void readStats() {
         final File file = new File(getPath());
         totalWins = 0;
         totalLosses = 0;

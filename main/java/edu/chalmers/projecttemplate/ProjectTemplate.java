@@ -8,9 +8,13 @@ import main.java.edu.chalmers.projecttemplate.view.ProjectView;
 
 import javax.swing.SwingUtilities;
 
+/**
+ * Responsibility: the programs main method. Runs the game.
+ *	Used by: -
+ *	Uses: GameHandler, Game, ProjectView,
+ */
 public final class ProjectTemplate {
 	private ProjectTemplate() {
-		/* No instances allowed! */
 	}
 
 	public static void main(String[] args) {
@@ -21,8 +25,6 @@ public final class ProjectTemplate {
 			public void run() {
 				final GameHandler gameHandler = new GameHandler();
 				final Game game = gameHandler.getCurrentGame();
-
-				//kan lägga in kod här och testa så att vyn målar rätt
 
 				final ProjectView projectView = new ProjectView(gameHandler);
 
@@ -36,9 +38,5 @@ public final class ProjectTemplate {
 			}
 		});
 	}
-	/*game.getBoard().getHexagon(3).blockTile();
-	game.getBoard().getHexagon(14).blockTile();
-	game.getBoard().getHexagon(32).blockTile();
-	game.getBoard().getHexagon(112).occupyTile();*/
 
 }
