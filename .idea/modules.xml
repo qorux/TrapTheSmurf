@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TrapTheSmurf.iml" filepath="$PROJECT_DIR$/TrapTheSmurf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mvn-example/mvn-example.iml" filepath="$PROJECT_DIR$/mvn-example/mvn-example.iml" />
     </modules>
   </component>
 </project>
