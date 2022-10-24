@@ -99,6 +99,9 @@ public class GameHandler {
         } catch (IOException e) {
 
         }
+        if(recordTurns == Integer.MAX_VALUE){
+            recordTurns = 0;
+        }
     }
 
     private FileWriter generateFileWriter() {
